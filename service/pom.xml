@@ -17,6 +17,10 @@
             <groupId>com.switchfully.jsonbourne</groupId>
             <artifactId>domain</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.switchfully.jsonbourne</groupId>
+            <artifactId>infrastructure</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

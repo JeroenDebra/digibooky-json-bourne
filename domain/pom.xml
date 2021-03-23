@@ -12,4 +12,11 @@
 
     <artifactId>domain</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.switchfully.jsonbourne</groupId>
+            <artifactId>infrastructure</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>
