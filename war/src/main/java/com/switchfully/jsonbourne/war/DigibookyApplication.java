@@ -1,4 +1,4 @@
-package com.switchfully.jsonbourne.digibooky;
+package com.switchfully.jsonbourne.war;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
