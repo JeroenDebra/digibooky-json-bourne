@@ -1,4 +1,4 @@
-package com.switchfully.jsonbourne.domain.models;
+package com.switchfully.jsonbourne.domain.models.member;
 
 
 import java.util.regex.Pattern;
@@ -27,7 +27,7 @@ public class PersonalInformation {
     }
 
     private String emailValidator(String email) {
-        if (lastName == null || Pattern.compile(VALID_EMAIL_REGEX).matcher(email).matches()) {
+        if (lastName == null || !Pattern.compile(VALID_EMAIL_REGEX).matcher(email).matches()) {
             throw new IllegalArgumentException("email not valid");
         }
         return email;

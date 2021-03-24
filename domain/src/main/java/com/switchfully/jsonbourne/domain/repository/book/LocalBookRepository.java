@@ -1,7 +1,7 @@
-package com.switchfully.jsonbourne.domain.repository;
+package com.switchfully.jsonbourne.domain.repository.book;
 
-import com.switchfully.jsonbourne.domain.models.Author;
-import com.switchfully.jsonbourne.domain.models.Book;
+import com.switchfully.jsonbourne.domain.models.book.Author;
+import com.switchfully.jsonbourne.domain.models.book.Book;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;

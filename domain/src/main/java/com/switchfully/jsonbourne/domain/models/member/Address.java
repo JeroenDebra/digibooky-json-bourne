@@ -1,4 +1,4 @@
-package com.switchfully.jsonbourne.domain.models;
+package com.switchfully.jsonbourne.domain.models.member;
 
 public class Address {
     private final String streetName;
@@ -16,7 +16,7 @@ public class Address {
 
     private String cityValidator(String city) {
         if (city == null || city.isBlank()) {
-            throw new IllegalArgumentException("City has to be filled in");
+            throw new IllegalArgumentException("city not valid");
         }
         return city;
     }

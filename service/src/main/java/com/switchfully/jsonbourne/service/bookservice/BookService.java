@@ -1,6 +1,6 @@
 package com.switchfully.jsonbourne.service.bookservice;
 
-import com.switchfully.jsonbourne.domain.models.Book;
+import com.switchfully.jsonbourne.domain.models.book.Book;
 
 import java.util.Collection;
 

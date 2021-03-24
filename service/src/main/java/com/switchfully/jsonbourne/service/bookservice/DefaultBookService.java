@@ -1,8 +1,8 @@
 package com.switchfully.jsonbourne.service.bookservice;
 
-import com.switchfully.jsonbourne.domain.models.Book;
+import com.switchfully.jsonbourne.domain.models.book.Book;
 import com.switchfully.jsonbourne.infrastructure.exceptions.BookNotFoundException;
-import com.switchfully.jsonbourne.domain.repository.BookRepository;
+import com.switchfully.jsonbourne.domain.repository.book.BookRepository;
 import com.switchfully.jsonbourne.infrastructure.exceptions.NoBooksFoundException;
 import org.springframework.stereotype.Service;
 
