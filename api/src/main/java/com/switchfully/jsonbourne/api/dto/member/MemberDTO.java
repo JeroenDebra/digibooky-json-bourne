@@ -1,6 +1,9 @@
 package com.switchfully.jsonbourne.api.dto.member;
 
+import java.util.UUID;
+
 public class MemberDTO {
+    private UUID id;
     private String firstName;
     private String lastName;
     private String email;
@@ -45,6 +48,10 @@ public class MemberDTO {
         return city;
     }
 
+    public UUID getId() {
+        return id;
+    }
+
     public MemberDTO setFirstName(String firstName) {
         this.firstName = firstName;
         return this;
@@ -82,6 +89,11 @@ public class MemberDTO {
 
     public MemberDTO setCity(String city) {
         this.city = city;
+        return this;
+    }
+
+    public MemberDTO setId(UUID id) {
+        this.id = id;
         return this;
     }
 }

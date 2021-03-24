@@ -25,7 +25,8 @@ public class MemberMapper {
                 .setINSS(member.getPersonalInformation().getINSS())
                 .setPostalCode(member.getAddress().getPostalCode())
                 .setStreetName(member.getAddress().getStreetName())
-                .setStreetNumber(member.getAddress().getStreetNumber());
+                .setStreetNumber(member.getAddress().getStreetNumber())
+                .setId(member.getUuid());
     }
 
 
