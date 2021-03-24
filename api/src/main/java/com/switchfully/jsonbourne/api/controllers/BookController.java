@@ -3,6 +3,7 @@ package com.switchfully.jsonbourne.api.controllers;
 
 import com.switchfully.jsonbourne.api.dto.BookDTO;
 import com.switchfully.jsonbourne.api.mapper.BookMapper;
+import com.switchfully.jsonbourne.infrastructure.exceptions.BookNotFoundException;
 import com.switchfully.jsonbourne.service.BookService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -27,16 +28,17 @@ public class BookController {
         return bookMapper.listBookToListDTO(bookService.getAllBooks());
     }
 
-    @GetMapping(path = "/{id}", produces = "application/json")
+    @GetMapping(path = "id/{id}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public BookDTO getBookById(@PathVariable String id) {
         return bookMapper.bookToBookDTOWithSummary(bookService.getBookById(id));
     }
 
-    @GetMapping(value = "/{isbn}", produces = "application/json")
+    @GetMapping(path = "isbn/{isbn}", produces = "application/json")
+  //  @ExceptionHandler(BookNotFoundException.class)
     public BookDTO findByIsbn(@PathVariable String isbn) {
-       // return bookMapper.bookToDTO(bookService.findByISBN(isbn));
-        return null;
+ //       return bookMapper.bookToDTO(bookService.findByISBN(isbn));
+       return null;
     }
 }
 
