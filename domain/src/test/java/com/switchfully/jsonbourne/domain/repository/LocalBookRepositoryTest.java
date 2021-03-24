@@ -1,5 +1,6 @@
 package com.switchfully.jsonbourne.domain.repository;
 
+import com.switchfully.jsonbourne.domain.domain.Author;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,5 +29,25 @@ class LocalBookRepositoryTest {
     @Test
     void getBookByISBNFakeIsbnGivesEmptyOptional() {
         assertTrue(localBookRepository.getBookByISBN("fakeisbnNumber").isEmpty());
+    }
+
+    @Test
+    void getBookByAuthorGivesCorrectBooksIfFullname(){
+        assertEquals(1,localBookRepository.getBookByAuthor("firstname lastname").size());
+    }
+
+    @Test
+    void getBookByAuthorGivesCorrectBooksIfLastname(){
+        assertEquals(1,localBookRepository.getBookByAuthor("lastname").size());
+    }
+
+    @Test
+    void getBookByAuthorGivesCorrectBooksIfFirstname(){
+        assertEquals(1,localBookRepository.getBookByAuthor("firstname").size());
+    }
+
+    @Test
+    void getBookByAuthorGivesEmptyListIfAuthorIsNotFound(){
+        assertEquals(0,localBookRepository.getBookByAuthor("fakename fakelastname").size());
     }
 }

@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 public class LocalBookRepository implements BookRepository {
@@ -35,5 +36,10 @@ public class LocalBookRepository implements BookRepository {
     @Override
     public Optional<Book> getBookByID(String id) {
         return books.stream().filter(book -> book.getId().toString().equals(id)).findFirst();
+    }
+
+    @Override
+    public Collection<Book> getBookByAuthor(String authorName) {
+        return books.stream().filter(book -> book.getAuthor().getFullname().contains(authorName)).collect(Collectors.toList());
     }
 }

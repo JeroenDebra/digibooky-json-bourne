@@ -3,6 +3,7 @@ package com.switchfully.jsonbourne.api.controllers;
 
 import com.switchfully.jsonbourne.api.dto.BookDTO;
 import com.switchfully.jsonbourne.api.mappers.BookMapper;
+import com.switchfully.jsonbourne.domain.domain.Author;
 import com.switchfully.jsonbourne.service.bookservice.BookService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +38,13 @@ public class BookController {
     @ResponseStatus(HttpStatus.OK)
     public BookDTO findByIsbn(@PathVariable String isbn) {
         return bookMapper.bookToDTO(bookService.getBookByISBN(isbn));
+    }
+
+
+    @GetMapping(path = "author/{fullAuthorName}")
+    @ResponseStatus(HttpStatus.OK)
+    public Collection<BookDTO> getBooksByAuthor(@PathVariable String fullAuthorName){
+        return bookMapper.listBookToListDTO(bookService.getBookByAuthor(fullAuthorName));
     }
 }
 

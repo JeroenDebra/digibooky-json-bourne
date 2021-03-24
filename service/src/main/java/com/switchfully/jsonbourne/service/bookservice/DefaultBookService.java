@@ -1,5 +1,6 @@
 package com.switchfully.jsonbourne.service.bookservice;
 
+import com.switchfully.jsonbourne.domain.domain.Author;
 import com.switchfully.jsonbourne.domain.domain.Book;
 import com.switchfully.jsonbourne.infrastructure.exceptions.BookNotFoundException;
 import com.switchfully.jsonbourne.domain.repository.BookRepository;
@@ -39,4 +40,8 @@ public class DefaultBookService implements BookService {
         return book.get();
     }
 
+    @Override
+    public Collection<Book> getBookByAuthor(String authorName) {
+        return bookRepository.getBookByAuthor(authorName);
+    }
 }
