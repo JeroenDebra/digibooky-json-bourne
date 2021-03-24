@@ -1,6 +1,5 @@
-package jsonbourne.repository;
+package com.switchfully.jsonbourne.domain.repository;
 
-import com.switchfully.jsonbourne.repository.LocalBookRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

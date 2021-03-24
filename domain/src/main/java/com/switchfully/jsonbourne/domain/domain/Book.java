@@ -1,4 +1,4 @@
-package com.switchfully.jsonbourne.domain;
+package com.switchfully.jsonbourne.domain.domain;
 
 import java.util.Objects;
 import java.util.UUID;

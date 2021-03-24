@@ -1,6 +1,6 @@
-package com.switchfully.jsonbourne.repository;
+package com.switchfully.jsonbourne.domain.repository;
 
-import com.switchfully.jsonbourne.domain.Book;
+import com.switchfully.jsonbourne.domain.domain.Book;
 
 import java.util.Collection;
 import java.util.Optional;

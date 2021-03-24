@@ -1,10 +1,8 @@
-package com.switchfully.jsonbourne.service;
+package com.switchfully.jsonbourne.service.bookservice;
 
 import com.switchfully.jsonbourne.infrastructure.exceptions.BookNotFoundException;
-import com.switchfully.jsonbourne.repository.LocalBookRepository;
+import com.switchfully.jsonbourne.domain.repository.LocalBookRepository;
 import org.junit.jupiter.api.Test;
-
-import java.util.Collection;
 
 import static org.junit.jupiter.api.Assertions.*;
 
