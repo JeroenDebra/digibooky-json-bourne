@@ -32,5 +32,12 @@ public class BookController {
     public BookDTO getBookById(@PathVariable String id) {
         return bookMapper.bookToBookDTOWithSummary(bookService.getBookById(id));
     }
+
+    @GetMapping(value = "/{isbn}", produces = "application/json")
+    public BookDTO findByIsbn(@PathVariable String isbn) {
+
+       // return bookMapper.bookToDTO(bookService.findByISBN(isbn));
+        return null;
+    }
 }
 

@@ -1,10 +1,12 @@
 package com.switchfully.jsonbourne.service;
 
 import com.switchfully.jsonbourne.domain.Book;
+import com.switchfully.jsonbourne.infrastructure.exceptions.BookNotFoundException;
 import com.switchfully.jsonbourne.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -19,6 +21,16 @@ public class DefaultBookService implements BookService {
     @Override
     public Collection<Book> getAllBooks() {
         return bookRepository.getAllBooks();
+    }
+
+    @Override
+    public Book findByISBN(String isbn){
+        Optional<Book> book = bookRepository.findByISBN(isbn);
+        if(book.isEmpty()){
+            throw new BookNotFoundException("Book not found");
+        }
+        return book.get();
+        }
     }
 
     @Override
