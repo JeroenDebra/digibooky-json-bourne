@@ -1,10 +1,7 @@
-package com.switchfully.jsonbourne.domain.repository.member;
-
+package com.switchfully.jsonbourne.service.memberservice;
 
 import com.switchfully.jsonbourne.domain.models.member.Member;
 
-public interface memberRepository {
-
+public interface MemberService {
     Member addMember(Member member);
-
 }

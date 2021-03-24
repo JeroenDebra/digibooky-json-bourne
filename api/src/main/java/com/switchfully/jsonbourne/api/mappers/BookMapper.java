@@ -1,6 +1,6 @@
 package com.switchfully.jsonbourne.api.mappers;
 
-import com.switchfully.jsonbourne.api.dto.BookDTO;
+import com.switchfully.jsonbourne.api.dto.book.BookDTO;
 import com.switchfully.jsonbourne.domain.models.book.Book;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package com.switchfully.jsonbourne.api.dto;
+package com.switchfully.jsonbourne.api.dto.book;
 
 public class BookDTO {
 

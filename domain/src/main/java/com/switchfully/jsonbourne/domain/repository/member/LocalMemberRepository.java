@@ -1,8 +1,8 @@
 package com.switchfully.jsonbourne.domain.repository.member;
 
+import com.switchfully.jsonbourne.domain.models.member.Member;
 import org.springframework.stereotype.Repository;
 
-import java.lang.reflect.Member;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +12,12 @@ public class LocalMemberRepository implements memberRepository {
     private final Set<Member> members = new HashSet<>();
 
     @Override
-    public boolean addMember(Member member) {
-        return members.add(member);
+    public Member addMember(Member member) {
+        members.add(member);
+        return member;
+    }
+
+    public int getsize(){
+        return members.size();
     }
 }
