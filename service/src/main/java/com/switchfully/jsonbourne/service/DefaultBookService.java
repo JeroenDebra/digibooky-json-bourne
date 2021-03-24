@@ -31,7 +31,6 @@ public class DefaultBookService implements BookService {
         }
         return book.get();
         }
-    }
 
     @Override
     public Book getBookById(String id) {
