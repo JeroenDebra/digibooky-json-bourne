@@ -3,6 +3,7 @@ package com.switchfully.jsonbourne.repository;
 import com.switchfully.jsonbourne.domain.Author;
 import com.switchfully.jsonbourne.domain.Book;
 import org.springframework.stereotype.Repository;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
@@ -27,8 +28,12 @@ public class LocalBookRepository implements BookRepository {
     }
 
     @Override
-    public Optional<Book> findByISBN(String isbn){
+    public Optional<Book> getBookByISBN(String isbn){
         return books.stream().filter(book -> book.getIsbn().equals(isbn)).findFirst();
     }
 
+    @Override
+    public Optional<Book> getBookByID(String id) {
+        return books.stream().filter(book -> book.getId().toString().equals(id)).findFirst();
+    }
 }

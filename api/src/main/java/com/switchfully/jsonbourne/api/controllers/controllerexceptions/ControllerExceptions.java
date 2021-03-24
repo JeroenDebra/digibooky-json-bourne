@@ -11,12 +11,9 @@ import java.io.IOException;
 @ControllerAdvice
 public class ControllerExceptions extends ResponseEntityExceptionHandler {
 
-
-
     @ExceptionHandler(BookNotFoundException.class)
     public void bookNotFound(BookNotFoundException bookNotFoundException, HttpServletResponse httpServletResponse) throws IOException {
         httpServletResponse.sendError(HttpServletResponse.SC_BAD_REQUEST, bookNotFoundException.getMessage());
     }
-
 
 }

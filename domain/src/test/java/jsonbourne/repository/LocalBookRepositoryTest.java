@@ -4,7 +4,6 @@ import com.switchfully.jsonbourne.repository.LocalBookRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
 import java.util.Collection;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,6 +23,6 @@ class LocalBookRepositoryTest {
 
     @Test
     void findByISBN() {
-        assertEquals(("9789024564460"),localBookRepository.findByISBN("9789024564460").get().getIsbn());
+        assertEquals(("9789024564460"),localBookRepository.getBookByISBN("9789024564460").get().getIsbn());
     }
 }

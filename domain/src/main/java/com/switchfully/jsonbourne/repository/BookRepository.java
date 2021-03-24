@@ -8,6 +8,7 @@ import java.util.Optional;
 public interface BookRepository {
 
     Collection<Book> getAllBooks();
-    Optional<Book> findByISBN(String isbn);
+    Optional<Book> getBookByISBN(String isbn);
+    Optional<Book> getBookByID(String id);
 
 }
