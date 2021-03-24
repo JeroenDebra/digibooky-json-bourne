@@ -1,5 +1,6 @@
 package com.switchfully.jsonbourne.service;
 
+import com.switchfully.jsonbourne.infrastructure.exceptions.BookNotFoundException;
 import com.switchfully.jsonbourne.repository.LocalBookRepository;
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +12,26 @@ class DefaultBookServiceTest {
 
     @Test
     void getAllBooksGivesACollectionOfBooks() {
-        assertTrue(new DefaultBookService(new LocalBookRepository()).getAllBooks() instanceof Collection);
+        assertNotNull(new DefaultBookService(new LocalBookRepository()).getAllBooks());
+    }
+
+    @Test
+    void getBookByISBNWillReturnCorrectBook() {
+        DefaultBookService defaultBookService = new DefaultBookService(new LocalBookRepository());
+        assertEquals("9789024564460",defaultBookService.getBookByISBN("9789024564460").getIsbn());
+    }
+
+    @Test
+    void getBookByISBN_withFakeISBNWillReturnException() {
+        DefaultBookService defaultBookService = new DefaultBookService(new LocalBookRepository());
+        Exception exception = assertThrows(BookNotFoundException.class, () -> defaultBookService.getBookByISBN("97"));
+        assertEquals("Book not found", exception.getMessage());
+    }
+
+    @Test
+    void getBookByID_withFakeISBNWillReturnException() {
+        DefaultBookService defaultBookService = new DefaultBookService(new LocalBookRepository());
+        Exception exception = assertThrows(BookNotFoundException.class, () -> defaultBookService.getBookById("zfzhozh"));
+        assertEquals("Book not found", exception.getMessage());
     }
 }
