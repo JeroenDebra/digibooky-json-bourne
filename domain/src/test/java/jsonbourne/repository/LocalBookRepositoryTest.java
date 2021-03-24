@@ -25,4 +25,9 @@ class LocalBookRepositoryTest {
     void findByISBN() {
         assertEquals(("9789024564460"),localBookRepository.getBookByISBN("9789024564460").get().getIsbn());
     }
+
+    @Test
+    void getBookByISBNFakeIsbnGivesEmptyOptional() {
+        assertTrue(localBookRepository.getBookByISBN("fakeisbnNumber").isEmpty());
+    }
 }
