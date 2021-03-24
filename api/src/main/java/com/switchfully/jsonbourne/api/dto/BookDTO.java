@@ -6,6 +6,7 @@ public class BookDTO {
     private String title;
     private String authorFirstName;
     private String authorLastName;
+    private String summary;
 
     public BookDTO() {
     }
@@ -26,6 +27,10 @@ public class BookDTO {
         return authorLastName;
     }
 
+    public String getSummary() {
+        return summary;
+    }
+
     public BookDTO setIsbn(String isbn) {
         this.isbn = isbn;
         return this;
@@ -43,6 +48,11 @@ public class BookDTO {
 
     public BookDTO setAuthorLastName(String authorLastName) {
         this.authorLastName = authorLastName;
+        return this;
+    }
+
+    public BookDTO setSummary(String summary){
+        this.summary = summary;
         return this;
     }
 }

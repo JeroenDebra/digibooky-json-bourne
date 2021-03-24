@@ -5,10 +5,8 @@ import com.switchfully.jsonbourne.api.dto.BookDTO;
 import com.switchfully.jsonbourne.api.mapper.BookMapper;
 import com.switchfully.jsonbourne.service.BookService;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.Collection;
 
 @RestController
@@ -25,8 +23,14 @@ public class BookController {
 
     @GetMapping(produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public Collection<BookDTO> getAllBooks(){
+    public Collection<BookDTO> getAllBooks() {
         return bookMapper.listBookToListDTO(bookService.getAllBooks());
+    }
+
+    @GetMapping(path = "/{id}", produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public BookDTO getBookById(@PathVariable String id) {
+        return bookMapper.bookToBookDTOWithSummary(bookService.getBookById(id));
     }
 }
 

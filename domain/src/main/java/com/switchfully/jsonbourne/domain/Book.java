@@ -9,11 +9,13 @@ public class Book {
     private String isbn;
     private String title;
     private Author author;
+    private String summary;
 
-    public Book(String isbn, String title, Author author){
+    public Book(String isbn, String title, Author author,String summary){
         this.isbn = isbn;
         this.title = title;
         this.author = author;
+        this.summary = summary;
         id = UUID.randomUUID();
     }
 
@@ -27,6 +29,12 @@ public class Book {
 
     public Author getAuthor() {
         return author;
+    }
+
+    public UUID getId(){return id;}
+
+    public String getSummary() {
+        return summary;
     }
 
     @Override

@@ -23,4 +23,13 @@ public class BookMapper {
         return listOfBooks.stream().map(this::bookToDTO).collect(Collectors.toList());
     }
 
+    public BookDTO bookToBookDTOWithSummary(Book book){
+        return new BookDTO()
+                .setIsbn(book.getIsbn())
+                .setTitle(book.getTitle())
+                .setAuthorFirstName(book.getAuthor().getFirstname())
+                .setAuthorLastName(book.getAuthor().getLastname())
+                .setSummary(book.getSummary());
+    }
+
 }

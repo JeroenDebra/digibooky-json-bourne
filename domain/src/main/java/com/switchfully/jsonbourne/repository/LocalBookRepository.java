@@ -21,8 +21,7 @@ public class LocalBookRepository implements BookRepository {
         return books;
     }
 
-
     private void fillInList(){
-        books.add(new Book("9789024564460","title",new Author("firstname","lastname")));
+        books.add(new Book("9789024564460","title",new Author("firstname","lastname"),"this is the story ....."));
     }
 }

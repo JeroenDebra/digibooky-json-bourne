@@ -5,6 +5,7 @@ import com.switchfully.jsonbourne.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.UUID;
 
 @Service
 public class DefaultBookService implements BookService {
@@ -18,5 +19,10 @@ public class DefaultBookService implements BookService {
     @Override
     public Collection<Book> getAllBooks() {
         return bookRepository.getAllBooks();
+    }
+
+    @Override
+    public Book getBookById(String id) {
+        return bookRepository.getAllBooks().stream().filter(book -> book.getId().toString().equals(id)).findFirst().orElseThrow(() -> new IllegalArgumentException("Book not found."));
     }
 }
