@@ -24,19 +24,19 @@ public class DefaultBookService implements BookService {
 
     @Override
     public Book getBookByISBN(String isbn){
-        Optional<Book> book = bookRepository.getBookByISBN(isbn);
-        if(book.isEmpty()){
+        return checkIfBookIsEmpty(bookRepository.getBookByISBN(isbn));
+    }
+
+    @Override
+    public Book getBookById(String id) {
+        return checkIfBookIsEmpty(bookRepository.getBookByID(id));
+    }
+
+    private Book checkIfBookIsEmpty(Optional<Book> book) {
+        if (book.isEmpty()) {
             throw new BookNotFoundException("Book not found");
         }
         return book.get();
     }
 
-    @Override
-    public Book getBookById(String id) {
-        Optional<Book> book = bookRepository.getBookByID(id);
-        if(book.isEmpty()){
-            throw new BookNotFoundException("Book not found");
-        }
-        return book.get();
-    }
 }
