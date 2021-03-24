@@ -5,7 +5,7 @@ public class Author {
     private final String firstname;
     private final String lastname;
 
-    public Author(String firstname, String lastname){
+    public Author(String firstname, String lastname) {
         this.firstname = firstname;
         this.lastname = lastname;
     }
@@ -18,7 +18,7 @@ public class Author {
         return lastname;
     }
 
-    public String getFullname(){
+    public String getFullname() {
         return firstname + " " + lastname;
     }
 }

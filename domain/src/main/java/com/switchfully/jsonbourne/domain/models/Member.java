@@ -8,8 +8,8 @@ public class Member {
     private final PersonalInformation personalInformation;
     private final Address address;
 
-    public Member(UUID uuid, PersonalInformation personalInformation, Address address) {
-        this.uuid = uuid;
+    public Member(PersonalInformation personalInformation, Address address) {
+        this.uuid = UUID.randomUUID();
         this.personalInformation = personalInformation;
         this.address = address;
     }
