@@ -1,7 +1,7 @@
 package com.switchfully.jsonbourne.domain.repository;
 
-import com.switchfully.jsonbourne.domain.domain.Author;
-import com.switchfully.jsonbourne.domain.domain.Book;
+import com.switchfully.jsonbourne.domain.models.Author;
+import com.switchfully.jsonbourne.domain.models.Book;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -25,7 +25,7 @@ public class LocalBookRepository implements BookRepository {
     }
 
     private void fillInList(){
-        books.add(new Book("9789024564460","title",new Author("firstname","lastname"),"this is the story ....."));
+        books.add(new Book("9789024564460","title",new Author("Firstname","Lastname"),"this is the story ....."));
     }
 
     @Override
@@ -40,6 +40,11 @@ public class LocalBookRepository implements BookRepository {
 
     @Override
     public Collection<Book> getBookByAuthor(String authorName) {
-        return books.stream().filter(book -> book.getAuthor().getFullname().contains(authorName)).collect(Collectors.toList());
+        return books.stream().filter(book -> book.getAuthor().getFullname().toLowerCase().contains(authorName.toLowerCase())).collect(Collectors.toList());
+    }
+
+    @Override
+    public Collection<Book> getBooksByTitle(String title) {
+        return books.stream().filter(book -> book.getTitle().toLowerCase().contains(title.toLowerCase())).collect(Collectors.toList());
     }
 }

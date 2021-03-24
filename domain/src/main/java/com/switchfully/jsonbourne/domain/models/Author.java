@@ -1,4 +1,4 @@
-package com.switchfully.jsonbourne.domain.domain;
+package com.switchfully.jsonbourne.domain.models;
 
 public class Author {
 

@@ -1,9 +1,9 @@
 package com.switchfully.jsonbourne.service.bookservice;
 
-import com.switchfully.jsonbourne.domain.domain.Author;
-import com.switchfully.jsonbourne.domain.domain.Book;
+import com.switchfully.jsonbourne.domain.models.Book;
 import com.switchfully.jsonbourne.infrastructure.exceptions.BookNotFoundException;
 import com.switchfully.jsonbourne.domain.repository.BookRepository;
+import com.switchfully.jsonbourne.infrastructure.exceptions.NoBooksFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -33,15 +33,27 @@ public class DefaultBookService implements BookService {
         return checkIfBookIsEmpty(bookRepository.getBookByID(id));
     }
 
+    @Override
+    public Collection<Book> getBooksByTitle(String title) {
+        return checkIfBookListIsEmpty(title, bookRepository.getBooksByTitle(title));
+    }
+
+    @Override
+    public Collection<Book> getBookByAuthor(String authorName) {
+        return checkIfBookListIsEmpty(authorName, bookRepository.getBookByAuthor(authorName));
+    }
+
+    private Collection<Book> checkIfBookListIsEmpty(String information, Collection<Book> books) {
+        if (books.isEmpty()) {
+            throw new NoBooksFoundException("No books found with " + information);
+        }
+        return books;
+    }
+
     private Book checkIfBookIsEmpty(Optional<Book> book) {
         if (book.isEmpty()) {
             throw new BookNotFoundException("Book not found");
         }
         return book.get();
-    }
-
-    @Override
-    public Collection<Book> getBookByAuthor(String authorName) {
-        return bookRepository.getBookByAuthor(authorName);
     }
 }
