@@ -16,25 +16,21 @@ public class DefaultEmployeeService implements EmployeeService {
 
     @Override
     public boolean isAdmin(String uuid) {
-        if (!employeeRepository.isAdmin(uuid)) {
-            throw new NotAuthorizedException("you are not authorized");
-        }
-        return true;
-    }
-
-    @Override
-    public Employee addEmployee(Employee employee, String id) {
-        if (isAdmin(id)) {
-            employeeRepository.addEmployee(employee);
-        }
-        return employee;
+        return employeeRepository.isAdmin(uuid);
     }
 
     @Override
     public boolean isLibrarian(String uuid) {
-        if (!employeeRepository.isLibrarian(uuid)) {
-            throw new NotAuthorizedException("you are not authorized");
-        }
-        return true;
+        return employeeRepository.isLibrarian(uuid);
     }
+
+    @Override
+    public Employee addEmployee(Employee employee, String id) {
+        if (!isAdmin(id)) throw new NotAuthorizedException("users does not have permission to add employees");
+
+        employeeRepository.addEmployee(employee);
+        return employee;
+    }
+
+
 }

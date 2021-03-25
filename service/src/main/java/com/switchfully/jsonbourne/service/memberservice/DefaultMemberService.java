@@ -1,14 +1,13 @@
 package com.switchfully.jsonbourne.service.memberservice;
 
 import com.switchfully.jsonbourne.domain.models.member.Member;
-import com.switchfully.jsonbourne.domain.repository.member.LocalMemberRepository;
 import com.switchfully.jsonbourne.domain.repository.member.MemberRepository;
 import com.switchfully.jsonbourne.infrastructure.exceptions.DuplicateMemberException;
+import com.switchfully.jsonbourne.infrastructure.exceptions.NotAuthorizedException;
 import com.switchfully.jsonbourne.service.employeeservice.EmployeeService;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,8 +37,9 @@ public class DefaultMemberService implements MemberService{
     }
 
     @Override
-    public Collection<Member> getAllMembers(String admin) {
-        employeeService.isAdmin(admin);
+    public Collection<Member> getAllMembers(String adminId) {
+        if (employeeService.isAdmin(adminId)) throw new NotAuthorizedException("user does not have permission to view user data");
+
         return memberRepository.getAllMembers();
     }
 }
