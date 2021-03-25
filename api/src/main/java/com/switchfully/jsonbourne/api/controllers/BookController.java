@@ -1,10 +1,8 @@
 package com.switchfully.jsonbourne.api.controllers;
 
-
 import com.switchfully.jsonbourne.api.dto.book.BookDTO;
 import com.switchfully.jsonbourne.api.dto.book.CreateBookDTO;
 import com.switchfully.jsonbourne.api.mappers.BookMapper;
-import com.switchfully.jsonbourne.domain.models.book.Book;
 import com.switchfully.jsonbourne.service.bookservice.BookService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
