@@ -74,9 +74,9 @@ public class BookController {
         return bookService.deleteBookById(librarianId, bookId);
     }
 
-    @PostMapping(path = "{librarianId}/{bookId}", produces = "application/json")
+    @PostMapping(path = "/{bookId}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public String restoreBook(@PathVariable String librarianId, @PathVariable String bookId) {
+    public String restoreBook(@RequestParam String librarianId, @PathVariable String bookId) {
         logger.info("A librarian tried to restore a specific deleted book");
         return bookService.restoreBookById(librarianId, bookId);
     }
