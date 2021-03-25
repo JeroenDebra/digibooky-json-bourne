@@ -1,28 +1,24 @@
-package com.switchfully.jsonbourne.service.memberservice;
+package com.switchfully.jsonbourne.service;
 
 import com.switchfully.jsonbourne.domain.models.member.Member;
-import com.switchfully.jsonbourne.domain.repository.member.LocalMemberRepository;
-import com.switchfully.jsonbourne.domain.repository.member.MemberRepository;
+import com.switchfully.jsonbourne.domain.repository.MemberRepository;
 import com.switchfully.jsonbourne.infrastructure.exceptions.DuplicateMemberException;
-import com.switchfully.jsonbourne.service.employeeservice.EmployeeService;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class DefaultMemberService implements MemberService{
+public class MemberService{
 
     private final MemberRepository memberRepository;
     private final EmployeeService employeeService;
 
-    public DefaultMemberService(MemberRepository memberRepository, EmployeeService employeeService) {
+    public MemberService(MemberRepository memberRepository, EmployeeService employeeService) {
         this.memberRepository = memberRepository;
         this.employeeService = employeeService;
     }
 
-    @Override
     public Member addMember(Member newMember) {
         if (!checkIfDuplicateExists(newMember)){
             throw new DuplicateMemberException("This member already exists");
@@ -37,7 +33,6 @@ public class DefaultMemberService implements MemberService{
                 .collect(Collectors.toList()).isEmpty();
     }
 
-    @Override
     public Collection<Member> getAllMembers(String admin) {
         employeeService.isAdmin(admin);
         return memberRepository.getAllMembers();

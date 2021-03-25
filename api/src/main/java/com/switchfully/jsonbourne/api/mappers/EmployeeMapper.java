@@ -3,7 +3,7 @@ package com.switchfully.jsonbourne.api.mappers;
 import com.switchfully.jsonbourne.api.dto.member.CreateEmployeeDTO;
 import com.switchfully.jsonbourne.api.dto.member.EmployeeDTO;
 import com.switchfully.jsonbourne.domain.models.member.Employee;
-import com.switchfully.jsonbourne.service.employeeservice.EmployeeService;
+import com.switchfully.jsonbourne.service.EmployeeService;
 import org.springframework.stereotype.Component;
 import com.switchfully.jsonbourne.domain.models.member.Role;
 
