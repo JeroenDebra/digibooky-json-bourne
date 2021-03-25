@@ -38,7 +38,8 @@ public class BookService {
     }
 
     public Book createBook(String librarianId, Book book) {
-        employeeService.isLibrarian(librarianId);
+        if (employeeService.isLibrarian(librarianId)) throw new NotAuthorizedException("user has no permission to create books");
+
         return bookRepository.addBook(book);
     }
 
@@ -47,22 +48,23 @@ public class BookService {
     }
 
     public Book updateBook(String bookId, String librarianId, Book bookWithNewInformation) {
-        if (!employeeService.isLibrarian(librarianId)) {
-            throw new NotAuthorizedException("You are not a librarian:" + librarianId);
-        }
+        if (employeeService.isLibrarian(librarianId)) throw new NotAuthorizedException("user has no permission to update books");
+
         checkIfBookIsEmpty(bookRepository.getBookByID(bookId));
         return bookRepository.updateBook(bookId, bookWithNewInformation);
 
     }
 
     public String deleteBookById(String librarianId, String id) {
-        employeeService.isLibrarian(librarianId);
+        if (employeeService.isLibrarian(librarianId)) throw new NotAuthorizedException("user has no permission to delete books");
+
         bookRepository.setBookToDeleted(checkIfBookIsEmpty(bookRepository.getBookByID(id)));
         return "This book with id " + id + " has been deleted.";
     }
 
     public String restoreBookById(String librarianId, String id) {
-        employeeService.isLibrarian(librarianId);
+        if (employeeService.isLibrarian(librarianId)) throw new NotAuthorizedException("user has no permission to restore books");
+
         bookRepository.restoreDeletedBook(checkIfBookIsEmpty(bookRepository.getDeletedBookByID(id)));
         return "This book with id " + id + " has been restored.";
     }

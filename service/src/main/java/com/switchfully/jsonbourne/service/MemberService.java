@@ -3,6 +3,7 @@ package com.switchfully.jsonbourne.service;
 import com.switchfully.jsonbourne.domain.models.member.Member;
 import com.switchfully.jsonbourne.domain.repository.MemberRepository;
 import com.switchfully.jsonbourne.infrastructure.exceptions.DuplicateMemberException;
+import com.switchfully.jsonbourne.infrastructure.exceptions.NotAuthorizedException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -33,8 +34,9 @@ public class MemberService{
                 .collect(Collectors.toList()).isEmpty();
     }
 
-    public Collection<Member> getAllMembers(String admin) {
-        employeeService.isAdmin(admin);
+    public Collection<Member> getAllMembers(String adminId) {
+        if (employeeService.isAdmin(adminId)) throw new NotAuthorizedException("User has no permission to view memeber data");
+
         return memberRepository.getAllMembers();
     }
 }
