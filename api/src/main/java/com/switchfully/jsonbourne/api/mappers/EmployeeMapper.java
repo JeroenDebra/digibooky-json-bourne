@@ -11,13 +11,8 @@ import com.switchfully.jsonbourne.domain.models.member.Role;
 @Component
 public class EmployeeMapper {
 
-    private final EmployeeService employeeToEmployeeDTO;
 
-    public EmployeeMapper(EmployeeService employeeToEmployeeDTO) {
-        this.employeeToEmployeeDTO = employeeToEmployeeDTO;
-    }
-
-    private EmployeeDTO employeeToEmployeeDTO(Employee employee){
+    public EmployeeDTO employeeToEmployeeDTO(Employee employee){
         return new EmployeeDTO()
                 .setId(employee.getId())
                 .setFirstname(employee.getFirstname())
@@ -26,8 +21,11 @@ public class EmployeeMapper {
                 .setRole(employee.getRole().toString());
     }
 
-    public EmployeeDTO createLibrarian(CreateEmployeeDTO createEmployeeDTO) {
-        Employee employee = new Employee(createEmployeeDTO.getFirstname(), createEmployeeDTO.getLastname(), createEmployeeDTO.getEmail(), Role.LIBRARIAN);
-        return employeeToEmployeeDTO(employeeToEmployeeDTO.addEmployee(employee));
+    public Employee createLibrarian(CreateEmployeeDTO createEmployeeDTO) {
+        return new Employee(createEmployeeDTO.getFirstname(), createEmployeeDTO.getLastname(), createEmployeeDTO.getEmail(), Role.LIBRARIAN);
+    }
+
+    public Employee createAdmin(CreateEmployeeDTO createEmployeeDTO) {
+        return new Employee(createEmployeeDTO.getFirstname(), createEmployeeDTO.getLastname(), createEmployeeDTO.getEmail(), Role.ADMIN);
     }
 }

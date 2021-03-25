@@ -23,8 +23,10 @@ public class DefaultEmployeeService implements EmployeeService {
     }
 
     @Override
-    public Employee addEmployee(Employee employee) {
-        employeeRepository.addEmployee(employee);
+    public Employee addEmployee(Employee employee, String id) {
+        if (isAdmin(id)) {
+            employeeRepository.addEmployee(employee);
+        }
         return employee;
     }
 

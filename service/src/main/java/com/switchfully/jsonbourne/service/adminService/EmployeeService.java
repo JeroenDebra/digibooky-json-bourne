@@ -7,5 +7,5 @@ public interface EmployeeService {
     boolean isAdmin(String uuid);
 
     boolean isLibrarian(String uuid);
-    Employee addEmployee(Employee employee);
+    Employee addEmployee(Employee employee, String id);
 }

@@ -21,8 +21,13 @@ public class EmployeeController {
 
     @PostMapping(path = "/addLibrarian/{adminId}",consumes = "application/json",produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public EmployeeDTO addMember(@RequestBody CreateEmployeeDTO createEmployeeDTO,@PathVariable String adminId){
-        employeeService.isAdmin(adminId);
-        return employeeMapper.createLibrarian(createEmployeeDTO);
+    public EmployeeDTO addLibrarian(@RequestBody CreateEmployeeDTO createEmployeeDTO,@PathVariable String adminId){
+        return employeeMapper.employeeToEmployeeDTO(employeeService.addEmployee(employeeMapper.createLibrarian(createEmployeeDTO), adminId));
+    }
+
+    @PostMapping(path = "/addAdmin/{adminId}",consumes = "application/json",produces = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    public EmployeeDTO addAdmin(@RequestBody CreateEmployeeDTO createEmployeeDTO,@PathVariable String adminId){
+        return employeeMapper.employeeToEmployeeDTO(employeeService.addEmployee(employeeMapper.createAdmin(createEmployeeDTO), adminId));
     }
 }
