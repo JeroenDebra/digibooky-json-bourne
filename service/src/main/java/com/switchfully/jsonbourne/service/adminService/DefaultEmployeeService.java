@@ -1,5 +1,6 @@
 package com.switchfully.jsonbourne.service.adminService;
 
+import com.switchfully.jsonbourne.domain.models.member.Employee;
 import com.switchfully.jsonbourne.domain.repository.admin.EmployeeRepository;
 import com.switchfully.jsonbourne.infrastructure.exceptions.NotAuthorizedException;
 import org.springframework.stereotype.Service;
@@ -19,5 +20,11 @@ public class DefaultEmployeeService implements EmployeeService {
             throw new NotAuthorizedException("you are not authorized");
         }
         return true;
+    }
+
+    @Override
+    public Employee addEmployee(Employee employee) {
+        employeeRepository.addEmployee(employee);
+        return employee;
     }
 }

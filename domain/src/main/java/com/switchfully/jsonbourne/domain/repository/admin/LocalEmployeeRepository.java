@@ -26,4 +26,9 @@ public class LocalEmployeeRepository implements EmployeeRepository {
     public boolean isAdmin(String uuuid) {
         return employees.stream().filter(employee -> employee.getRole() == Role.ADMIN).filter(employee -> employee.getId().toString().equals(uuuid)).count() > 0;
     }
+
+    @Override
+    public boolean addEmployee(Employee employee) {
+        return employees.add(employee);
+    }
 }
