@@ -11,8 +11,8 @@ public interface BookService {
     Book getBookById(String id);
     Collection<Book> getBookByAuthor(String authorName);
     Collection<Book> getBooksByTitle(String title);
-    Book updateBook(String id,Book bookWithNewInformation);
     String deleteBookById(String librarianId, String bookId);
     String restoreBookById(String libranianId, String bookId);
+    Book updateBook(String bookId,String librarianId,Book bookWithNewInformation);
     Book createBook(Book book);
 }

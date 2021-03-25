@@ -47,6 +47,6 @@ public class BookMapper {
     }
 
     public BookDTO createBook(CreateBookDTO createBookDTO) {
-        return bookToDTO(service.createBook(new Book(createBookDTO.getIsbn(),createBookDTO.getTitle(),new Author(createBookDTO.getAuthorFirstName(),createBookDTO.getAuthorLastName()),createBookDTO.getSummary())));
+        return bookToDTO(defaultBookService.createBook(new Book(createBookDTO.getIsbn(),createBookDTO.getTitle(),new Author(createBookDTO.getAuthorFirstName(),createBookDTO.getAuthorLastName()),createBookDTO.getSummary())));
     }
 }

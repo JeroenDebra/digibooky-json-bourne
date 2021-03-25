@@ -4,6 +4,7 @@ import com.switchfully.jsonbourne.domain.models.book.Book;
 import com.switchfully.jsonbourne.infrastructure.exceptions.BookNotFoundException;
 import com.switchfully.jsonbourne.domain.repository.book.BookRepository;
 import com.switchfully.jsonbourne.infrastructure.exceptions.NoBooksFoundException;
+import com.switchfully.jsonbourne.infrastructure.exceptions.NotAuthorizedException;
 import com.switchfully.jsonbourne.service.adminService.EmployeeService;
 import org.springframework.stereotype.Service;
 
@@ -53,13 +54,14 @@ public class DefaultBookService implements BookService {
     }
 
     @Override
-   public Book updateBook(String id, Book bookWithNewInformation){
+    public Book updateBook(String bookId, String librarianId, Book bookWithNewInformation) {
+        if (!employeeService.isLibrarian(librarianId)) {
+            throw new NotAuthorizedException("You are not a librarian:" + librarianId);
+        }
+        checkIfBookIsEmpty(bookRepository.getBookByID(bookId));
+        return bookRepository.updateBook(bookId, bookWithNewInformation);
 
-        checkIfBookIsEmpty(bookRepository.getBookByID(id));
-       return bookRepository.updateBook(id,bookWithNewInformation);
     }
-
-
     @Override
     public String deleteBookById(String librarianId, String id) {
         employeeService.isLibrarian(librarianId);
