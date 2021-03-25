@@ -3,7 +3,7 @@ package com.switchfully.jsonbourne.api.controllers;
 import com.switchfully.jsonbourne.api.dto.member.CreateEmployeeDTO;
 import com.switchfully.jsonbourne.api.dto.member.EmployeeDTO;
 import com.switchfully.jsonbourne.api.mappers.EmployeeMapper;
-import com.switchfully.jsonbourne.service.employeeservice.EmployeeService;
+import com.switchfully.jsonbourne.service.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

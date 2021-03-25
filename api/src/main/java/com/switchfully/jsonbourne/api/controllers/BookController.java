@@ -2,12 +2,9 @@ package com.switchfully.jsonbourne.api.controllers;
 
 import com.switchfully.jsonbourne.api.dto.book.BookDTO;
 import com.switchfully.jsonbourne.api.dto.book.UpDateBookDTO;
-import com.switchfully.jsonbourne.api.dto.member.CreateMemberDTO;
-import com.switchfully.jsonbourne.api.dto.member.MemberDTO;
 import com.switchfully.jsonbourne.api.dto.book.CreateBookDTO;
 import com.switchfully.jsonbourne.api.mappers.BookMapper;
-import com.switchfully.jsonbourne.service.employeeservice.EmployeeService;
-import com.switchfully.jsonbourne.service.bookservice.BookService;
+import com.switchfully.jsonbourne.service.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -23,12 +20,10 @@ public class BookController {
 
     private final BookService bookService;
     private final BookMapper bookMapper;
-    private final EmployeeService employeeService;
 
-    public BookController(BookService bookService, BookMapper bookMapper, EmployeeService employeeService) {
+    public BookController(BookService bookService, BookMapper bookMapper) {
         this.bookService = bookService;
         this.bookMapper = bookMapper;
-        this.employeeService = employeeService;
     }
 
     @GetMapping(produces = "application/json")
