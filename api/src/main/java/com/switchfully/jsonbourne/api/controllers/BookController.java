@@ -3,6 +3,7 @@ package com.switchfully.jsonbourne.api.controllers;
 import com.switchfully.jsonbourne.api.dto.book.BookDTO;
 import com.switchfully.jsonbourne.api.dto.book.CreateBookDTO;
 import com.switchfully.jsonbourne.api.mappers.BookMapper;
+import com.switchfully.jsonbourne.service.adminService.EmployeeService;
 import com.switchfully.jsonbourne.service.bookservice.BookService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +16,12 @@ public class BookController {
 
     private final BookService bookService;
     private final BookMapper bookMapper;
+    private final EmployeeService employeeService;
 
-    public BookController(BookService bookService, BookMapper bookMapper) {
+    public BookController(BookService bookService, BookMapper bookMapper, EmployeeService employeeService) {
         this.bookService = bookService;
         this.bookMapper = bookMapper;
+        this.employeeService = employeeService;
     }
 
     @GetMapping(produces = "application/json")
@@ -51,6 +54,7 @@ public class BookController {
         return bookMapper.listBookToListDTO(bookService.getBooksByTitle(title));
     }
 
+
     @DeleteMapping(path = "deletebook/{librarianId}/{bookId}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public String deleteBook (@PathVariable String librarianId, @PathVariable String bookId) {
@@ -63,9 +67,10 @@ public class BookController {
         return bookService.restoreBookById(librarianId, bookId);
     }
 
-    @PostMapping(consumes = "application/json")
-    @ResponseStatus(HttpStatus.OK)
-    public BookDTO patchBook(@RequestBody CreateBookDTO createBookDTO){
+    @PostMapping(path = "/{librarianId}",consumes = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    public BookDTO createBook(@RequestBody CreateBookDTO createBookDTO,@PathVariable String librarianId){
+        employeeService.isAdmin(librarianId);
         return bookMapper.createBook(createBookDTO);
     }
 }

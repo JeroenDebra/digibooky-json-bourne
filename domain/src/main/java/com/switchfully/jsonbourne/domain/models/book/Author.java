@@ -7,7 +7,14 @@ public class Author {
 
     public Author(String firstname, String lastname) {
         this.firstname = firstname;
-        this.lastname = lastname;
+        this.lastname = lastNameValidator(lastname);
+    }
+
+    private String lastNameValidator(String lastname) {
+        if (lastname == null || lastname.isBlank()) {
+            throw new IllegalArgumentException("lastname is not valid");
+        }
+        return lastname;
     }
 
     public String getFirstname() {
