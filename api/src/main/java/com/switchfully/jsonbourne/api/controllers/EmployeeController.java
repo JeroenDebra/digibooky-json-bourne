@@ -19,10 +19,10 @@ public class EmployeeController {
         this.employeeMapper = employeeMapper;
     }
 
-    @PostMapping(path = "/addemployee/{adminId}",consumes = "application/json",produces = "application/json")
+    @PostMapping(path = "/addLibrarian/{adminId}",consumes = "application/json",produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public EmployeeDTO addMember(@RequestBody CreateEmployeeDTO createEmployeeDTO,@PathVariable String adminId){
         employeeService.isAdmin(adminId);
-        return employeeMapper.createEmployee(createEmployeeDTO);
+        return employeeMapper.createLibrarian(createEmployeeDTO);
     }
 }

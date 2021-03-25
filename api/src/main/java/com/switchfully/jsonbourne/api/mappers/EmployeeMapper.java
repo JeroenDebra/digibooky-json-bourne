@@ -26,16 +26,8 @@ public class EmployeeMapper {
                 .setRole(employee.getRole().toString());
     }
 
-    private Role roleMapper(String role){
-        if (role.equals("admin")){
-            return Role.ADMIN;
-        }
-        return Role.LIBRARIAN;
-    }
-
-    public EmployeeDTO createEmployee(CreateEmployeeDTO createEmployeeDTO) {
-        Employee employee = new Employee(createEmployeeDTO.getFirstname(), createEmployeeDTO.getLastname(), createEmployeeDTO.getEmail(), roleMapper(createEmployeeDTO.getRole()));
-
+    public EmployeeDTO createLibrarian(CreateEmployeeDTO createEmployeeDTO) {
+        Employee employee = new Employee(createEmployeeDTO.getFirstname(), createEmployeeDTO.getLastname(), createEmployeeDTO.getEmail(), Role.LIBRARIAN);
         return employeeToEmployeeDTO(employeeToEmployeeDTO.addEmployee(employee));
     }
 }

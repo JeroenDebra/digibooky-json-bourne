@@ -4,6 +4,7 @@ import com.switchfully.jsonbourne.domain.models.book.Book;
 import com.switchfully.jsonbourne.infrastructure.exceptions.BookNotFoundException;
 import com.switchfully.jsonbourne.domain.repository.book.BookRepository;
 import com.switchfully.jsonbourne.infrastructure.exceptions.NoBooksFoundException;
+import com.switchfully.jsonbourne.service.adminService.EmployeeService;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -13,9 +14,11 @@ import java.util.Optional;
 public class DefaultBookService implements BookService {
 
     private final BookRepository bookRepository;
+    private final EmployeeService employeeService;
 
-    public DefaultBookService(BookRepository bookRepository) {
+    public DefaultBookService(BookRepository bookRepository, EmployeeService employeeService) {
         this.bookRepository = bookRepository;
+        this.employeeService = employeeService;
     }
 
     @Override
@@ -56,6 +59,20 @@ public class DefaultBookService implements BookService {
        return bookRepository.updateBook(id,bookWithNewInformation);
     }
 
+
+    @Override
+    public String deleteBookById(String librarianId, String id) {
+        employeeService.isLibrarian(librarianId);
+        bookRepository.setBookToDeleted(checkIfBookIsEmpty(bookRepository.getBookByID(id)));
+        return "This book with id " + id + " has been deleted.";
+    }
+
+    @Override
+    public String restoreBookById(String librarianId, String id) {
+        employeeService.isLibrarian(librarianId);
+        bookRepository.restoreDeletedBook(checkIfBookIsEmpty(bookRepository.getDeletedBookByID(id)));
+        return "This book with id " + id + " has been restored.";
+    }
 
     private Collection<Book> checkIfBookListIsEmpty(String information, Collection<Book> books) {
         if (books.isEmpty()) {

@@ -13,6 +13,9 @@ public interface BookRepository {
     Collection<Book> getBooksByTitle(String title);
     Collection<Book> getBookByAuthor(String authorName);
     Book updateBook(String id,Book bookWithNewInformation);
+    void setBookToDeleted(Book book);
+    void restoreDeletedBook(Book book);
+    Optional<Book> getDeletedBookByID(String id);
     Book addBook(Book book);
 
 }
