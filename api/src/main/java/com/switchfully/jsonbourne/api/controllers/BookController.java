@@ -62,8 +62,7 @@ public class BookController {
         return bookMapper.listBookToListDTO(bookService.getBooksByTitle(title));
     }
 
-
-    @PutMapping(path = "id/{bookId}", consumes = "application/json", produces = "application/json")
+    @PutMapping(path = "{bookId}", consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public BookDTO updateBook(@PathVariable String bookId, @RequestParam String librarianId, @RequestBody UpDateBookDTO upDateBookDTO) {
         return bookMapper.bookToDTO(bookService.updateBook(bookId, librarianId, bookMapper.updateBookDTOToBook(upDateBookDTO)));
@@ -76,7 +75,7 @@ public class BookController {
         return bookService.deleteBookById(librarianId, bookId);
     }
 
-    @PatchMapping(path = "{librarianId}/{bookId}", produces = "application/json")
+    @PostMapping(path = "{librarianId}/{bookId}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public String restoreBook(@PathVariable String librarianId, @PathVariable String bookId) {
         logger.info("A librarian tried to restore a specific deleted book");
