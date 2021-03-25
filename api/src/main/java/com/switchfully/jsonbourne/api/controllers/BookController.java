@@ -38,30 +38,31 @@ public class BookController {
         return bookMapper.listBookToListDTO(bookService.getAllBooks());
     }
 
-    @GetMapping(path = "id/{id}", produces = "application/json")
+    @GetMapping(path = "/{id}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public BookDTO getBookById(@PathVariable String id) {
         logger.info("A user requested a specific book by its ID");
         return bookMapper.bookToDTO(bookService.getBookById(id));
     }
 
-    @GetMapping(path = "isbn/{isbn}", produces = "application/json")
+   @GetMapping( produces = "application/json", params = {"isbn"})
     @ResponseStatus(HttpStatus.OK)
-    public BookDTO getBookByISBN(@PathVariable String isbn) {
+    public BookDTO getBookByISBN(@RequestParam String isbn) {
         logger.info("A user requested a specific book by its ISBN");
         return bookMapper.bookToDTO(bookService.getBookByISBN(isbn));
     }
 
-    @GetMapping(path = "author/{fullAuthorName}")
+
+    @GetMapping( produces = "application/json", params = {"fullAuthorName"})
     @ResponseStatus(HttpStatus.OK)
-    public Collection<BookDTO> getBooksByAuthor(@PathVariable String fullAuthorName){
+    public Collection<BookDTO> getBooksByAuthor(@RequestParam String fullAuthorName){
         logger.info("A user requested a list of books by a specific author");
         return bookMapper.listBookToListDTO(bookService.getBookByAuthor(fullAuthorName));
     }
 
-    @GetMapping(path = "title/{title}", produces = "application/json")
-    @ResponseStatus(HttpStatus.OK)
-    public Collection<BookDTO> getBooksByTitle (@PathVariable String title){
+  @GetMapping( produces = "application/json", params = {"title"})
+  @ResponseStatus(HttpStatus.OK)
+    public Collection<BookDTO> getBooksByTitle (@RequestParam String title){
         logger.info("A user requested a list of books with a certain title");
         return bookMapper.listBookToListDTO(bookService.getBooksByTitle(title));
     }
