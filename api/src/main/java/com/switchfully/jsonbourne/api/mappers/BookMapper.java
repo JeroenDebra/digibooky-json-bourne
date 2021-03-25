@@ -5,8 +5,12 @@ import com.switchfully.jsonbourne.api.dto.book.UpDateBookDTO;
 import com.switchfully.jsonbourne.api.dto.member.CreateMemberDTO;
 import com.switchfully.jsonbourne.api.dto.member.MemberDTO;
 import com.switchfully.jsonbourne.domain.models.book.Author;
+import com.switchfully.jsonbourne.api.dto.book.CreateBookDTO;
+import com.switchfully.jsonbourne.domain.models.book.Author;
 import com.switchfully.jsonbourne.domain.models.book.Book;
 import com.switchfully.jsonbourne.domain.models.member.Member;
+import com.switchfully.jsonbourne.service.bookservice.DefaultBookService;
+import com.switchfully.jsonbourne.service.bookservice.BookService;
 import com.switchfully.jsonbourne.service.bookservice.DefaultBookService;
 import org.springframework.stereotype.Component;
 
@@ -40,5 +44,9 @@ public class BookMapper {
 
     public Book updateBookDTOToBook(UpDateBookDTO upDateBookDTO){
         return new Book("lalala", upDateBookDTO.getTitle(), new Author(upDateBookDTO.getAuthorFirstName(), upDateBookDTO.getAuthorLastName()), upDateBookDTO.getSummary());
+    }
+
+    public BookDTO createBook(CreateBookDTO createBookDTO) {
+        return bookToDTO(service.createBook(new Book(createBookDTO.getIsbn(),createBookDTO.getTitle(),new Author(createBookDTO.getAuthorFirstName(),createBookDTO.getAuthorLastName()),createBookDTO.getSummary())));
     }
 }

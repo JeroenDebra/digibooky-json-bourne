@@ -41,6 +41,12 @@ public class LocalBookRepository implements BookRepository {
     }
 
     @Override
+    public Book addBook(Book book) {
+        books.add(book);
+        return book;
+    }
+
+    @Override
     public Collection<Book> getBooksByTitle(String title) {
         return books.stream().filter(book -> book.getTitle().toLowerCase().contains(title.toLowerCase())).collect(Collectors.toList());
     }

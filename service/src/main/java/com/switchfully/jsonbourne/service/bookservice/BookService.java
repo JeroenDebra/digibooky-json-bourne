@@ -13,4 +13,5 @@ public interface BookService {
     Collection<Book> getBooksByTitle(String title);
     Book updateBook(String id,Book bookWithNewInformation);
 
+    Book createBook(Book book);
 }

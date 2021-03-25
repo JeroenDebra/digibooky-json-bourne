@@ -13,5 +13,6 @@ public interface BookRepository {
     Collection<Book> getBooksByTitle(String title);
     Collection<Book> getBookByAuthor(String authorName);
     Book updateBook(String id,Book bookWithNewInformation);
+    Book addBook(Book book);
 
 }

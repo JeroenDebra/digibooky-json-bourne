@@ -5,7 +5,9 @@ import com.switchfully.jsonbourne.api.dto.book.BookDTO;
 import com.switchfully.jsonbourne.api.dto.book.UpDateBookDTO;
 import com.switchfully.jsonbourne.api.dto.member.CreateMemberDTO;
 import com.switchfully.jsonbourne.api.dto.member.MemberDTO;
+import com.switchfully.jsonbourne.api.dto.book.CreateBookDTO;
 import com.switchfully.jsonbourne.api.mappers.BookMapper;
+import com.switchfully.jsonbourne.domain.models.book.Book;
 import com.switchfully.jsonbourne.service.bookservice.BookService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -56,8 +58,15 @@ public class BookController {
 
     @PutMapping(path = "id/{id}", consumes = "application/json", produces = "application/json")
     public BookDTO updateBook(@PathVariable String bookId, @RequestBody UpDateBookDTO upDateBookDTO) {
-
         return bookMapper.bookToDTO(bookService.updateBook(bookId, bookMapper.updateBookDTOToBook(upDateBookDTO)));
 
     }
+
+    @PostMapping(consumes = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public BookDTO patchBook(@RequestBody CreateBookDTO createBookDTO){
+        return bookMapper.createBook(createBookDTO);
+    }
 }
+
+

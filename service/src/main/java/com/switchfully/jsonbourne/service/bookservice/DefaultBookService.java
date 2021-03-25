@@ -24,7 +24,7 @@ public class DefaultBookService implements BookService {
     }
 
     @Override
-    public Book getBookByISBN(String isbn){
+    public Book getBookByISBN(String isbn) {
         return checkIfBookIsEmpty(bookRepository.getBookByISBN(isbn));
     }
 
@@ -36,6 +36,12 @@ public class DefaultBookService implements BookService {
     @Override
     public Collection<Book> getBooksByTitle(String title) {
         return checkIfBookListIsEmpty(title, bookRepository.getBooksByTitle(title));
+    }
+
+    @Override
+    public Book createBook(Book book) {
+        bookRepository.addBook(book);
+        return book;
     }
 
     @Override
