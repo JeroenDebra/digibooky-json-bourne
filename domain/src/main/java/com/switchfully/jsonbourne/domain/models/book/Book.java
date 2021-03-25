@@ -14,11 +14,25 @@ public class Book {
 
     public Book(String isbn, String title, Author author,String summary){
         id = UUID.randomUUID();
-        this.isbn = isbn;
-        this.title = title;
+        this.isbn = isbnValidator(isbn);
+        this.title = titleValidator(title);
         this.author = author;
         this.summary = summary;
         this.isDeleted = false;
+    }
+
+    private String isbnValidator(String isbn) {
+        if (isbn == null || isbn.isBlank()) {
+            throw new IllegalArgumentException("isbn is not valid");
+        }
+        return isbn;
+    }
+
+    private String titleValidator(String title) {
+        if (title == null || title.isBlank()) {
+            throw new IllegalArgumentException("title is not valid");
+        }
+        return title;
     }
 
     public String getIsbn() {
