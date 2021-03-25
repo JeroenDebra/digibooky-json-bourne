@@ -4,6 +4,8 @@ import com.switchfully.jsonbourne.domain.models.member.Member;
 import com.switchfully.jsonbourne.domain.repository.MemberRepository;
 import com.switchfully.jsonbourne.infrastructure.exceptions.DuplicateMemberException;
 import com.switchfully.jsonbourne.infrastructure.exceptions.NotAuthorizedException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -11,6 +13,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class MemberService{
+
+    private static final Logger logger = LoggerFactory.getLogger(MemberService.class);
 
     private final MemberRepository memberRepository;
     private final EmployeeService employeeService;
@@ -22,6 +26,7 @@ public class MemberService{
 
     public Member addMember(Member newMember) {
         if (!checkIfDuplicateExists(newMember)){
+            logger.warn("The user tried to register a user that already exists");
             throw new DuplicateMemberException("This member already exists");
         }
         memberRepository.addMember(newMember);
@@ -35,8 +40,10 @@ public class MemberService{
     }
 
     public Collection<Member> getAllMembers(String adminId) {
-        if (employeeService.isAdmin(adminId)) throw new NotAuthorizedException("User has no permission to view memeber data");
-
+        if (!employeeService.isAdmin(adminId)) {
+            logger.warn("This user tried to see all the members without the right permissions");
+            throw new NotAuthorizedException("User has no permission to view member data");
+        }
         return memberRepository.getAllMembers();
     }
 }

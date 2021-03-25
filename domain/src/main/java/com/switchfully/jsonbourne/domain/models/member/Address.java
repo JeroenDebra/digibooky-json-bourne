@@ -1,6 +1,12 @@
 package com.switchfully.jsonbourne.domain.models.member;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Address {
+
+    private static final Logger logger = LoggerFactory.getLogger(Address.class);
+
     private final String streetName;
     private final String streetNumber;
     private final String postalCode;
@@ -16,6 +22,7 @@ public class Address {
 
     private String cityValidator(String city) {
         if (city == null || city.isBlank()) {
+            logger.warn("The user tried to register an invalid city");
             throw new IllegalArgumentException("city not valid");
         }
         return city;

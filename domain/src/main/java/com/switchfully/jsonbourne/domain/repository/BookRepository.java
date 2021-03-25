@@ -58,7 +58,6 @@ public class BookRepository {
     }
 
     public Book updateBook(String id, Book bookWithNewInformation){
-
         Book bookToUpdate = getBookByID(id).get();
         bookToUpdate.update(bookWithNewInformation);
         return bookToUpdate;

@@ -1,6 +1,11 @@
 package com.switchfully.jsonbourne.domain.models.book;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Author {
+
+    private static final Logger logger = LoggerFactory.getLogger(Author.class);
 
     private String firstname;
     private String lastname;
@@ -12,11 +17,11 @@ public class Author {
 
     private String lastNameValidator(String lastname) {
         if (lastname == null || lastname.isBlank()) {
+            logger.warn("The user tried to register an invalid last name");
             throw new IllegalArgumentException("lastname is not valid");
         }
         return lastname;
     }
-
 
     public String getFirstname() {
         return firstname;

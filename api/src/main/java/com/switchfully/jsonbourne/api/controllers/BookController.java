@@ -46,7 +46,6 @@ public class BookController {
         return bookMapper.bookToDTO(bookService.getBookByISBN(isbn));
     }
 
-
     @GetMapping(produces = "application/json", params = {"fullAuthorName"})
     @ResponseStatus(HttpStatus.OK)
     public Collection<BookDTO> getBooksByAuthor(@RequestParam String fullAuthorName) {
@@ -64,6 +63,7 @@ public class BookController {
     @PutMapping(path = "{bookId}", consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public BookDTO updateBook(@PathVariable String bookId, @RequestParam String librarianId, @RequestBody UpDateBookDTO upDateBookDTO) {
+        logger.info("A librarian tried to update a specific book");
         return bookMapper.bookToDTO(bookService.updateBook(bookId, librarianId, bookMapper.updateBookDTOToBook(upDateBookDTO)));
     }
 

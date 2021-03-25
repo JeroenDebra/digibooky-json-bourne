@@ -1,9 +1,14 @@
 package com.switchfully.jsonbourne.domain.models.book;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Objects;
 import java.util.UUID;
 
 public class Book {
+
+    private static final Logger logger = LoggerFactory.getLogger(Book.class);
 
     private final UUID id;
     private String isbn;
@@ -23,6 +28,7 @@ public class Book {
 
     private String isbnValidator(String isbn) {
         if (isbn == null || isbn.isBlank()) {
+            logger.warn("The user tried to register an invalid ISBN");
             throw new IllegalArgumentException("isbn is not valid");
         }
         return isbn;
@@ -30,6 +36,7 @@ public class Book {
 
     private String titleValidator(String title) {
         if (title == null || title.isBlank()) {
+            logger.warn("The user tried to register an invalid title");
             throw new IllegalArgumentException("title is not valid");
         }
         return title;
