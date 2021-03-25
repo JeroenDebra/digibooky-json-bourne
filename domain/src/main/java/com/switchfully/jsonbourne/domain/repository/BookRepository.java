@@ -61,10 +61,6 @@ public class BookRepository {
 
         Book bookToUpdate = getBookByID(id).get();
         bookToUpdate.update(bookWithNewInformation);
-
-//        bookToUpdate.setAuthor(bookWithNewInformation.getAuthor());
-//        bookToUpdate.setTitle(bookWithNewInformation.getTitle());
-//        bookToUpdate.setSummary(bookWithNewInformation.getSummary());
         return bookToUpdate;
     }
 
