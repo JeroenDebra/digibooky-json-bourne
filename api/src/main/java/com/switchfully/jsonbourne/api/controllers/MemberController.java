@@ -6,6 +6,7 @@ import com.switchfully.jsonbourne.api.mappers.MemberMapper;
 import com.switchfully.jsonbourne.service.memberservice.DefaultMemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping(path = "/member")

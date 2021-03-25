@@ -1,7 +1,10 @@
 package com.switchfully.jsonbourne.api.dto.book;
 
+import java.util.UUID;
+
 public class BookDTO {
 
+    private UUID uuid;
     private String isbn;
     private String title;
     private String authorFirstName;
@@ -9,6 +12,10 @@ public class BookDTO {
     private String summary;
 
     public BookDTO() {
+    }
+
+    public UUID getUuid() {
+        return uuid;
     }
 
     public String getIsbn() {
@@ -29,6 +36,11 @@ public class BookDTO {
 
     public String getSummary() {
         return summary;
+    }
+
+    public BookDTO setUuid(UUID uuid) {
+        this.uuid = uuid;
+        return this;
     }
 
     public BookDTO setIsbn(String isbn) {

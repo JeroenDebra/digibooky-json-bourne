@@ -30,7 +30,7 @@ public class BookController {
     @GetMapping(path = "id/{id}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public BookDTO getBookById(@PathVariable String id) {
-        return bookMapper.bookToBookDTOWithSummary(bookService.getBookById(id));
+        return bookMapper.bookToDTO(bookService.getBookById(id));
     }
 
     @GetMapping(path = "isbn/{isbn}", produces = "application/json")

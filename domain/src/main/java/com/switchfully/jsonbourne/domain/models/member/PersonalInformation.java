@@ -5,18 +5,19 @@ import java.util.regex.Pattern;
 
 public class PersonalInformation {
 
-    private static final String VALID_EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@(.+)$";
+//    private static final String VALID_EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@(.+)$";
+    private static final Pattern VALID_EMAIL_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     private final String firstName;
     private final String lastName;
     private final String email;
-    private final String INSS;
+    private final String inss;
 
     public PersonalInformation(String firstName, String lastName, String email, String INSS) {
         this.firstName = firstName;
         this.lastName = lastNameValidator(lastName);
         this.email = emailValidator(email);
-        this.INSS = INSSValidator(INSS);
+        this.inss = INSSValidator(INSS);
     }
 
     private String lastNameValidator(String lastName) {
@@ -27,17 +28,17 @@ public class PersonalInformation {
     }
 
     private String emailValidator(String email) {
-        if (lastName == null || !Pattern.compile(VALID_EMAIL_REGEX).matcher(email).matches()) {
+        if (lastName == null || !VALID_EMAIL_REGEX.matcher(email).matches()) {
             throw new IllegalArgumentException("email not valid");
         }
         return email;
     }
 
-    private String INSSValidator(String INSS){
-        if (INSS == null || INSS.isBlank()) {
+    private String INSSValidator(String inss){
+        if (inss == null || inss.isBlank()) {
             throw new IllegalArgumentException("INSS not valid");
         }
-        return INSS;
+        return inss;
     }
 
     public String getFirstName() {
@@ -52,7 +53,7 @@ public class PersonalInformation {
         return email;
     }
 
-    public String getINSS() {
-        return INSS;
+    public String getInss() {
+        return inss;
     }
 }

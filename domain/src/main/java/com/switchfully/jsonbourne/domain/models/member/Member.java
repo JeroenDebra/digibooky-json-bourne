@@ -33,11 +33,11 @@ public class Member {
         if (o == null || getClass() != o.getClass()) return false;
         Member member = (Member) o;
         return (Objects.equals(personalInformation.getEmail(),member.getPersonalInformation().getEmail())
-                || Objects.equals(personalInformation.getINSS(), member.getPersonalInformation().getINSS()));
+                && Objects.equals(personalInformation.getInss(), member.getPersonalInformation().getInss()));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(personalInformation.getEmail(),personalInformation.getINSS());
+        return Objects.hash(personalInformation.getEmail(),personalInformation.getInss());
     }
 }

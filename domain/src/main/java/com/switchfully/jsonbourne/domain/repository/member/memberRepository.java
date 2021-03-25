@@ -5,6 +5,6 @@ import com.switchfully.jsonbourne.domain.models.member.Member;
 
 public interface memberRepository {
 
-    Member addMember(Member member);
+    void addMember(Member member);
 
 }

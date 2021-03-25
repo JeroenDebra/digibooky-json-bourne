@@ -4,7 +4,7 @@ public class CreateMemberDTO {
     private String firstName;
     private String lastName;
     private String email;
-    private String INSS;
+    private String inss;
     private String streetName;
     private String streetNumber;
     private String postalCode;
@@ -25,8 +25,8 @@ public class CreateMemberDTO {
         return email;
     }
 
-    public String getINSS() {
-        return INSS;
+    public String getInss() {
+        return inss;
     }
 
     public String getStreetName() {
@@ -60,8 +60,8 @@ public class CreateMemberDTO {
         return this;
     }
 
-    public CreateMemberDTO setINSS(String INSS) {
-        this.INSS = INSS;
+    public CreateMemberDTO setInss(String inss) {
+        this.inss = inss;
         return this;
     }
 

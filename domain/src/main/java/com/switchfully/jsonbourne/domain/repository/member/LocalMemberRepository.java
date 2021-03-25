@@ -12,9 +12,12 @@ public class LocalMemberRepository implements memberRepository {
     private final Set<Member> members = new HashSet<>();
 
     @Override
-    public Member addMember(Member member) {
+    public void addMember(Member member) {
         members.add(member);
-        return member;
+    }
+
+    public Set<Member> getAllMembers() {
+        return members;
     }
 
     public int getsize(){

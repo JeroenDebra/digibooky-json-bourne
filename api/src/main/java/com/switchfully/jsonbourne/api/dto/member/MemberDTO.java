@@ -7,7 +7,6 @@ public class MemberDTO {
     private String firstName;
     private String lastName;
     private String email;
-    private String INSS;
     private String streetName;
     private String streetNumber;
     private String postalCode;
@@ -26,10 +25,6 @@ public class MemberDTO {
 
     public String getEmail() {
         return email;
-    }
-
-    public String getINSS() {
-        return INSS;
     }
 
     public String getStreetName() {
@@ -64,11 +59,6 @@ public class MemberDTO {
 
     public MemberDTO setEmail(String email) {
         this.email = email;
-        return this;
-    }
-
-    public MemberDTO setINSS(String INSS) {
-        this.INSS = INSS;
         return this;
     }
 

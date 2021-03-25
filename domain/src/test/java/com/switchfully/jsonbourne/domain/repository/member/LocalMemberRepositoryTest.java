@@ -14,7 +14,7 @@ class LocalMemberRepositoryTest {
         //given
         LocalMemberRepository localMemberRepository = new LocalMemberRepository();
         //then
-        var result = localMemberRepository.addMember(new Member(
+        localMemberRepository.addMember(new Member(
                 new PersonalInformation("test", "test", "test@test.com", "test")
                 ,new Address("test", "test", "test", "Marke")));
         //when
@@ -30,7 +30,7 @@ class LocalMemberRepositoryTest {
                 new PersonalInformation("test", "test", "test@test.com", "test")
                 ,new Address("test", "test", "test", "Marke")));
 
-        var result = localMemberRepository.addMember(new Member(
+        localMemberRepository.addMember(new Member(
                 new PersonalInformation("test", "test", "test@test.com", "test")
                 ,new Address("test", "test", "test", "Marke")));
         //when

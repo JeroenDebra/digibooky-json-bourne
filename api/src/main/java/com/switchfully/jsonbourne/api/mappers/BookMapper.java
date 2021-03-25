@@ -13,23 +13,16 @@ public class BookMapper {
 
     public BookDTO bookToDTO(Book book){
         return new BookDTO()
-                .setIsbn(book.getIsbn())
-                .setTitle(book.getTitle())
-                .setAuthorFirstName(book.getAuthor().getFirstname())
-                .setAuthorLastName(book.getAuthor().getLastname());
-    }
-
-    public List<BookDTO> listBookToListDTO (Collection<Book> listOfBooks) {
-        return listOfBooks.stream().map(this::bookToDTO).collect(Collectors.toList());
-    }
-
-    public BookDTO bookToBookDTOWithSummary(Book book){
-        return new BookDTO()
+                .setUuid(book.getId())
                 .setIsbn(book.getIsbn())
                 .setTitle(book.getTitle())
                 .setAuthorFirstName(book.getAuthor().getFirstname())
                 .setAuthorLastName(book.getAuthor().getLastname())
                 .setSummary(book.getSummary());
+    }
+
+    public List<BookDTO> listBookToListDTO (Collection<Book> listOfBooks) {
+        return listOfBooks.stream().map(this::bookToDTO).collect(Collectors.toList());
     }
 
 }

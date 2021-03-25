@@ -17,23 +17,29 @@ public class MemberMapper {
         this.service = service;
     }
 
-    private MemberDTO memberToCreateMemberDTO(Member member){
-        return new MemberDTO().setFirstName(member.getPersonalInformation().getFirstName())
+    private MemberDTO memberToMemberDTO(Member member){
+        return new MemberDTO()
+                .setId(member.getUuid())
+                .setFirstName(member.getPersonalInformation().getFirstName())
                 .setLastName(member.getPersonalInformation().getLastName())
                 .setCity(member.getAddress().getCity())
                 .setEmail(member.getPersonalInformation().getEmail())
-                .setINSS(member.getPersonalInformation().getINSS())
                 .setPostalCode(member.getAddress().getPostalCode())
                 .setStreetName(member.getAddress().getStreetName())
-                .setStreetNumber(member.getAddress().getStreetNumber())
-                .setId(member.getUuid());
+                .setStreetNumber(member.getAddress().getStreetNumber());
+
     }
 
-
     public MemberDTO createMember(CreateMemberDTO createMemberDTO){
-        return memberToCreateMemberDTO(service.addMember(new Member(
-                new PersonalInformation(createMemberDTO.getFirstName(),createMemberDTO.getLastName(),createMemberDTO.getEmail(), createMemberDTO.getINSS()),
-                new Address(createMemberDTO.getStreetName(),createMemberDTO.getStreetNumber(),createMemberDTO.getPostalCode(),createMemberDTO.getCity()))));
+        return memberToMemberDTO(service.addMember(new Member(createPersonalInformation(createMemberDTO),createAddress(createMemberDTO))));
+    }
+
+    private Address createAddress(CreateMemberDTO createMemberDTO) {
+        return new Address(createMemberDTO.getStreetName(), createMemberDTO.getStreetNumber(), createMemberDTO.getPostalCode(), createMemberDTO.getCity());
+    }
+
+    private PersonalInformation createPersonalInformation(CreateMemberDTO createMemberDTO) {
+        return new PersonalInformation(createMemberDTO.getFirstName(), createMemberDTO.getLastName(), createMemberDTO.getEmail(), createMemberDTO.getInss());
     }
 
 }
