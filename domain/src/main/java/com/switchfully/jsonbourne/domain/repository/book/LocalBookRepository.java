@@ -44,4 +44,17 @@ public class LocalBookRepository implements BookRepository {
     public Collection<Book> getBooksByTitle(String title) {
         return books.stream().filter(book -> book.getTitle().toLowerCase().contains(title.toLowerCase())).collect(Collectors.toList());
     }
+
+    @Override
+    public Book updateBook(String id, Book bookWithNewInformation){
+
+        Book bookToUpdate = getBookByID(id).get();
+        bookToUpdate.update(bookWithNewInformation);
+
+//        bookToUpdate.setAuthor(bookWithNewInformation.getAuthor());
+//        bookToUpdate.setTitle(bookWithNewInformation.getTitle());
+//        bookToUpdate.setSummary(bookWithNewInformation.getSummary());
+        return bookToUpdate;
+    }
+
 }

@@ -12,5 +12,6 @@ public interface BookRepository {
     Optional<Book> getBookByID(String id);
     Collection<Book> getBooksByTitle(String title);
     Collection<Book> getBookByAuthor(String authorName);
+    Book updateBook(String id,Book bookWithNewInformation);
 
 }

@@ -37,6 +37,19 @@ public class Book {
         return summary;
     }
 
+      public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -48,5 +61,11 @@ public class Book {
     @Override
     public int hashCode() {
         return Objects.hash(isbn);
+    }
+
+    public void update(Book bookWithNewInformation) {
+        setSummary(bookWithNewInformation.getSummary());
+        setTitle(bookWithNewInformation.getTitle());
+        setAuthor(bookWithNewInformation.getAuthor());
     }
 }

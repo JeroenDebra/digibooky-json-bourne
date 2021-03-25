@@ -2,6 +2,9 @@ package com.switchfully.jsonbourne.api.controllers;
 
 
 import com.switchfully.jsonbourne.api.dto.book.BookDTO;
+import com.switchfully.jsonbourne.api.dto.book.UpDateBookDTO;
+import com.switchfully.jsonbourne.api.dto.member.CreateMemberDTO;
+import com.switchfully.jsonbourne.api.dto.member.MemberDTO;
 import com.switchfully.jsonbourne.api.mappers.BookMapper;
 import com.switchfully.jsonbourne.service.bookservice.BookService;
 import org.springframework.http.HttpStatus;
@@ -41,14 +44,20 @@ public class BookController {
 
     @GetMapping(path = "author/{fullAuthorName}")
     @ResponseStatus(HttpStatus.OK)
-    public Collection<BookDTO> getBooksByAuthor(@PathVariable String fullAuthorName){
+    public Collection<BookDTO> getBooksByAuthor(@PathVariable String fullAuthorName) {
         return bookMapper.listBookToListDTO(bookService.getBookByAuthor(fullAuthorName));
     }
 
     @GetMapping(path = "title/{title}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public Collection<BookDTO> getBooksByTitle (@PathVariable String title){
+    public Collection<BookDTO> getBooksByTitle(@PathVariable String title) {
         return bookMapper.listBookToListDTO(bookService.getBooksByTitle(title));
     }
-}
 
+    @PutMapping(path = "id/{id}", consumes = "application/json", produces = "application/json")
+    public BookDTO updateBook(@PathVariable String bookId, @RequestBody UpDateBookDTO upDateBookDTO) {
+
+        return bookMapper.bookToDTO(bookService.updateBook(bookId, bookMapper.updateBookDTOToBook(upDateBookDTO)));
+
+    }
+}

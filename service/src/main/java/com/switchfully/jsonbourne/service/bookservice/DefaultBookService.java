@@ -43,6 +43,14 @@ public class DefaultBookService implements BookService {
         return checkIfBookListIsEmpty(authorName, bookRepository.getBookByAuthor(authorName));
     }
 
+    @Override
+   public Book updateBook(String id, Book bookWithNewInformation){
+
+        checkIfBookIsEmpty(bookRepository.getBookByID(id));
+       return bookRepository.updateBook(id,bookWithNewInformation);
+    }
+
+
     private Collection<Book> checkIfBookListIsEmpty(String information, Collection<Book> books) {
         if (books.isEmpty()) {
             throw new NoBooksFoundException("No books found with " + information);
