@@ -23,17 +23,10 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @PostMapping(path = "/addLibrarian/{adminId}",consumes = "application/json",produces = "application/json")
+    @PostMapping(path = "",consumes = "application/json",produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public EmployeeDTO addLibrarian(@RequestBody CreateEmployeeDTO createEmployeeDTO, @PathVariable String adminId){
+    public EmployeeDTO addEmployee(@RequestBody CreateEmployeeDTO createEmployeeDTO){
         logger.info("An admin tried to register a new librarian to the employee database");
-        return employeeMapper.employeeToEmployeeDTO(employeeService.addEmployee(employeeMapper.createLibrarian(createEmployeeDTO), adminId));
-    }
-
-    @PostMapping(path = "/addAdmin/{adminId}",consumes = "application/json",produces = "application/json")
-    @ResponseStatus(HttpStatus.CREATED)
-    public EmployeeDTO addAdmin(@RequestBody CreateEmployeeDTO createEmployeeDTO,@PathVariable String adminId){
-        logger.info("An admin tried to register a new admin to the employee database");
-        return employeeMapper.employeeToEmployeeDTO(employeeService.addEmployee(employeeMapper.createAdmin(createEmployeeDTO), adminId));
+        return employeeMapper.createEmployee(createEmployeeDTO);
     }
 }

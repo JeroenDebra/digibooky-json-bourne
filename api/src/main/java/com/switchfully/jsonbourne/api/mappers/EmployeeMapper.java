@@ -11,10 +11,10 @@ import com.switchfully.jsonbourne.domain.models.member.Role;
 @Component
 public class EmployeeMapper {
 
-    private final EmployeeService employeeToEmployeeDTO;
+    private final EmployeeService employeeService;
 
-    public EmployeeMapper(EmployeeService employeeToEmployeeDTO) {
-        this.employeeToEmployeeDTO = employeeToEmployeeDTO;
+    public EmployeeMapper(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
     public EmployeeDTO employeeToEmployeeDTO(Employee employee){
@@ -26,11 +26,9 @@ public class EmployeeMapper {
                 .setRole(employee.getRole().toString());
     }
 
-    public Employee createLibrarian(CreateEmployeeDTO createEmployeeDTO) {
-        return new Employee(createEmployeeDTO.getFirstname(), createEmployeeDTO.getLastname(), createEmployeeDTO.getEmail(), Role.LIBRARIAN);
+    public EmployeeDTO createEmployee(CreateEmployeeDTO createEmployeeDTO) {
+        Employee employee = new Employee(createEmployeeDTO.getFirstname(), createEmployeeDTO.getLastname(), createEmployeeDTO.getEmail(), createEmployeeDTO.getRole());
+        return employeeToEmployeeDTO(employeeService.addEmployee(employee,createEmployeeDTO.getAuthorisationId()));
     }
 
-    public Employee createAdmin(CreateEmployeeDTO createEmployeeDTO) {
-        return new Employee(createEmployeeDTO.getFirstname(), createEmployeeDTO.getLastname(), createEmployeeDTO.getEmail(), Role.ADMIN);
-    }
 }

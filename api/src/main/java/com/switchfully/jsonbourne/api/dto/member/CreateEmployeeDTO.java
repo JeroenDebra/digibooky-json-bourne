@@ -1,13 +1,20 @@
 package com.switchfully.jsonbourne.api.dto.member;
 
+import com.switchfully.jsonbourne.domain.models.member.Role;
+
 public class CreateEmployeeDTO {
 
+    private String authorisationId;
     private String firstname;
     private String lastname;
     private String email;
-    private String role;
+    private Role role;
 
     public CreateEmployeeDTO() {
+    }
+
+    public String getAuthorisationId() {
+        return authorisationId;
     }
 
     public String getFirstname() {
@@ -22,7 +29,7 @@ public class CreateEmployeeDTO {
         return email;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
@@ -41,8 +48,11 @@ public class CreateEmployeeDTO {
         return this;
     }
 
-    public CreateEmployeeDTO setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
-        return this;
+    }
+
+    public void setAuthorisationId(String authorisationId) {
+        this.authorisationId = authorisationId;
     }
 }
