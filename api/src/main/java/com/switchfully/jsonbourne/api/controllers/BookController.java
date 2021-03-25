@@ -33,57 +33,58 @@ public class BookController {
         return bookMapper.listBookToListDTO(bookService.getAllBooks());
     }
 
-    @GetMapping(path = "id/{id}", produces = "application/json")
+    @GetMapping(path = "/{id}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public BookDTO getBookById(@PathVariable String id) {
         logger.info("A user requested a specific book by its ID");
         return bookMapper.bookToDTO(bookService.getBookById(id));
     }
 
-    @GetMapping(path = "isbn/{isbn}", produces = "application/json")
+    @GetMapping(produces = "application/json", params = {"isbn"})
     @ResponseStatus(HttpStatus.OK)
-    public BookDTO getBookByISBN(@PathVariable String isbn) {
+    public BookDTO getBookByISBN(@RequestParam String isbn) {
         logger.info("A user requested a specific book by its ISBN");
         return bookMapper.bookToDTO(bookService.getBookByISBN(isbn));
     }
 
-    @GetMapping(path = "author/{fullAuthorName}")
+
+    @GetMapping(produces = "application/json", params = {"fullAuthorName"})
     @ResponseStatus(HttpStatus.OK)
-    public Collection<BookDTO> getBooksByAuthor(@PathVariable String fullAuthorName){
+    public Collection<BookDTO> getBooksByAuthor(@RequestParam String fullAuthorName) {
         logger.info("A user requested a list of books by a specific author");
         return bookMapper.listBookToListDTO(bookService.getBookByAuthor(fullAuthorName));
     }
 
-    @GetMapping(path = "title/{title}", produces = "application/json")
+    @GetMapping(produces = "application/json", params = {"title"})
     @ResponseStatus(HttpStatus.OK)
-    public Collection<BookDTO> getBooksByTitle (@PathVariable String title){
+    public Collection<BookDTO> getBooksByTitle(@RequestParam String title) {
         logger.info("A user requested a list of books with a certain title");
         return bookMapper.listBookToListDTO(bookService.getBooksByTitle(title));
     }
 
-    @DeleteMapping(path = "{librarianId}/{bookId}", produces = "application/json")
+
     @PutMapping(path = "id/{bookId}", consumes = "application/json", produces = "application/json")
-    public BookDTO updateBook(@PathVariable String bookId,@RequestParam String librarianId, @RequestBody UpDateBookDTO upDateBookDTO) {
-        return bookMapper.bookToDTO(bookService.updateBook(bookId,librarianId, bookMapper.updateBookDTOToBook(upDateBookDTO)));
+    public BookDTO updateBook(@PathVariable String bookId, @RequestParam String librarianId, @RequestBody UpDateBookDTO upDateBookDTO) {
+        return bookMapper.bookToDTO(bookService.updateBook(bookId, librarianId, bookMapper.updateBookDTOToBook(upDateBookDTO)));
     }
 
     @DeleteMapping(path = "deletebook/{librarianId}/{bookId}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public String deleteBook (@PathVariable String librarianId, @PathVariable String bookId) {
+    public String deleteBook(@PathVariable String librarianId, @PathVariable String bookId) {
         logger.info("A librarian tried to delete a specific book");
         return bookService.deleteBookById(librarianId, bookId);
     }
 
     @PatchMapping(path = "{librarianId}/{bookId}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public String restoreBook (@PathVariable String librarianId, @PathVariable String bookId) {
+    public String restoreBook(@PathVariable String librarianId, @PathVariable String bookId) {
         logger.info("A librarian tried to restore a specific deleted book");
         return bookService.restoreBookById(librarianId, bookId);
     }
 
-    @PostMapping(path = "{librarianId}",consumes = "application/json")
+    @PostMapping(path = "{librarianId}", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public BookDTO createBook(@RequestBody CreateBookDTO createBookDTO,@PathVariable String librarianId){
+    public BookDTO createBook(@RequestBody CreateBookDTO createBookDTO, @PathVariable String librarianId) {
         logger.info("A librarian tried to register a new book into the database");
         return bookMapper.createBook(librarianId, createBookDTO);
     }
