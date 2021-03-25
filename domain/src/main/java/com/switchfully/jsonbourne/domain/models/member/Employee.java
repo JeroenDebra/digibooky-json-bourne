@@ -3,25 +3,29 @@ package com.switchfully.jsonbourne.domain.models.member;
 import com.switchfully.jsonbourne.infrastructure.utils.EmailUtils;
 import java.util.UUID;
 
-public class Admin {
+public class Employee {
 
     private final UUID id;
     private final String firstname;
     private final String lastname;
     private final String email;
+    private final Role role;
 
-    public Admin(String firstname, String lastname, String email) {
+
+    public Employee( String firstname, String lastname, String email, Role role) {
+        id = UUID.randomUUID();
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = validEmail(email);
-        id = UUID.randomUUID();
+        this.role = role;
     }
 
-    public Admin(UUID id, String firstname, String lastname, String email) {
+    public Employee(UUID id, String firstname, String lastname, String email,Role role) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = validEmail(email);
+        this.role =role;
     }
 
     private String validEmail(String email){
@@ -47,4 +51,7 @@ public class Admin {
         return email;
     }
 
+    public Role getRole() {
+        return role;
+    }
 }
