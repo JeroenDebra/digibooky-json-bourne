@@ -13,11 +13,11 @@ public class Book {
     private boolean isDeleted;
 
     public Book(String isbn, String title, Author author,String summary){
+        id = UUID.randomUUID();
         this.isbn = isbn;
         this.title = title;
         this.author = author;
         this.summary = summary;
-        id = UUID.randomUUID();
         this.isDeleted = false;
     }
 
@@ -43,9 +43,16 @@ public class Book {
         return isDeleted;
     }
 
-    public Book setDeleted(boolean deleted) {
-        isDeleted = deleted;
-        return this;
+    public void setIsDeleted() {
+        if (!isDeleted) {
+            this.isDeleted = true;
+        }
+    }
+
+    public void setUndeleted() {
+        if (isDeleted) {
+            this.isDeleted = false;
+        }
     }
 
     @Override

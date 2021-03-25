@@ -46,14 +46,17 @@ public class LocalBookRepository implements BookRepository {
     }
 
     @Override
-    public String setBookToDeleted(Book book) {
-        book.setDeleted(true);
-        return "The book has been deleted";
+    public Optional<Book> getDeletedBookByID(String id) {
+        return books.stream().filter(book -> book.getId().toString().equals(id) && book.isDeleted()).findFirst();
     }
 
     @Override
-    public String restoreDeletedBook(Book book) {
-        book.setDeleted(false);
-        return "The book has been restored";
+    public void setBookToDeleted(Book book) {
+        book.setIsDeleted();
+    }
+
+    @Override
+    public void restoreDeletedBook(Book book) {
+        book.setUndeleted();
     }
 }
