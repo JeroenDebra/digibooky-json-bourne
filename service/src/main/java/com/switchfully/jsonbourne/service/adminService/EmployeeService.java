@@ -1,6 +1,6 @@
 package com.switchfully.jsonbourne.service.adminService;
 
-public interface AdminService {
+public interface EmployeeService {
 
     public boolean isAdmin(String uuid);
 

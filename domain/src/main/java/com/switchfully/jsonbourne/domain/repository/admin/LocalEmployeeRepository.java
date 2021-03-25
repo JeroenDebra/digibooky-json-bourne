@@ -9,12 +9,12 @@ import java.util.Set;
 import java.util.UUID;
 
 @Repository
-public class LocalAdminRepository implements AdminRepository {
+public class LocalEmployeeRepository implements EmployeeRepository {
 
     private final Set<Employee> employees = new HashSet<>();
 
 
-    public LocalAdminRepository() {
+    public LocalEmployeeRepository() {
        this.init();
     }
 
