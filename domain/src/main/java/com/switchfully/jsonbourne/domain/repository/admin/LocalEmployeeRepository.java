@@ -32,4 +32,9 @@ public class LocalEmployeeRepository implements EmployeeRepository {
     public boolean isLibrarian(String uuid) {
         return employees.stream().filter(employee -> employee.getRole() == Role.LIBRARIAN).filter(employee -> employee.getId().toString().equals(uuid)).count() > 0;
     }
+
+    @Override
+    public boolean addEmployee(Employee employee) {
+        return employees.add(employee);
+    }
 }
