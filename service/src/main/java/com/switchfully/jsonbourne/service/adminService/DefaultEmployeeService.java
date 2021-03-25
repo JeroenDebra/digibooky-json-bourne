@@ -20,4 +20,12 @@ public class DefaultEmployeeService implements EmployeeService {
         }
         return true;
     }
+
+    @Override
+    public boolean isLibrarian(String uuid) {
+        if (!employeeRepository.isLibrarian(uuid)) {
+            throw new NotAuthorizedException("you are not authorized");
+        }
+        return true;
+    }
 }
