@@ -8,6 +8,10 @@ import com.switchfully.jsonbourne.domain.models.member.PersonalInformation;
 import com.switchfully.jsonbourne.service.memberservice.DefaultMemberService;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class MemberMapper {
 
@@ -28,6 +32,10 @@ public class MemberMapper {
                 .setStreetName(member.getAddress().getStreetName())
                 .setStreetNumber(member.getAddress().getStreetNumber());
 
+    }
+
+    public List<MemberDTO> memberListToMemberDTOList(Collection<Member> members){
+        return members.stream().map(this::memberToMemberDTO).collect(Collectors.toList());
     }
 
     public MemberDTO createMember(CreateMemberDTO createMemberDTO){

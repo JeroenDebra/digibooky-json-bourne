@@ -5,6 +5,7 @@ import com.switchfully.jsonbourne.domain.repository.member.LocalMemberRepository
 import com.switchfully.jsonbourne.infrastructure.exceptions.DuplicateMemberException;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,5 +31,10 @@ public class DefaultMemberService implements MemberService{
         return repository.getAllMembers().stream()
                 .filter(member -> member.getPersonalInformation().getEmail().equalsIgnoreCase(newMember.getPersonalInformation().getEmail().toLowerCase()) || member.getPersonalInformation().getInss().equals(newMember.getPersonalInformation().getInss()))
                 .collect(Collectors.toList()).isEmpty();
+    }
+
+    @Override
+    public Collection<Member> getAllMembers() {
+        return repository.getAllMembers();
     }
 }

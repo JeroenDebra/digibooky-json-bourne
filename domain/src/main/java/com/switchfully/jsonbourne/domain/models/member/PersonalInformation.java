@@ -1,12 +1,9 @@
 package com.switchfully.jsonbourne.domain.models.member;
 
-
-import java.util.regex.Pattern;
+import com.switchfully.jsonbourne.infrastructure.utils.EmailUtils;
 
 public class PersonalInformation {
 
-//    private static final String VALID_EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@(.+)$";
-    private static final Pattern VALID_EMAIL_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     private final String firstName;
     private final String lastName;
@@ -28,7 +25,7 @@ public class PersonalInformation {
     }
 
     private String emailValidator(String email) {
-        if (lastName == null || !VALID_EMAIL_REGEX.matcher(email).matches()) {
+        if (!EmailUtils.isValidEmail(email)) {
             throw new IllegalArgumentException("email not valid");
         }
         return email;

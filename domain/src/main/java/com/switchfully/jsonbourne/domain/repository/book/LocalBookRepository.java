@@ -4,10 +4,7 @@ import com.switchfully.jsonbourne.domain.models.book.Author;
 import com.switchfully.jsonbourne.domain.models.book.Book;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Repository
@@ -21,7 +18,7 @@ public class LocalBookRepository implements BookRepository {
 
     @Override
     public Collection<Book> getAllBooks() {
-        return books;
+        return Collections.unmodifiableSet(books);
     }
 
     private void fillInList(){

@@ -3,6 +3,8 @@ package com.switchfully.jsonbourne.domain.repository.member;
 import com.switchfully.jsonbourne.domain.models.member.Member;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,11 +18,11 @@ public class LocalMemberRepository implements memberRepository {
         members.add(member);
     }
 
-    public Set<Member> getAllMembers() {
-        return members;
+    public Collection<Member> getAllMembers() {
+        return Collections.unmodifiableSet(members);
     }
 
-    public int getsize(){
+    protected int getsize(){
         return members.size();
     }
 }
