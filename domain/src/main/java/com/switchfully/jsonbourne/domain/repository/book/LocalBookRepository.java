@@ -18,7 +18,7 @@ public class LocalBookRepository implements BookRepository {
 
     @Override
     public Collection<Book> getAllBooks() {
-        return Collections.unmodifiableSet(books);
+        return Collections.unmodifiableSet(books).stream().filter(book -> !book.isDeleted()).collect(Collectors.toList());
     }
 
     private void fillInList(){
@@ -27,17 +27,17 @@ public class LocalBookRepository implements BookRepository {
 
     @Override
     public Optional<Book> getBookByISBN(String isbn){
-        return books.stream().filter(book -> book.getIsbn().equals(isbn)).findFirst();
+        return books.stream().filter(book -> book.getIsbn().equals(isbn) && !book.isDeleted()).findFirst();
     }
 
     @Override
     public Optional<Book> getBookByID(String id) {
-        return books.stream().filter(book -> book.getId().toString().equals(id)).findFirst();
+        return books.stream().filter(book -> book.getId().toString().equals(id) && !book.isDeleted()).findFirst();
     }
 
     @Override
     public Collection<Book> getBookByAuthor(String authorName) {
-        return books.stream().filter(book -> book.getAuthor().getFullname().toLowerCase().contains(authorName.toLowerCase())).collect(Collectors.toList());
+        return books.stream().filter(book -> book.getAuthor().getFullname().toLowerCase().contains(authorName.toLowerCase()) && !book.isDeleted()).collect(Collectors.toList());
     }
 
     @Override
@@ -48,6 +48,21 @@ public class LocalBookRepository implements BookRepository {
 
     @Override
     public Collection<Book> getBooksByTitle(String title) {
-        return books.stream().filter(book -> book.getTitle().toLowerCase().contains(title.toLowerCase())).collect(Collectors.toList());
+        return books.stream().filter(book -> book.getTitle().toLowerCase().contains(title.toLowerCase()) && !book.isDeleted()).collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<Book> getDeletedBookByID(String id) {
+        return books.stream().filter(book -> book.getId().toString().equals(id) && book.isDeleted()).findFirst();
+    }
+
+    @Override
+    public void setBookToDeleted(Book book) {
+        book.setIsDeleted();
+    }
+
+    @Override
+    public void restoreDeletedBook(Book book) {
+        book.setUndeleted();
     }
 }

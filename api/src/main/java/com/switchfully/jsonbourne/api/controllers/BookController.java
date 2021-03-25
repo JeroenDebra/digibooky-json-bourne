@@ -1,10 +1,8 @@
 package com.switchfully.jsonbourne.api.controllers;
 
-
 import com.switchfully.jsonbourne.api.dto.book.BookDTO;
 import com.switchfully.jsonbourne.api.dto.book.CreateBookDTO;
 import com.switchfully.jsonbourne.api.mappers.BookMapper;
-import com.switchfully.jsonbourne.domain.models.book.Book;
 import com.switchfully.jsonbourne.service.bookservice.BookService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -51,6 +49,18 @@ public class BookController {
     @ResponseStatus(HttpStatus.OK)
     public Collection<BookDTO> getBooksByTitle (@PathVariable String title){
         return bookMapper.listBookToListDTO(bookService.getBooksByTitle(title));
+    }
+
+    @DeleteMapping(path = "deletebook/{librarianId}/{bookId}", produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public String deleteBook (@PathVariable String librarianId, @PathVariable String bookId) {
+        return bookService.deleteBookById(librarianId, bookId);
+    }
+
+    @PutMapping(path = "restorebook/{librarianId}/{bookId}", produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public String restoreBook (@PathVariable String librarianId, @PathVariable String bookId) {
+        return bookService.restoreBookById(librarianId, bookId);
     }
 
     @PostMapping(consumes = "application/json")

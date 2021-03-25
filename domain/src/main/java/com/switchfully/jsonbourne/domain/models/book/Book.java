@@ -10,13 +10,15 @@ public class Book {
     private String title;
     private Author author;
     private String summary;
+    private boolean isDeleted;
 
     public Book(String isbn, String title, Author author,String summary){
+        id = UUID.randomUUID();
         this.isbn = isbn;
         this.title = title;
         this.author = author;
         this.summary = summary;
-        id = UUID.randomUUID();
+        this.isDeleted = false;
     }
 
     public String getIsbn() {
@@ -35,6 +37,22 @@ public class Book {
 
     public String getSummary() {
         return summary;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted() {
+        if (!isDeleted) {
+            this.isDeleted = true;
+        }
+    }
+
+    public void setUndeleted() {
+        if (isDeleted) {
+            this.isDeleted = false;
+        }
     }
 
     @Override
