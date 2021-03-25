@@ -64,6 +64,7 @@ public class BookController {
 
 
     @PutMapping(path = "id/{bookId}", consumes = "application/json", produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
     public BookDTO updateBook(@PathVariable String bookId, @RequestParam String librarianId, @RequestBody UpDateBookDTO upDateBookDTO) {
         return bookMapper.bookToDTO(bookService.updateBook(bookId, librarianId, bookMapper.updateBookDTOToBook(upDateBookDTO)));
     }
