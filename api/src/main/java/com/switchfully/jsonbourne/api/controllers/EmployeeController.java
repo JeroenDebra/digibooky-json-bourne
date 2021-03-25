@@ -33,6 +33,7 @@ public class EmployeeController {
     @PostMapping(path = "/addAdmin/{adminId}",consumes = "application/json",produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public EmployeeDTO addAdmin(@RequestBody CreateEmployeeDTO createEmployeeDTO,@PathVariable String adminId){
+        logger.info("An admin tried to register a new admin to the employee database");
         return employeeMapper.employeeToEmployeeDTO(employeeService.addEmployee(employeeMapper.createAdmin(createEmployeeDTO), adminId));
     }
 }

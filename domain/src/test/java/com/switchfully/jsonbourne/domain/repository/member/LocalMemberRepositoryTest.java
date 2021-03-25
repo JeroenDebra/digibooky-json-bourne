@@ -9,32 +9,24 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LocalMemberRepositoryTest {
 
+    private final LocalMemberRepository localMemberRepository = new LocalMemberRepository();
+
     @Test
     void createMemberAddsOneToList() {
-        //given
-        LocalMemberRepository localMemberRepository = new LocalMemberRepository();
-        //then
         localMemberRepository.addMember(new Member(
                 new PersonalInformation("test", "test", "test@test.com", "test")
                 ,new Address("test", "test", "test", "Marke")));
-        //when
         assertEquals(1,localMemberRepository.getsize());
     }
 
     @Test
     void createTheSameMemberTwiceThenDontAdd() {
-        //given
-        LocalMemberRepository localMemberRepository = new LocalMemberRepository();
-        //then
         localMemberRepository.addMember(new Member(
                 new PersonalInformation("test", "test", "test@test.com", "test")
                 ,new Address("test", "test", "test", "Marke")));
-
         localMemberRepository.addMember(new Member(
                 new PersonalInformation("test", "test", "test@test.com", "test")
                 ,new Address("test", "test", "test", "Marke")));
-        //when
-
         assertEquals(1,localMemberRepository.getsize());
     }
 }
