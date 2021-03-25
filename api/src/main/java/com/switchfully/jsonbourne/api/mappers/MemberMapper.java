@@ -31,7 +31,6 @@ public class MemberMapper {
                 .setPostalCode(member.getAddress().getPostalCode())
                 .setStreetName(member.getAddress().getStreetName())
                 .setStreetNumber(member.getAddress().getStreetNumber());
-
     }
 
     public List<MemberDTO> memberListToMemberDTOList(Collection<Member> members){

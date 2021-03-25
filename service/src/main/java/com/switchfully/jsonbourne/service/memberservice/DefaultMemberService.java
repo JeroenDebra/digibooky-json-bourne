@@ -2,7 +2,9 @@ package com.switchfully.jsonbourne.service.memberservice;
 
 import com.switchfully.jsonbourne.domain.models.member.Member;
 import com.switchfully.jsonbourne.domain.repository.member.LocalMemberRepository;
+import com.switchfully.jsonbourne.domain.repository.member.MemberRepository;
 import com.switchfully.jsonbourne.infrastructure.exceptions.DuplicateMemberException;
+import com.switchfully.jsonbourne.service.employeeservice.EmployeeService;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -12,10 +14,12 @@ import java.util.stream.Collectors;
 @Service
 public class DefaultMemberService implements MemberService{
 
-    private final LocalMemberRepository repository;
+    private final MemberRepository memberRepository;
+    private final EmployeeService employeeService;
 
-    public DefaultMemberService(LocalMemberRepository repository) {
-        this.repository = repository;
+    public DefaultMemberService(MemberRepository memberRepository, EmployeeService employeeService) {
+        this.memberRepository = memberRepository;
+        this.employeeService = employeeService;
     }
 
     @Override
@@ -23,18 +27,19 @@ public class DefaultMemberService implements MemberService{
         if (!checkIfDuplicateExists(newMember)){
             throw new DuplicateMemberException("This member already exists");
         }
-        repository.addMember(newMember);
+        memberRepository.addMember(newMember);
         return newMember;
     }
 
     private boolean checkIfDuplicateExists(Member newMember) {
-        return repository.getAllMembers().stream()
+        return memberRepository.getAllMembers().stream()
                 .filter(member -> member.getPersonalInformation().getEmail().equalsIgnoreCase(newMember.getPersonalInformation().getEmail().toLowerCase()) || member.getPersonalInformation().getInss().equals(newMember.getPersonalInformation().getInss()))
                 .collect(Collectors.toList()).isEmpty();
     }
 
     @Override
-    public Collection<Member> getAllMembers() {
-        return repository.getAllMembers();
+    public Collection<Member> getAllMembers(String admin) {
+        employeeService.isAdmin(admin);
+        return memberRepository.getAllMembers();
     }
 }

@@ -5,7 +5,7 @@ import com.switchfully.jsonbourne.infrastructure.exceptions.BookNotFoundExceptio
 import com.switchfully.jsonbourne.domain.repository.book.BookRepository;
 import com.switchfully.jsonbourne.infrastructure.exceptions.NoBooksFoundException;
 import com.switchfully.jsonbourne.infrastructure.exceptions.NotAuthorizedException;
-import com.switchfully.jsonbourne.service.adminService.EmployeeService;
+import com.switchfully.jsonbourne.service.employeeservice.EmployeeService;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -43,9 +43,9 @@ public class DefaultBookService implements BookService {
     }
 
     @Override
-    public Book createBook(Book book) {
-        bookRepository.addBook(book);
-        return book;
+    public Book createBook(String librarianId, Book book) {
+        employeeService.isLibrarian(librarianId);
+        return bookRepository.addBook(book);
     }
 
     @Override

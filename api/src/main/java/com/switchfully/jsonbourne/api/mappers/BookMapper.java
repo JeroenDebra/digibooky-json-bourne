@@ -36,8 +36,6 @@ public class BookMapper {
                 .setSummary(book.getSummary());
     }
 
-
-
     public List<BookDTO> listBookToListDTO (Collection<Book> listOfBooks) {
         return listOfBooks.stream().map(this::bookToDTO).collect(Collectors.toList());
     }
@@ -46,7 +44,7 @@ public class BookMapper {
         return new Book("lalala", upDateBookDTO.getTitle(), new Author(upDateBookDTO.getAuthorFirstName(), upDateBookDTO.getAuthorLastName()), upDateBookDTO.getSummary());
     }
 
-    public BookDTO createBook(CreateBookDTO createBookDTO) {
-        return bookToDTO(defaultBookService.createBook(new Book(createBookDTO.getIsbn(),createBookDTO.getTitle(),new Author(createBookDTO.getAuthorFirstName(),createBookDTO.getAuthorLastName()),createBookDTO.getSummary())));
+    public BookDTO createBook(String librarianId, CreateBookDTO createBookDTO) {
+        return bookToDTO(defaultBookService.createBook(librarianId, new Book(createBookDTO.getIsbn(),createBookDTO.getTitle(),new Author(createBookDTO.getAuthorFirstName(),createBookDTO.getAuthorLastName()),createBookDTO.getSummary())));
     }
 }

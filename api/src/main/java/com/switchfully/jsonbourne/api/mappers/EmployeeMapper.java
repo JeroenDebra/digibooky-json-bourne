@@ -3,7 +3,7 @@ package com.switchfully.jsonbourne.api.mappers;
 import com.switchfully.jsonbourne.api.dto.member.CreateEmployeeDTO;
 import com.switchfully.jsonbourne.api.dto.member.EmployeeDTO;
 import com.switchfully.jsonbourne.domain.models.member.Employee;
-import com.switchfully.jsonbourne.service.adminService.EmployeeService;
+import com.switchfully.jsonbourne.service.employeeservice.EmployeeService;
 import org.springframework.stereotype.Component;
 import com.switchfully.jsonbourne.domain.models.member.Role;
 
@@ -11,6 +11,11 @@ import com.switchfully.jsonbourne.domain.models.member.Role;
 @Component
 public class EmployeeMapper {
 
+    private final EmployeeService employeeToEmployeeDTO;
+
+    public EmployeeMapper(EmployeeService employeeToEmployeeDTO) {
+        this.employeeToEmployeeDTO = employeeToEmployeeDTO;
+    }
 
     public EmployeeDTO employeeToEmployeeDTO(Employee employee){
         return new EmployeeDTO()

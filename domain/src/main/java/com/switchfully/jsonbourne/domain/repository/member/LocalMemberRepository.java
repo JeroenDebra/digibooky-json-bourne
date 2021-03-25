@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Repository
-public class LocalMemberRepository implements memberRepository {
+public class LocalMemberRepository implements MemberRepository {
 
     private final Set<Member> members = new HashSet<>();
 

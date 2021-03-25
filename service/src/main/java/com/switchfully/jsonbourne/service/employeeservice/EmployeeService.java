@@ -1,4 +1,4 @@
-package com.switchfully.jsonbourne.service.adminService;
+package com.switchfully.jsonbourne.service.employeeservice;
 
 import com.switchfully.jsonbourne.domain.models.member.Employee;
 

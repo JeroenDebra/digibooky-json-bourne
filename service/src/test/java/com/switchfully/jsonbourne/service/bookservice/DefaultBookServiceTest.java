@@ -1,12 +1,10 @@
 package com.switchfully.jsonbourne.service.bookservice;
 
 import com.switchfully.jsonbourne.domain.models.book.Book;
-import com.switchfully.jsonbourne.domain.repository.admin.EmployeeRepository;
 import com.switchfully.jsonbourne.domain.repository.admin.LocalEmployeeRepository;
 import com.switchfully.jsonbourne.infrastructure.exceptions.BookNotFoundException;
 import com.switchfully.jsonbourne.domain.repository.book.LocalBookRepository;
-import com.switchfully.jsonbourne.service.adminService.DefaultEmployeeService;
-import com.switchfully.jsonbourne.service.adminService.EmployeeService;
+import com.switchfully.jsonbourne.service.employeeservice.DefaultEmployeeService;
 import org.junit.jupiter.api.Test;
 
 import java.util.stream.Collectors;
