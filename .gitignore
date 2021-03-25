@@ -37,3 +37,6 @@ build/
 /mvnw
 /mvnw.bat
 mvnw.cmd
+
+### loger files ###
+.log
