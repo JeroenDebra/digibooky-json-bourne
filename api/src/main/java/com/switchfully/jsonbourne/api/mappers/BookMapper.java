@@ -1,7 +1,11 @@
 package com.switchfully.jsonbourne.api.mappers;
 
 import com.switchfully.jsonbourne.api.dto.book.BookDTO;
+import com.switchfully.jsonbourne.api.dto.book.CreateBookDTO;
+import com.switchfully.jsonbourne.domain.models.book.Author;
 import com.switchfully.jsonbourne.domain.models.book.Book;
+import com.switchfully.jsonbourne.service.bookservice.BookService;
+import com.switchfully.jsonbourne.service.bookservice.DefaultBookService;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -10,6 +14,12 @@ import java.util.stream.Collectors;
 
 @Component
 public class BookMapper {
+
+    private final DefaultBookService service;
+
+    public BookMapper(DefaultBookService service) {
+        this.service = service;
+    }
 
     public BookDTO bookToDTO(Book book){
         return new BookDTO()
@@ -25,4 +35,7 @@ public class BookMapper {
         return listOfBooks.stream().map(this::bookToDTO).collect(Collectors.toList());
     }
 
+    public BookDTO createBook(CreateBookDTO createBookDTO) {
+        return bookToDTO(service.createBook(new Book(createBookDTO.getIsbn(),createBookDTO.getTitle(),new Author(createBookDTO.getAuthorFirstName(),createBookDTO.getAuthorLastName()),createBookDTO.getSummary())));
+    }
 }
