@@ -15,4 +15,6 @@ public interface BookRepository {
     void setBookToDeleted(Book book);
     void restoreDeletedBook(Book book);
     Optional<Book> getDeletedBookByID(String id);
+    Book addBook(Book book);
+
 }
