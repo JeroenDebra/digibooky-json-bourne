@@ -57,12 +57,10 @@ public class BookController {
         return bookMapper.listBookToListDTO(bookService.getBooksByTitle(title));
     }
 
-    @PutMapping(path = "id/{id}", consumes = "application/json", produces = "application/json")
+    @PutMapping(path = "id/{bookId}", consumes = "application/json", produces = "application/json")
     public BookDTO updateBook(@PathVariable String bookId,@RequestParam String librarianId, @RequestBody UpDateBookDTO upDateBookDTO) {
         return bookMapper.bookToDTO(bookService.updateBook(bookId,librarianId, bookMapper.updateBookDTOToBook(upDateBookDTO)));
     }
-
-    @PostMapping(consumes = "application/json")
 
     @DeleteMapping(path = "deletebook/{librarianId}/{bookId}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
