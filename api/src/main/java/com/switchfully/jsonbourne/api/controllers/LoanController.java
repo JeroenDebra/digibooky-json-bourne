@@ -35,22 +35,21 @@ public class LoanController {
     @PostMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public BookLoanDTO lendBook(@RequestBody CreateBookLoanDTO bookLoanDTO){
-        logger.info("A user is requesting to add a specific book to his loans");
+        logger.info("A user is requesting to add a book by ISBN " + bookLoanDTO.getIsbn() + " to his loans");
         return loanMapper.bookLoanToBookLoanDTO(loanService.addBookLoan(loanMapper.createBookLoanToBookLoan(bookLoanDTO)));
     }
 
     @PostMapping(path = "/{memberId}",produces = "application/json",consumes = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public Collection<BookLoanDTO> getLoansByUser(@RequestBody LoanBookLibarianDTO loanBookLibarianDTO, @PathVariable UUID memberId){
-        logger.info("A librarian requests a list of all the books a member has in loan");
+        logger.info("A librarian requests a list of all the books user " + memberId.toString() + " has in loan");
         return loanMapper.listBookLoanToListBookLoanDTO(loanService.getLoansForUser(loanBookLibarianDTO.getLibarianId().toString(), memberId));
     }
 
     @PutMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public String returnBook(@RequestBody ReturnBookLoanDTO returnBookLoanDTO){
-        logger.info(returnBookLoanDTO.getLoanId() + "is being returned");
-
+        logger.info(returnBookLoanDTO.getLoanId() + " is being returned");
         if (loanMapper.returnBookUpdate(returnBookLoanDTO)) {
             return "Book has been returned too late";
         }
