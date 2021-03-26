@@ -16,6 +16,7 @@ public class Book {
     private Author author;
     private String summary;
     private boolean isDeleted;
+    private boolean isOnLoan;
 
     public Book(String isbn, String title, Author author,String summary){
         id = UUID.randomUUID();
@@ -24,6 +25,7 @@ public class Book {
         this.author = author;
         this.summary = summary;
         this.isDeleted = false;
+        this.isOnLoan = false;
     }
 
     private String isbnValidator(String isbn) {
@@ -81,6 +83,8 @@ public class Book {
         return isDeleted;
     }
 
+    public boolean isOnLoan(){return isOnLoan;}
+
     public void setIsDeleted() {
         if (!isDeleted) {
             this.isDeleted = true;
@@ -90,6 +94,18 @@ public class Book {
     public void setUndeleted() {
         if (isDeleted) {
             this.isDeleted = false;
+        }
+    }
+
+    public void setOnLoan(){
+        if(!isOnLoan){
+            this.isOnLoan = true;
+        }
+    }
+
+    public void returnBook(){
+        if(isOnLoan){
+            this.isOnLoan = false;
         }
     }
 

@@ -21,7 +21,7 @@ public class BookMapper {
         this.bookService = bookService;
     }
 
-    public BookDTO bookToDTO(Book book){
+    public BookDTO bookToDTO(Book book) {
         return new BookDTO()
                 .setUuid(book.getId())
                 .setIsbn(book.getIsbn())
@@ -31,7 +31,7 @@ public class BookMapper {
                 .setSummary(book.getSummary());
     }
 
-    public List<BookDTO> listBookToListDTO (Collection<Book> listOfBooks) {
+    public List<BookDTO> listBookToListDTO(Collection<Book> listOfBooks) {
         return listOfBooks.stream().map(this::bookToDTO).collect(Collectors.toList());
     }
 
