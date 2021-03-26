@@ -2,10 +2,13 @@ package com.switchfully.jsonbourne.api.mappers;
 
 import com.switchfully.jsonbourne.api.dto.book.BookDTO;
 import com.switchfully.jsonbourne.api.dto.book.CreateBookDTO;
+import com.switchfully.jsonbourne.api.dto.bookloan.BookLoanDTO;
+import com.switchfully.jsonbourne.api.dto.bookloan.CreateBookLoanDTO;
 import com.switchfully.jsonbourne.domain.models.book.Author;
 import com.switchfully.jsonbourne.domain.models.book.Book;
-import com.switchfully.jsonbourne.service.bookservice.BookService;
+import com.switchfully.jsonbourne.domain.models.lending.BookLoan;
 import com.switchfully.jsonbourne.service.bookservice.DefaultBookService;
+import com.switchfully.jsonbourne.service.loanservice.LoanService;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -21,7 +24,7 @@ public class BookMapper {
         this.service = service;
     }
 
-    public BookDTO bookToDTO(Book book){
+    public BookDTO bookToDTO(Book book) {
         return new BookDTO()
                 .setUuid(book.getId())
                 .setIsbn(book.getIsbn())
@@ -31,11 +34,11 @@ public class BookMapper {
                 .setSummary(book.getSummary());
     }
 
-    public List<BookDTO> listBookToListDTO (Collection<Book> listOfBooks) {
+    public List<BookDTO> listBookToListDTO(Collection<Book> listOfBooks) {
         return listOfBooks.stream().map(this::bookToDTO).collect(Collectors.toList());
     }
 
     public BookDTO createBook(CreateBookDTO createBookDTO) {
-        return bookToDTO(service.createBook(new Book(createBookDTO.getIsbn(),createBookDTO.getTitle(),new Author(createBookDTO.getAuthorFirstName(),createBookDTO.getAuthorLastName()),createBookDTO.getSummary())));
+        return bookToDTO(service.createBook(new Book(createBookDTO.getIsbn(), createBookDTO.getTitle(), new Author(createBookDTO.getAuthorFirstName(), createBookDTO.getAuthorLastName()), createBookDTO.getSummary())));
     }
 }
