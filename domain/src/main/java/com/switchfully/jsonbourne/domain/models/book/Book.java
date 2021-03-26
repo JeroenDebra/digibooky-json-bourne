@@ -63,22 +63,19 @@ public class Book {
         return summary;
     }
 
-    public void setTitle(String title) {
+    public Book setTitle(String title) {
         this.title = title;
+        return this;
     }
 
-    public void setAuthor(Author author) {
+    public Book setAuthor(Author author) {
         this.author = author;
+        return this;
     }
     
-    public void setSummary(String summary) {
+    public Book setSummary(String summary) {
         this.summary = summary;
-    }
-
-    public void update(Book bookWithNewInformation) {
-        setSummary(bookWithNewInformation.getSummary());
-        setTitle(bookWithNewInformation.getTitle());
-        setAuthor(bookWithNewInformation.getAuthor());
+        return this;
     }
 
     public boolean isDeleted() {
@@ -124,4 +121,9 @@ public class Book {
         return Objects.hash(id);
     }
 
+    public void update(Book bookWithNewInformation) {
+        this.setTitle(bookWithNewInformation.getTitle());
+        this.setAuthor(bookWithNewInformation.getAuthor());
+        this.setSummary(bookWithNewInformation.getSummary());
+    }
 }

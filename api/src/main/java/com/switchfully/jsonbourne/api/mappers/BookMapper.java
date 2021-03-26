@@ -49,9 +49,9 @@ public class BookMapper {
     }
 
     public Book updateBookDTOToBook(Book bookById,UpDateBookDTO upDateBookDTO){
-        bookById.setTitle(upDateBookDTO.getTitle());
-        bookById.setAuthor(new Author(upDateBookDTO.getAuthorFirstName(), upDateBookDTO.getAuthorLastName()));
-        bookById.setSummary(upDateBookDTO.getSummary());
+        bookById.setTitle(upDateBookDTO.getTitle())
+        .setAuthor(new Author(upDateBookDTO.getAuthorFirstName(), upDateBookDTO.getAuthorLastName()))
+        .setSummary(upDateBookDTO.getSummary());
         return bookById;
     }
 
