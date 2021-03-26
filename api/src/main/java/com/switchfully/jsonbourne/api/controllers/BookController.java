@@ -65,7 +65,7 @@ public class BookController {
     @ResponseStatus(HttpStatus.OK)
     public BookDTO updateBook(@PathVariable String bookId, @RequestParam String librarianId, @RequestBody UpDateBookDTO upDateBookDTO) {
         logger.info("A librarian tried to update a specific book");
-        return bookMapper.bookToDTO(bookService.updateBook(bookId, librarianId, bookMapper.updateBookDTOToBook(upDateBookDTO)));
+        return bookMapper.bookToDTO(bookService.updateBook(bookId, librarianId, bookMapper.updateBookDTOToBook(bookService.getBookById(bookId), upDateBookDTO)));
     }
 
     @DeleteMapping(path = "{bookId}", produces = "application/json")

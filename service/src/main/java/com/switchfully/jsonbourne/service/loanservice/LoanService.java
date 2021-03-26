@@ -4,6 +4,12 @@ import com.switchfully.jsonbourne.domain.models.book.Book;
 import com.switchfully.jsonbourne.domain.models.lending.BookLoan;
 import com.switchfully.jsonbourne.domain.repository.BookRepository;
 import com.switchfully.jsonbourne.domain.repository.loan.LoanRepository;
+import com.switchfully.jsonbourne.infrastructure.exceptions.NoBooksForLoan;
+import com.switchfully.jsonbourne.infrastructure.exceptions.NotAuthorizedException;
+import com.switchfully.jsonbourne.service.BookService;
+import com.switchfully.jsonbourne.service.EmployeeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.switchfully.jsonbourne.infrastructure.exceptions.LoanNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +23,13 @@ public class LoanService {
 
     private final LoanRepository loanRepository;
     private final BookRepository bookRepository;
+    private final EmployeeService employeeService;
+    private static final Logger logger = LoggerFactory.getLogger(BookService.class);
 
-    public LoanService(LoanRepository loanRepository, BookRepository bookRepository) {
+    public LoanService(LoanRepository loanRepository, BookRepository bookRepository, EmployeeService employeeService) {
         this.loanRepository = loanRepository;
         this.bookRepository = bookRepository;
+        this.employeeService = employeeService;
     }
 
     public BookLoan addBookLoan(BookLoan bookLoan){
@@ -31,12 +40,19 @@ public class LoanService {
     }
 
     public UUID getUUIDFromisbn(String isbn){
-        //getbookByIsbn check if book is availab, give msg that there is no book.
-       return bookRepository.getBookByISBN(isbn).get().getId();
+        var bookToLoan = bookRepository.getBookByISBNAndIsNotLoaned(isbn);
+       if(bookToLoan.isEmpty()){
+           logger.warn("This user tried to loan a book that was not pressent.");
+           throw new NoBooksForLoan("There are no book for loan with this isbn.");
+       }
+       return bookToLoan.get().getId();
     }
 
-    public Collection<BookLoan> getLoansForUser(UUID memberId){
-        //check if id is lib
+    public Collection<BookLoan> getLoansForUser(String librarianId,UUID memberId){
+        if (!employeeService.isLibrarian(librarianId)) {
+            logger.warn("This user tried to see the loans for a user without the right permissions");
+            throw new NotAuthorizedException("user has no permission to see the loan info");
+        }
         return loanRepository.getLoansForUser(memberId);
     }
 
