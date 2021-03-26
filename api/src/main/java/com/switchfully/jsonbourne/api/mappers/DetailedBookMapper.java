@@ -17,16 +17,20 @@ public class DetailedBookMapper {
     public DetailedBookDTO BookToDetailedDTO(Book book) {
         DetailedBookDTO detailedBookDTO = new DetailedBookDTO();
         detailedBookDTO.setUuid(book.getId())
-                .setIsbn(book.getIsbn())
-                .setTitle(book.getTitle())
-                .setAuthorFirstName(book.getAuthor().getFirstname())
-                .setAuthorLastName(book.getAuthor().getLastname())
-                .setSummary(book.getSummary())
-                .setOnLoan(book.isOnLoan());
+                       .setIsbn(book.getIsbn())
+                       .setTitle(book.getTitle())
+                       .setAuthorFirstName(book.getAuthor().getFirstname())
+                       .setAuthorLastName(book.getAuthor().getLastname())
+                       .setSummary(book.getSummary())
+                       .setOnLoan(book.isOnLoan());
         if (book.isOnLoan()) {
-            detailedBookDTO.setMemberFirstName(loanService.getMemberThatLoanedABook(book.getId().toString()).get().getPersonalInformation().getFirstName());
-            detailedBookDTO.setMemberLastName(loanService.getMemberThatLoanedABook(book.getId().toString()).get().getPersonalInformation().getLastName());
+            extracted(book, detailedBookDTO);
         }
         return detailedBookDTO;
+    }
+
+    private void extracted(Book book, DetailedBookDTO detailedBookDTO) {
+        detailedBookDTO.setMemberFirstName(loanService.getMemberThatLoanedABook(book.getId().toString()).get().getPersonalInformation().getFirstName());
+        detailedBookDTO.setMemberLastName(loanService.getMemberThatLoanedABook(book.getId().toString()).get().getPersonalInformation().getLastName());
     }
 }
