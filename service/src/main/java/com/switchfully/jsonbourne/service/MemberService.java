@@ -3,14 +3,12 @@ package com.switchfully.jsonbourne.service;
 import com.switchfully.jsonbourne.domain.models.member.Member;
 import com.switchfully.jsonbourne.domain.repository.MemberRepository;
 import com.switchfully.jsonbourne.infrastructure.exceptions.DuplicateMemberException;
-import com.switchfully.jsonbourne.infrastructure.exceptions.MemberNotFoundException;
 import com.switchfully.jsonbourne.infrastructure.exceptions.NotAuthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service

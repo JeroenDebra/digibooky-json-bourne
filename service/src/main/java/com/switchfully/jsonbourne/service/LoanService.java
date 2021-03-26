@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import com.switchfully.jsonbourne.infrastructure.exceptions.LoanNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -39,12 +38,11 @@ public class LoanService {
         this.employeeService = employeeService;
         this.memberRepository = memberRepository;
         this.bookService = bookService;
-        this.memberService = memberService;
     }
 
     public BookLoan addBookLoan(BookLoan bookLoan) {
         if(memberRepository.getMemberById(bookLoan.getMemberId().toString()).isEmpty()) {
-            logger.warn("A not know user tried to loan a book.");
+            logger.warn("A not known user tried to loan a book.");
             throw new MemberNotFoundException("Member id is not found.");
         }
         loanRepository.LendABook(bookLoan);
