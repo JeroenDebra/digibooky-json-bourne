@@ -3,7 +3,7 @@ package com.switchfully.jsonbourne.api.mappers;
 import com.switchfully.jsonbourne.api.dto.book.DetailedBookDTO;
 import com.switchfully.jsonbourne.domain.models.book.Book;
 import com.switchfully.jsonbourne.service.BookService;
-import com.switchfully.jsonbourne.service.loanservice.LoanService;
+import com.switchfully.jsonbourne.service.LoanService;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -26,13 +26,13 @@ public class DetailedBookMapper {
                 .setAuthorLastName(book.getAuthor().getLastname())
                 .setSummary(book.getSummary())
                 .setOnLoan(book.isOnLoan());
-        if (book.isOnLoan()) {
+        /*if (book.isOnLoan()) {
             detailedBookDTO.setMemberFirstName(loanService.getMemberThatLoanedABook(book.getId().toString()).get().getPersonalInformation().getFirstName())
                     .setMemberLastName(loanService.getMemberThatLoanedABook(book.getId().toString()).get().getPersonalInformation().getLastName());
-        } else {
+        } else { */
             detailedBookDTO.setMemberFirstName("");
             detailedBookDTO.setMemberLastName("");
-        }
+     /*   } */
         return detailedBookDTO;
     }
 }

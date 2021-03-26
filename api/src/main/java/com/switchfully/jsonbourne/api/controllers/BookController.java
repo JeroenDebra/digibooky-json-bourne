@@ -56,9 +56,9 @@ public class BookController {
 
     @GetMapping(produces = "application/json", params = {"isbn"})
     @ResponseStatus(HttpStatus.OK)
-    public BookDTO getBookByISBN(@RequestParam String isbn) {
+    public Collection<BookDTO> getBookByISBN(@RequestParam String isbn) {
         logger.info("A user requested a specific book by its ISBN");
-        return bookMapper.bookToDTO(bookService.getBookByISBN(isbn));
+        return bookMapper.listBookToListDTO(bookService.getBookByISBN(isbn));
     }
 
     @GetMapping(produces = "application/json", params = {"fullAuthorName"})
