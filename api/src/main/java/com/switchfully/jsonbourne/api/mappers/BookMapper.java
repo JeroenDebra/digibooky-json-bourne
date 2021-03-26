@@ -35,6 +35,19 @@ public class BookMapper {
         return listOfBooks.stream().map(this::bookToDTO).collect(Collectors.toList());
     }
 
+    private BookDTO bookToBookDTOWithoutSummary(Book book) {
+        return new BookDTO()
+                .setUuid(book.getId())
+                .setIsbn(book.getIsbn())
+                .setTitle(book.getTitle())
+                .setAuthorFirstName(book.getAuthor().getFirstname())
+                .setAuthorLastName(book.getAuthor().getLastname());
+    }
+
+    public List<BookDTO> listBookToListDTOWithoutSummary(Collection<Book> listofBooks) {
+        return listofBooks.stream().map(this::bookToBookDTOWithoutSummary).collect(Collectors.toList());
+    }
+
     public Book updateBookDTOToBook(Book bookById,UpDateBookDTO upDateBookDTO){
         bookById.setTitle(upDateBookDTO.getTitle());
         bookById.setAuthor(new Author(upDateBookDTO.getAuthorFirstName(), upDateBookDTO.getAuthorLastName()));

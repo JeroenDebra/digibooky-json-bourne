@@ -1,7 +1,10 @@
 package com.switchfully.jsonbourne.api.dto.member;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.UUID;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MemberDTO {
     private UUID id;
     private String firstName;
