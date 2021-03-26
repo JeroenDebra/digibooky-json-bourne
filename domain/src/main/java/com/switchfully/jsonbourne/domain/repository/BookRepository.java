@@ -16,21 +16,16 @@ public class BookRepository {
         fillInList();
     }
 
+    private void fillInList() {
+        books.add(new Book("9789024564460", "title", new Author("Firstname", "Lastname"), "this is the story ....."));
+    }
+
     public Collection<Book> getAllBooks() {
         return Collections.unmodifiableSet(books).stream().filter(book -> !book.isDeleted()).collect(Collectors.toList());
     }
 
-    private void fillInList(){
-        books.add(new Book("9789024564460","title",new Author("Firstname","Lastname"),"this is the story ....."));
-    }
-
-    public Collection<Book> getBooksByISBN(String isbn){
-        return books.stream()
-                .filter(book -> book.getIsbn().contains(isbn) && !book.isDeleted()).collect(Collectors.toList());
-    }
-
-    public Optional<Book> getBookByISBNAndIsNotLoaned(String isbn){
-        return books.stream().filter(book -> book.getIsbn().equals(isbn) && !book.isDeleted() && !book.isOnLoan()).findFirst();
+    public Collection<Book> getBooksByISBN(String isbn) {
+        return books.stream().filter(book -> book.getIsbn().contains(isbn) && !book.isDeleted()).collect(Collectors.toList());
     }
 
     public Optional<Book> getBookByID(String id) {
@@ -62,10 +57,15 @@ public class BookRepository {
         book.setUndeleted();
     }
 
-    public Book updateBook(String id, Book bookWithNewInformation){
+    public Book updateBook(String id, Book bookWithNewInformation) {
         Book bookToUpdate = getBookByID(id).get();
         bookToUpdate.update(bookWithNewInformation);
         return bookToUpdate;
     }
+
+    public Optional<Book> getBookByISBNAndIsNotLoaned(String isbn) {
+        return books.stream().filter(book -> book.getIsbn().equals(isbn) && !book.isDeleted() && !book.isOnLoan()).findFirst();
+    }
+
 
 }

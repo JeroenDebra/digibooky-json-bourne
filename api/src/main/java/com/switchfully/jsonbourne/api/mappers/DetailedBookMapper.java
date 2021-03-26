@@ -26,13 +26,16 @@ public class DetailedBookMapper {
                 .setAuthorLastName(book.getAuthor().getLastname())
                 .setSummary(book.getSummary())
                 .setOnLoan(book.isOnLoan());
-        /*if (book.isOnLoan()) {
+
+        if (book.isOnLoan()) {
+
+
             detailedBookDTO.setMemberFirstName(loanService.getMemberThatLoanedABook(book.getId().toString()).get().getPersonalInformation().getFirstName())
                     .setMemberLastName(loanService.getMemberThatLoanedABook(book.getId().toString()).get().getPersonalInformation().getLastName());
-        } else { */
-           detailedBookDTO.setMemberFirstName("");
+        } else {
+            detailedBookDTO.setMemberFirstName("");
             detailedBookDTO.setMemberLastName("");
-     /*   } */
+        }
         return detailedBookDTO;
     }
 }
