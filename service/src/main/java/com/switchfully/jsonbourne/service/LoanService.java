@@ -78,7 +78,7 @@ public class LoanService {
     }
 
     public double returnBook(String loanId) {
-        Optional<BookLoan> bookLoan = loanRepository.getOpenBookLoanFromUser(loanId);
+        Optional<BookLoan> bookLoan = loanRepository.getBookLoanWithId(loanId);
         if (bookLoan.isEmpty()) {
             logger.warn("This user tried to return a book that was on loan");
             throw new LoanNotFoundException("Your loan could not be found:" + loanId);
