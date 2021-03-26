@@ -81,9 +81,9 @@ public class BookController {
         return bookService.restoreBookById(librarianId, bookId);
     }
 
-    @PostMapping(path = "{librarianId}", consumes = "application/json")
+    @PostMapping(consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public BookDTO createBook(@RequestBody CreateBookDTO createBookDTO, @PathVariable String librarianId) {
+    public BookDTO createBook(@RequestBody CreateBookDTO createBookDTO, @RequestParam String librarianId) {
         logger.info("A librarian tried to register a new book into the database");
         return bookMapper.createBook(librarianId, createBookDTO);
     }
