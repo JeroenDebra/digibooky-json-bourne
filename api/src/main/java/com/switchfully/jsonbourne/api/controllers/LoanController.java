@@ -2,10 +2,12 @@ package com.switchfully.jsonbourne.api.controllers;
 
 import com.switchfully.jsonbourne.api.dto.bookloan.BookLoanDTO;
 import com.switchfully.jsonbourne.api.dto.bookloan.CreateBookLoanDTO;
+import com.switchfully.jsonbourne.api.dto.member.AuthorizationIdDTO;
 import com.switchfully.jsonbourne.api.mappers.LoanMapper;
 import com.switchfully.jsonbourne.service.loanservice.LoanService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.theme.AbstractThemeResolver;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -33,5 +35,11 @@ public class LoanController {
     public Collection<BookLoanDTO> getLoansByUser(@PathVariable UUID memberid){
         //body => lib id,
         return mapper.listBookLoanToListBookLoanDTO(loanService.getLoansForUser(memberid));
+    }
+
+    @PostMapping(path = "/overdue",consumes = "application/json", produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public Collection<BookLoanDTO> getAllOverdueBookLoans (@RequestBody AuthorizationIdDTO authorizationIdDTO) {
+        return mapper.listBookLoanToListBookLoanDTO(loanService.getAllOverdueBookLoans(mapper.mapToStringId(authorizationIdDTO)));
     }
 }

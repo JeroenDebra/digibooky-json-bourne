@@ -3,6 +3,7 @@ package com.switchfully.jsonbourne.domain.repository.loan;
 import com.switchfully.jsonbourne.domain.models.lending.BookLoan;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,5 +25,9 @@ public class LoanRepository {
 
     public Collection<BookLoan> getLoansForUser(UUID memberId){
         return bookLoans.stream().filter(loan -> loan.getMemberId().equals(memberId)).collect(Collectors.toSet());
+    }
+
+    public Collection<BookLoan> getAllOverdueBookLoans() {
+        return bookLoans.stream().filter(bookLoan -> bookLoan.getReturnDate().isBefore(LocalDate.now())).collect(Collectors.toList());
     }
 }

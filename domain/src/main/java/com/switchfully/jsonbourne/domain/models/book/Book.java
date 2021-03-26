@@ -61,6 +61,7 @@ public class Book {
     public String getSummary() {
         return summary;
     }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -68,11 +69,11 @@ public class Book {
     public void setAuthor(Author author) {
         this.author = author;
     }
-
-
+    
     public void setSummary(String summary) {
         this.summary = summary;
     }
+
     public void update(Book bookWithNewInformation) {
         setSummary(bookWithNewInformation.getSummary());
         setTitle(bookWithNewInformation.getTitle());

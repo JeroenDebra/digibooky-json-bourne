@@ -21,7 +21,7 @@ public class BookMapper {
         this.bookService = bookService;
     }
 
-    public BookDTO bookToDTO(Book book) {
+    public BookDTO bookToDTO(Book book){
         return new BookDTO()
                 .setUuid(book.getId())
                 .setIsbn(book.getIsbn())

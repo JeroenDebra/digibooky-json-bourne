@@ -2,6 +2,7 @@ package com.switchfully.jsonbourne.api.mappers;
 
 import com.switchfully.jsonbourne.api.dto.bookloan.BookLoanDTO;
 import com.switchfully.jsonbourne.api.dto.bookloan.CreateBookLoanDTO;
+import com.switchfully.jsonbourne.api.dto.member.AuthorizationIdDTO;
 import com.switchfully.jsonbourne.domain.models.lending.BookLoan;
 import com.switchfully.jsonbourne.service.loanservice.LoanService;
 import org.springframework.stereotype.Component;
@@ -32,4 +33,9 @@ public class LoanMapper {
     public Collection<BookLoanDTO> listBookLoanToListBookLoanDTO(Collection<BookLoan> list) {
         return list.stream().map(c -> new BookLoanDTO().setId(c.getId()).setBookId(c.getBookId()).setMemberId(c.getMemberId()).setReturnDate(c.getReturnDate())).collect(Collectors.toList());
     }
+
+    public String mapToStringId(AuthorizationIdDTO authorizationIdDTO) {
+        return authorizationIdDTO.getAuthorizationId();
+    }
+
 }
