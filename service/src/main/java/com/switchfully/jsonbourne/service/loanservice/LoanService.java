@@ -1,7 +1,7 @@
 package com.switchfully.jsonbourne.service.loanservice;
 
 import com.switchfully.jsonbourne.domain.models.lending.BookLoan;
-import com.switchfully.jsonbourne.domain.repository.book.BookRepository;
+import com.switchfully.jsonbourne.domain.repository.BookRepository;
 import com.switchfully.jsonbourne.domain.repository.loan.LoanRepository;
 import org.springframework.stereotype.Service;
 
