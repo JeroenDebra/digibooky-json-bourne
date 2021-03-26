@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.UUID;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class MemberDTO {
     private UUID id;
     private String firstName;
@@ -14,6 +14,7 @@ public class MemberDTO {
     private String streetNumber;
     private String postalCode;
     private String city;
+    private double totalAmountOfFines;
 
     public MemberDTO() {
     }
@@ -48,6 +49,10 @@ public class MemberDTO {
 
     public UUID getId() {
         return id;
+    }
+
+    public double getTotalAmountOfFines() {
+        return totalAmountOfFines;
     }
 
     public MemberDTO setFirstName(String firstName) {
@@ -87,6 +92,11 @@ public class MemberDTO {
 
     public MemberDTO setId(UUID id) {
         this.id = id;
+        return this;
+    }
+
+    public MemberDTO setTotalAmountOfFines(double totalAmountOfFines) {
+        this.totalAmountOfFines = totalAmountOfFines;
         return this;
     }
 }

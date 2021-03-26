@@ -11,6 +11,7 @@ public class BookLoanDTO {
     private UUID memberId;
     private UUID bookId;
     private LocalDate returnDate;
+    private double fine;
 
     public BookLoanDTO() {
     }
@@ -31,6 +32,10 @@ public class BookLoanDTO {
         return returnDate;
     }
 
+    public double getFine() {
+        return fine;
+    }
+
     public BookLoanDTO setId(UUID id) {
         this.id = id;
         return this;
@@ -48,6 +53,11 @@ public class BookLoanDTO {
 
     public BookLoanDTO setReturnDate(LocalDate returnDate) {
         this.returnDate = returnDate;
+        return this;
+    }
+
+    public BookLoanDTO setFine(double fine) {
+        this.fine = fine;
         return this;
     }
 }
