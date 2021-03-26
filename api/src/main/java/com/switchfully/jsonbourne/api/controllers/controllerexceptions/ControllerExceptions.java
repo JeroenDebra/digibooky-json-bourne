@@ -2,6 +2,7 @@ package com.switchfully.jsonbourne.api.controllers.controllerexceptions;
 
 import com.switchfully.jsonbourne.infrastructure.exceptions.BookNotFoundException;
 import com.switchfully.jsonbourne.infrastructure.exceptions.DuplicateMemberException;
+import com.switchfully.jsonbourne.infrastructure.exceptions.LoanNotFoundException;
 import com.switchfully.jsonbourne.infrastructure.exceptions.NotAuthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,5 +36,13 @@ public class ControllerExceptions extends ResponseEntityExceptionHandler {
         logger.error("someone tried to do an unauthorized action", notAuthorizedException);
         httpServletResponse.sendError(HttpServletResponse.SC_FORBIDDEN, notAuthorizedException.getMessage());
     }
+
+    @ExceptionHandler(LoanNotFoundException.class)
+    public void loanCouldNotBeFound(LoanNotFoundException loanNotFoundException, HttpServletResponse httpServletResponse) throws IOException {
+        logger.error("loan of book you wanter to return could not be found", loanNotFoundException);
+        httpServletResponse.sendError(HttpServletResponse.SC_BAD_REQUEST, loanNotFoundException.getMessage());
+    }
+
+
 
 }
