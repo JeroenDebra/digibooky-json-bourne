@@ -2,6 +2,7 @@ package com.switchfully.jsonbourne.api.controllers;
 
 import com.switchfully.jsonbourne.api.dto.bookloan.BookLoanDTO;
 import com.switchfully.jsonbourne.api.dto.bookloan.CreateBookLoanDTO;
+import com.switchfully.jsonbourne.api.dto.bookloan.LoanBookLibarianDTO;
 import com.switchfully.jsonbourne.api.mappers.LoanMapper;
 import com.switchfully.jsonbourne.service.loanservice.LoanService;
 import org.springframework.http.HttpStatus;
@@ -28,10 +29,9 @@ public class LoanController {
         return mapper.bookLoanToBookLoanDTO(loanService.addBookLoan(mapper.createBookLoanToBookLoan(bookLoanDTO)));
     }
 
-    @GetMapping(path = "/{memberid}",produces = "application/json")
+    @PostMapping(path = "/{memberid}",produces = "application/json",consumes = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public Collection<BookLoanDTO> getLoansByUser(@PathVariable UUID memberid){
-        //body => lib id,
-        return mapper.listBookLoanToListBookLoanDTO(loanService.getLoansForUser(memberid));
+    public Collection<BookLoanDTO> getLoansByUser(@RequestBody LoanBookLibarianDTO loanBookLibarianDTO, @PathVariable UUID memberid){
+        return mapper.listBookLoanToListBookLoanDTO(loanService.getLoansForUser(loanBookLibarianDTO.getLibarianId().toString(),memberid));
     }
 }
