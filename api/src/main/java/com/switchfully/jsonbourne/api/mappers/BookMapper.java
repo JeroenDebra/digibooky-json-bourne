@@ -35,8 +35,11 @@ public class BookMapper {
         return listOfBooks.stream().map(this::bookToDTO).collect(Collectors.toList());
     }
 
-    public Book updateBookDTOToBook(UpDateBookDTO upDateBookDTO){
-        return new Book("lalala", upDateBookDTO.getTitle(), new Author(upDateBookDTO.getAuthorFirstName(), upDateBookDTO.getAuthorLastName()), upDateBookDTO.getSummary());
+    public Book updateBookDTOToBook(Book bookById,UpDateBookDTO upDateBookDTO){
+        bookById.setTitle(upDateBookDTO.getTitle());
+        bookById.setAuthor(new Author(upDateBookDTO.getAuthorFirstName(), upDateBookDTO.getAuthorLastName()));
+        bookById.setSummary(upDateBookDTO.getSummary());
+        return bookById;
     }
 
     public BookDTO createBook(String librarianId, CreateBookDTO createBookDTO) {

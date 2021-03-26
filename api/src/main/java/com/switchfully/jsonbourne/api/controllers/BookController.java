@@ -65,7 +65,7 @@ public class BookController {
     @ResponseStatus(HttpStatus.OK)
     public BookDTO updateBook(@PathVariable String bookId, @RequestParam String librarianId, @RequestBody UpDateBookDTO upDateBookDTO) {
         logger.info("A librarian tried to update a specific book");
-        return bookMapper.bookToDTO(bookService.updateBook(bookId, librarianId, bookMapper.updateBookDTOToBook(upDateBookDTO)));
+        return bookMapper.bookToDTO(bookService.updateBook(bookId, librarianId, bookMapper.updateBookDTOToBook(bookService.getBookById(bookId), upDateBookDTO)));
     }
 
     @DeleteMapping(path = "{bookId}", produces = "application/json")
@@ -82,9 +82,9 @@ public class BookController {
         return bookService.restoreBookById(librarianId, bookId);
     }
 
-    @PostMapping(path = "{librarianId}", consumes = "application/json")
+    @PostMapping(consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public BookDTO createBook(@RequestBody CreateBookDTO createBookDTO, @PathVariable String librarianId) {
+    public BookDTO createBook(@RequestBody CreateBookDTO createBookDTO, @RequestParam String librarianId) {
         logger.info("A librarian tried to register a new book into the database");
         return bookMapper.createBook(librarianId, createBookDTO);
     }

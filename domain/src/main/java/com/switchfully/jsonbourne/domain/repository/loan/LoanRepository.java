@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Repository
@@ -29,5 +30,11 @@ public class LoanRepository {
 
     public Collection<BookLoan> getAllOverdueBookLoans() {
         return bookLoans.stream().filter(bookLoan -> bookLoan.getReturnDate().isBefore(LocalDate.now())).collect(Collectors.toList());
+    }
+
+    public Optional<BookLoan> getOpenBookLoanFromUser(String loanId){
+       return bookLoans.stream().filter(bookLoan -> !bookLoan.isReturned())
+                .filter(bookLoan -> bookLoan.getId().toString().equals(loanId))
+                .findFirst();
     }
 }

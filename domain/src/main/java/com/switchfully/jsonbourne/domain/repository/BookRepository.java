@@ -28,6 +28,10 @@ public class BookRepository {
         return books.stream().filter(book -> book.getIsbn().equals(isbn) && !book.isDeleted()).findFirst();
     }
 
+    public Optional<Book> getBookByISBNAndIsNotLoaned(String isbn){
+        return books.stream().filter(book -> book.getIsbn().equals(isbn) && !book.isDeleted() && !book.isOnLoan()).findFirst();
+    }
+
     public Optional<Book> getBookByID(String id) {
         return books.stream().filter(book -> book.getId().toString().equals(id) && !book.isDeleted()).findFirst();
     }
