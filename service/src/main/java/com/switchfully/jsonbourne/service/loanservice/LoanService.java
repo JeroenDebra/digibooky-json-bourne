@@ -1,20 +1,14 @@
 package com.switchfully.jsonbourne.service.loanservice;
 
-import com.switchfully.jsonbourne.domain.models.book.Book;
 import com.switchfully.jsonbourne.domain.models.lending.BookLoan;
 import com.switchfully.jsonbourne.domain.repository.BookRepository;
 import com.switchfully.jsonbourne.domain.repository.loan.LoanRepository;
 import com.switchfully.jsonbourne.infrastructure.exceptions.NoBooksForLoan;
 import com.switchfully.jsonbourne.infrastructure.exceptions.NotAuthorizedException;
-import com.switchfully.jsonbourne.service.BookService;
 import com.switchfully.jsonbourne.service.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.switchfully.jsonbourne.infrastructure.exceptions.LoanNotFoundException;
-import com.switchfully.jsonbourne.infrastructure.exceptions.NotAuthorizedException;
-import com.switchfully.jsonbourne.service.EmployeeService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

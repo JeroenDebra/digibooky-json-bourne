@@ -2,13 +2,16 @@ package com.switchfully.jsonbourne.api.controllers;
 
 import com.switchfully.jsonbourne.api.dto.bookloan.BookLoanDTO;
 import com.switchfully.jsonbourne.api.dto.bookloan.CreateBookLoanDTO;
+import com.switchfully.jsonbourne.api.dto.bookloan.LoanBookLibarianDTO;
+import com.switchfully.jsonbourne.api.dto.bookloan.ReturnBookLoanDTO;
+import com.switchfully.jsonbourne.api.dto.member.AuthorizationIdDTO;
+import com.switchfully.jsonbourne.api.mappers.EmployeeMapper;
 import com.switchfully.jsonbourne.api.mappers.LoanMapper;
 import com.switchfully.jsonbourne.service.loanservice.LoanService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.theme.AbstractThemeResolver;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -20,23 +23,25 @@ public class LoanController {
     private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
     private final LoanService loanService;
-    private final LoanMapper mapper;
+    private final LoanMapper loanMapper;
+    private final EmployeeMapper employeeMapper;
 
-    public LoanController(LoanService loanService, LoanMapper mapper) {
+    public LoanController(LoanService loanService, LoanMapper loanMapper, EmployeeMapper employeeMapper) {
         this.loanService = loanService;
-        this.mapper = mapper;
+        this.loanMapper = loanMapper;
+        this.employeeMapper = employeeMapper;
     }
 
     @PostMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public BookLoanDTO lendBook(@RequestBody CreateBookLoanDTO bookLoanDTO){
-        return mapper.bookLoanToBookLoanDTO(loanService.addBookLoan(mapper.createBookLoanToBookLoan(bookLoanDTO)));
+        return loanMapper.bookLoanToBookLoanDTO(loanService.addBookLoan(loanMapper.createBookLoanToBookLoan(bookLoanDTO)));
     }
 
-    @PostMapping(path = "/{memberid}",produces = "application/json",consumes = "application/json")
+    @PostMapping(path = "/{memberId}",produces = "application/json",consumes = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public Collection<BookLoanDTO> getLoansByUser(@RequestBody LoanBookLibarianDTO loanBookLibarianDTO, @PathVariable UUID memberid){
-        return mapper.listBookLoanToListBookLoanDTO(loanService.getLoansForUser(loanBookLibarianDTO.getLibarianId().toString(),memberid));
+    public Collection<BookLoanDTO> getLoansByUser(@RequestBody LoanBookLibarianDTO loanBookLibarianDTO, @PathVariable UUID memberId){
+        return loanMapper.listBookLoanToListBookLoanDTO(loanService.getLoansForUser(loanBookLibarianDTO.getLibarianId().toString(), memberId));
     }
 
     @PutMapping(consumes = "application/json")
@@ -44,7 +49,7 @@ public class LoanController {
     public String returnBook(@RequestBody ReturnBookLoanDTO returnBookLoanDTO){
         logger.info(returnBookLoanDTO.getLoanId() + "is being returned");
 
-        if (mapper.returnBookUpdate(returnBookLoanDTO)) {
+        if (loanMapper.returnBookUpdate(returnBookLoanDTO)) {
             return "Book has been returned too late";
         }
         return "book has been successfully returned";
@@ -53,6 +58,6 @@ public class LoanController {
     @PostMapping(path = "/overdue",consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public Collection<BookLoanDTO> getAllOverdueBookLoans (@RequestBody AuthorizationIdDTO authorizationIdDTO) {
-        return mapper.listBookLoanToListBookLoanDTO(loanService.getAllOverdueBookLoans(mapper.mapToStringId(authorizationIdDTO)));
+        return loanMapper.listBookLoanToListBookLoanDTO(loanService.getAllOverdueBookLoans(employeeMapper.mapToStringId(authorizationIdDTO)));
     }
 }
