@@ -20,6 +20,10 @@ public class LoanRepository {
         bookLoans = new HashSet<>();
     }
 
+    public Set<BookLoan> getBookLoans() {
+        return bookLoans;
+    }
+
     public void LendABook(BookLoan book) {
         bookLoans.add(book);
     }
