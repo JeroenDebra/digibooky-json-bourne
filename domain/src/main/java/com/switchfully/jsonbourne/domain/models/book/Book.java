@@ -1,5 +1,6 @@
 package com.switchfully.jsonbourne.domain.models.book;
 
+import com.switchfully.jsonbourne.infrastructure.utils.IsbnUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +30,7 @@ public class Book {
     }
 
     private String isbnValidator(String isbn) {
-        if (isbn == null || isbn.isBlank()) {
+        if (!IsbnUtils.isValidISBN(isbn)) {
             logger.warn("The user tried to register an invalid ISBN");
             throw new IllegalArgumentException("isbn is not valid");
         }

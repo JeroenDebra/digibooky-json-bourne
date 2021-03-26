@@ -4,7 +4,7 @@ import com.switchfully.jsonbourne.api.dto.bookloan.BookLoanDTO;
 import com.switchfully.jsonbourne.api.dto.bookloan.CreateBookLoanDTO;
 import com.switchfully.jsonbourne.api.dto.bookloan.ReturnBookLoanDTO;
 import com.switchfully.jsonbourne.domain.models.lending.BookLoan;
-import com.switchfully.jsonbourne.service.loanservice.LoanService;
+import com.switchfully.jsonbourne.service.LoanService;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;

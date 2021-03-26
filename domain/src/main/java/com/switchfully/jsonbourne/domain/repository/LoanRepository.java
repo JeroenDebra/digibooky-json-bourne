@@ -1,4 +1,4 @@
-package com.switchfully.jsonbourne.domain.repository.loan;
+package com.switchfully.jsonbourne.domain.repository;
 
 import com.switchfully.jsonbourne.domain.models.lending.BookLoan;
 import org.springframework.stereotype.Repository;

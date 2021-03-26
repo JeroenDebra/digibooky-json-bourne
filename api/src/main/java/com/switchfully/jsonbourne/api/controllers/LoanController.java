@@ -7,7 +7,7 @@ import com.switchfully.jsonbourne.api.dto.bookloan.ReturnBookLoanDTO;
 import com.switchfully.jsonbourne.api.dto.member.AuthorizationIdDTO;
 import com.switchfully.jsonbourne.api.mappers.EmployeeMapper;
 import com.switchfully.jsonbourne.api.mappers.LoanMapper;
-import com.switchfully.jsonbourne.service.loanservice.LoanService;
+import com.switchfully.jsonbourne.service.LoanService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

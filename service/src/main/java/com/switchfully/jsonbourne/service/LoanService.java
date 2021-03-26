@@ -1,11 +1,10 @@
-package com.switchfully.jsonbourne.service.loanservice;
+package com.switchfully.jsonbourne.service;
 
 import com.switchfully.jsonbourne.domain.models.lending.BookLoan;
 import com.switchfully.jsonbourne.domain.repository.BookRepository;
-import com.switchfully.jsonbourne.domain.repository.loan.LoanRepository;
+import com.switchfully.jsonbourne.domain.repository.LoanRepository;
 import com.switchfully.jsonbourne.infrastructure.exceptions.NoBooksForLoan;
 import com.switchfully.jsonbourne.infrastructure.exceptions.NotAuthorizedException;
-import com.switchfully.jsonbourne.service.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.switchfully.jsonbourne.infrastructure.exceptions.LoanNotFoundException;
@@ -66,6 +65,7 @@ public class LoanService {
     public boolean returnBook( String loanId) {
         Optional<BookLoan> bookLoan = loanRepository.getOpenBookLoanFromUser(loanId);
         if (bookLoan.isEmpty()){
+            logger.warn("This user tried to return a book that was on loan");
             throw new LoanNotFoundException("Your loan could not be found:" + loanId);
         }
         bookLoan.get().setReturned(true);
