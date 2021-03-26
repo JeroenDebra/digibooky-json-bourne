@@ -50,10 +50,11 @@ public class LoanController {
     @ResponseStatus(HttpStatus.OK)
     public String returnBook(@RequestBody ReturnBookLoanDTO returnBookLoanDTO){
         logger.info(returnBookLoanDTO.getLoanId() + " is being returned");
-        if (loanMapper.returnBookUpdate(returnBookLoanDTO)) {
-            return "Book has been returned too late";
+        String result = "Book has been successfully returned ";
+        if (loanMapper.returnBookUpdate(returnBookLoanDTO) > 0) {
+            return result + "with a fine off " + loanMapper.returnBookUpdate(returnBookLoanDTO) + " EUR";
         }
-        return "book has been successfully returned";
+        return result;
     }
 
     @PostMapping(path = "/overdue",consumes = "application/json", produces = "application/json")

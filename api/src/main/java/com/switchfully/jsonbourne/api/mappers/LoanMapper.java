@@ -34,7 +34,7 @@ public class LoanMapper {
         return list.stream().map(c -> new BookLoanDTO().setId(c.getId()).setBookId(c.getBookId()).setMemberId(c.getMemberId()).setReturnDate(c.getReturnDate())).collect(Collectors.toList());
     }
 
-    public boolean returnBookUpdate(ReturnBookLoanDTO returnBookLoanDTO){
+    public double returnBookUpdate(ReturnBookLoanDTO returnBookLoanDTO){
         return loanService.returnBook(returnBookLoanDTO.getLoanId());
     }
 }

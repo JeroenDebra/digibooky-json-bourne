@@ -1,6 +1,7 @@
 package com.switchfully.jsonbourne.domain.models.member;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 public class Member {
@@ -9,10 +10,13 @@ public class Member {
     private final PersonalInformation personalInformation;
     private final Address address;
 
+    private double totalAmountOfFines;
+
     public Member(PersonalInformation personalInformation, Address address) {
         this.uuid = UUID.randomUUID();
         this.personalInformation = personalInformation;
         this.address = address;
+        this.totalAmountOfFines = 0.0;
     }
 
     public UUID getUuid() {
@@ -25,6 +29,14 @@ public class Member {
 
     public Address getAddress() {
         return address;
+    }
+
+    public double getTotalAmountOfFines() {
+        return totalAmountOfFines;
+    }
+
+    public void setTotalAmountOfFines(double totalAmountOfFines) {
+        this.totalAmountOfFines += totalAmountOfFines;
     }
 
     @Override

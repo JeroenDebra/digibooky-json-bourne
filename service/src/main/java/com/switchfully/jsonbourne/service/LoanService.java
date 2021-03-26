@@ -8,6 +8,7 @@ import com.switchfully.jsonbourne.domain.repository.MemberRepository;
 import com.switchfully.jsonbourne.infrastructure.exceptions.MemberNotFoundException;
 import com.switchfully.jsonbourne.infrastructure.exceptions.NoBooksForLoan;
 import com.switchfully.jsonbourne.infrastructure.exceptions.NotAuthorizedException;
+import com.switchfully.jsonbourne.infrastructure.utils.FineCalculator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.switchfully.jsonbourne.infrastructure.exceptions.LoanNotFoundException;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -28,12 +28,14 @@ public class LoanService {
     private final BookRepository bookRepository;
     private final EmployeeService employeeService;
     private final MemberRepository memberRepository;
+    private final MemberService memberService;
 
-    public LoanService(LoanRepository loanRepository, BookRepository bookRepository, EmployeeService employeeService, MemberRepository memberRepository) {
+    public LoanService(LoanRepository loanRepository, BookRepository bookRepository, EmployeeService employeeService, MemberRepository memberRepository, MemberService memberService) {
         this.loanRepository = loanRepository;
         this.bookRepository = bookRepository;
         this.employeeService = employeeService;
         this.memberRepository = memberRepository;
+        this.memberService = memberService;
     }
 
     public BookLoan addBookLoan(BookLoan bookLoan) {
@@ -71,18 +73,15 @@ public class LoanService {
         return loanRepository.getAllOverdueBookLoans();
     }
 
-    public boolean returnBook(String loanId) {
+    public double returnBook(String loanId) {
         Optional<BookLoan> bookLoan = loanRepository.getOpenBookLoanFromUser(loanId);
         if (bookLoan.isEmpty()) {
-            logger.warn("This user with id tried to return a book that was on loan");
+            logger.warn("This user tried to return a book that was on loan");
             throw new LoanNotFoundException("Your loan could not be found:" + loanId);
         }
         bookLoan.get().setReturned(true);
-        return isBookReturnedLate(bookLoan.get());
-    }
-
-    private boolean isBookReturnedLate(BookLoan bookLoan) {
-        return bookLoan.getReturnDate().isBefore(LocalDate.now());
+        memberRepository.getMemberById(bookLoan.get().getMemberId().toString()).get().setTotalAmountOfFines(FineCalculator.CalculateFine(bookLoan.get().getReturnDate()));
+        return FineCalculator.CalculateFine(bookLoan.get().getReturnDate());
     }
 
     public Optional<Member> getMemberThatLoanedABook(String bookId) {
