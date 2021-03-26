@@ -2,18 +2,15 @@ package com.switchfully.jsonbourne.api.mappers;
 
 import com.switchfully.jsonbourne.api.dto.book.DetailedBookDTO;
 import com.switchfully.jsonbourne.domain.models.book.Book;
-import com.switchfully.jsonbourne.service.BookService;
 import com.switchfully.jsonbourne.service.LoanService;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DetailedBookMapper {
 
-    private final BookService bookService;
     private final LoanService loanService;
 
-    public DetailedBookMapper(BookService bookService, LoanService loanService) {
-        this.bookService = bookService;
+    public DetailedBookMapper(LoanService loanService) {
         this.loanService = loanService;
     }
 
@@ -26,15 +23,9 @@ public class DetailedBookMapper {
                 .setAuthorLastName(book.getAuthor().getLastname())
                 .setSummary(book.getSummary())
                 .setOnLoan(book.isOnLoan());
-
         if (book.isOnLoan()) {
-
-
-            detailedBookDTO.setMemberFirstName(loanService.getMemberThatLoanedABook(book.getId().toString()).get().getPersonalInformation().getFirstName())
-                    .setMemberLastName(loanService.getMemberThatLoanedABook(book.getId().toString()).get().getPersonalInformation().getLastName());
-        } else {
-            detailedBookDTO.setMemberFirstName("");
-            detailedBookDTO.setMemberLastName("");
+            detailedBookDTO.setMemberFirstName(loanService.getMemberThatLoanedABook(book.getId().toString()).get().getPersonalInformation().getFirstName());
+            detailedBookDTO.setMemberLastName(loanService.getMemberThatLoanedABook(book.getId().toString()).get().getPersonalInformation().getLastName());
         }
         return detailedBookDTO;
     }
