@@ -30,7 +30,7 @@ public class DetailedBookMapper {
             detailedBookDTO.setMemberFirstName(loanService.getMemberThatLoanedABook(book.getId().toString()).get().getPersonalInformation().getFirstName())
                     .setMemberLastName(loanService.getMemberThatLoanedABook(book.getId().toString()).get().getPersonalInformation().getLastName());
         } else { */
-            detailedBookDTO.setMemberFirstName("");
+           detailedBookDTO.setMemberFirstName("");
             detailedBookDTO.setMemberLastName("");
      /*   } */
         return detailedBookDTO;

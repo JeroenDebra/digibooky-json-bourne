@@ -37,21 +37,14 @@ public class BookController {
         return bookMapper.listBookToListDTO(bookService.getAllBooks());
     }
 
-//    @GetMapping(path = "/{id}", produces = "application/json")
-//    @ResponseStatus(HttpStatus.OK)
-//    public BookDTO getBookById(@PathVariable String id) {
-//        logger.info("A user requested a specific book by its ID");
-//        return bookMapper.bookToDTO(bookService.getBookById(id));
-//    }
-
     @GetMapping(path = "/{id}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public DetailedBookDTO getDetailedBookById(@PathVariable String id) {
         logger.info("A user requested a specific detailed book by its ID");
-        var x = bookService.getBookById(id);
-        System.out.println(x);
-        System.out.println(x.isOnLoan());
-        return detailedBookMapper.BookToDetailedDTO(bookService.getBookById(id));
+
+        var Book = bookService.getBookById(id);
+       DetailedBookDTO detailedBookDTO = detailedBookMapper.BookToDetailedDTO(bookService.getBookById(id));
+        return detailedBookDTO;
     }
 
     @GetMapping(produces = "application/json", params = {"isbn"})

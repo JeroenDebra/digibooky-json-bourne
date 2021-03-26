@@ -15,6 +15,42 @@ public class DetailedBookDTO {
     private String memberLastName;
 
 
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthorFirstName() {
+        return authorFirstName;
+    }
+
+    public String getAuthorLastName() {
+        return authorLastName;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public boolean isOnLoan() {
+        return isOnLoan;
+    }
+
+    public String getMemberFirstName() {
+        return memberFirstName;
+    }
+
+    public String getMemberLastName() {
+        return memberLastName;
+    }
+
     public DetailedBookDTO setUuid(UUID uuid) {
         this.uuid = uuid;
         return this;
