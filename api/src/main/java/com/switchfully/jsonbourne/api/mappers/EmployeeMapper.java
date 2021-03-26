@@ -3,7 +3,7 @@ package com.switchfully.jsonbourne.api.mappers;
 import com.switchfully.jsonbourne.api.dto.member.CreateEmployeeDTO;
 import com.switchfully.jsonbourne.api.dto.member.EmployeeDTO;
 import com.switchfully.jsonbourne.domain.models.member.Employee;
-import com.switchfully.jsonbourne.service.adminService.EmployeeService;
+import com.switchfully.jsonbourne.service.EmployeeService;
 import org.springframework.stereotype.Component;
 import com.switchfully.jsonbourne.domain.models.member.Role;
 
@@ -11,13 +11,13 @@ import com.switchfully.jsonbourne.domain.models.member.Role;
 @Component
 public class EmployeeMapper {
 
-    private final EmployeeService employeeToEmployeeDTO;
+    private final EmployeeService employeeService;
 
-    public EmployeeMapper(EmployeeService employeeToEmployeeDTO) {
-        this.employeeToEmployeeDTO = employeeToEmployeeDTO;
+    public EmployeeMapper(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
-    private EmployeeDTO employeeToEmployeeDTO(Employee employee){
+    public EmployeeDTO employeeToEmployeeDTO(Employee employee){
         return new EmployeeDTO()
                 .setId(employee.getId())
                 .setFirstname(employee.getFirstname())
@@ -26,16 +26,9 @@ public class EmployeeMapper {
                 .setRole(employee.getRole().toString());
     }
 
-    private Role roleMapper(String role){
-        if (role.equals("admin")){
-            return Role.ADMIN;
-        }
-        return Role.LIBRARIAN;
-    }
-
     public EmployeeDTO createEmployee(CreateEmployeeDTO createEmployeeDTO) {
-        Employee employee = new Employee(createEmployeeDTO.getFirstname(), createEmployeeDTO.getLastname(), createEmployeeDTO.getEmail(), roleMapper(createEmployeeDTO.getRole()));
-
-        return employeeToEmployeeDTO(employeeToEmployeeDTO.addEmployee(employee));
+        Employee employee = new Employee(createEmployeeDTO.getFirstname(), createEmployeeDTO.getLastname(), createEmployeeDTO.getEmail(), createEmployeeDTO.getRole());
+        return employeeToEmployeeDTO(employeeService.addEmployee(employee,createEmployeeDTO.getAuthorisationId()));
     }
+
 }

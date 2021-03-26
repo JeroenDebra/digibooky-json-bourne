@@ -1,9 +1,14 @@
 package com.switchfully.jsonbourne.domain.models.book;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Objects;
 import java.util.UUID;
 
 public class Book {
+
+    private static final Logger logger = LoggerFactory.getLogger(Book.class);
 
     private final UUID id;
     private String isbn;
@@ -25,6 +30,7 @@ public class Book {
 
     private String isbnValidator(String isbn) {
         if (isbn == null || isbn.isBlank()) {
+            logger.warn("The user tried to register an invalid ISBN");
             throw new IllegalArgumentException("isbn is not valid");
         }
         return isbn;
@@ -32,6 +38,7 @@ public class Book {
 
     private String titleValidator(String title) {
         if (title == null || title.isBlank()) {
+            logger.warn("The user tried to register an invalid title");
             throw new IllegalArgumentException("title is not valid");
         }
         return title;
@@ -53,6 +60,23 @@ public class Book {
 
     public String getSummary() {
         return summary;
+    }
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+    public void update(Book bookWithNewInformation) {
+        setSummary(bookWithNewInformation.getSummary());
+        setTitle(bookWithNewInformation.getTitle());
+        setAuthor(bookWithNewInformation.getAuthor());
     }
 
     public boolean isDeleted() {
@@ -95,6 +119,7 @@ public class Book {
 
     @Override
     public int hashCode() {
-        return Objects.hash(isbn);
+        return Objects.hash(id);
     }
+
 }

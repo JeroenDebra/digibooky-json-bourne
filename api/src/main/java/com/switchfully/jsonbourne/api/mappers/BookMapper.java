@@ -1,14 +1,11 @@
 package com.switchfully.jsonbourne.api.mappers;
 
 import com.switchfully.jsonbourne.api.dto.book.BookDTO;
-import com.switchfully.jsonbourne.api.dto.book.CreateBookDTO;
-import com.switchfully.jsonbourne.api.dto.bookloan.BookLoanDTO;
-import com.switchfully.jsonbourne.api.dto.bookloan.CreateBookLoanDTO;
+import com.switchfully.jsonbourne.api.dto.book.UpDateBookDTO;
 import com.switchfully.jsonbourne.domain.models.book.Author;
+import com.switchfully.jsonbourne.api.dto.book.CreateBookDTO;
 import com.switchfully.jsonbourne.domain.models.book.Book;
-import com.switchfully.jsonbourne.domain.models.lending.BookLoan;
-import com.switchfully.jsonbourne.service.bookservice.DefaultBookService;
-import com.switchfully.jsonbourne.service.loanservice.LoanService;
+import com.switchfully.jsonbourne.service.BookService;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -18,10 +15,10 @@ import java.util.stream.Collectors;
 @Component
 public class BookMapper {
 
-    private final DefaultBookService service;
+    private final BookService bookService;
 
-    public BookMapper(DefaultBookService service) {
-        this.service = service;
+    public BookMapper(BookService bookService) {
+        this.bookService = bookService;
     }
 
     public BookDTO bookToDTO(Book book) {
@@ -38,7 +35,11 @@ public class BookMapper {
         return listOfBooks.stream().map(this::bookToDTO).collect(Collectors.toList());
     }
 
-    public BookDTO createBook(CreateBookDTO createBookDTO) {
-        return bookToDTO(service.createBook(new Book(createBookDTO.getIsbn(), createBookDTO.getTitle(), new Author(createBookDTO.getAuthorFirstName(), createBookDTO.getAuthorLastName()), createBookDTO.getSummary())));
+    public Book updateBookDTOToBook(UpDateBookDTO upDateBookDTO){
+        return new Book("lalala", upDateBookDTO.getTitle(), new Author(upDateBookDTO.getAuthorFirstName(), upDateBookDTO.getAuthorLastName()), upDateBookDTO.getSummary());
+    }
+
+    public BookDTO createBook(String librarianId, CreateBookDTO createBookDTO) {
+        return bookToDTO(bookService.createBook(librarianId, new Book(createBookDTO.getIsbn(),createBookDTO.getTitle(),new Author(createBookDTO.getAuthorFirstName(),createBookDTO.getAuthorLastName()),createBookDTO.getSummary())));
     }
 }

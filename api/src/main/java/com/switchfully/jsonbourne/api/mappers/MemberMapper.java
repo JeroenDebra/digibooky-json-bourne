@@ -5,7 +5,8 @@ import com.switchfully.jsonbourne.api.dto.member.MemberDTO;
 import com.switchfully.jsonbourne.domain.models.member.Address;
 import com.switchfully.jsonbourne.domain.models.member.Member;
 import com.switchfully.jsonbourne.domain.models.member.PersonalInformation;
-import com.switchfully.jsonbourne.service.memberservice.DefaultMemberService;
+
+import com.switchfully.jsonbourne.service.MemberService;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -15,10 +16,10 @@ import java.util.stream.Collectors;
 @Component
 public class MemberMapper {
 
-    private final DefaultMemberService service;
+    private final MemberService memberService;
 
-    public MemberMapper(DefaultMemberService service) {
-        this.service = service;
+    public MemberMapper(MemberService service) {
+        this.memberService = service;
     }
 
     private MemberDTO memberToMemberDTO(Member member){
@@ -31,7 +32,6 @@ public class MemberMapper {
                 .setPostalCode(member.getAddress().getPostalCode())
                 .setStreetName(member.getAddress().getStreetName())
                 .setStreetNumber(member.getAddress().getStreetNumber());
-
     }
 
     public List<MemberDTO> memberListToMemberDTOList(Collection<Member> members){
@@ -39,7 +39,7 @@ public class MemberMapper {
     }
 
     public MemberDTO createMember(CreateMemberDTO createMemberDTO){
-        return memberToMemberDTO(service.addMember(new Member(createPersonalInformation(createMemberDTO),createAddress(createMemberDTO))));
+        return memberToMemberDTO(memberService.addMember(new Member(createPersonalInformation(createMemberDTO),createAddress(createMemberDTO))));
     }
 
     private Address createAddress(CreateMemberDTO createMemberDTO) {

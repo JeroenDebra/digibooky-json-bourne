@@ -1,18 +1,21 @@
 package com.switchfully.jsonbourne.domain.models.member;
 
 import com.switchfully.jsonbourne.infrastructure.utils.EmailUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
 import java.util.UUID;
 
 public class Employee {
 
+    private static final Logger logger = LoggerFactory.getLogger(Employee.class);
+
     private final UUID id;
     private final String firstname;
     private final String lastname;
     private final String email;
     private final Role role;
-
 
     public Employee( String firstname, String lastname, String email, Role role) {
         id = UUID.randomUUID();
@@ -32,6 +35,7 @@ public class Employee {
 
     private String validEmail(String email){
         if (!EmailUtils.isValidEmail(email)){
+            logger.warn("The user tried to register an invalid e-mail");
             throw new IllegalArgumentException("email is not valid");
         }
         return email;
