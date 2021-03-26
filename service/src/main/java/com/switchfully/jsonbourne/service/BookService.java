@@ -63,27 +63,27 @@ public class BookService {
         return bookRepository.updateBook(bookId, bookWithNewInformation);
     }
 
-    public String deleteBookById(String librarianId, String id) {
+    public Book deleteBookById(String librarianId, String id) {
         if (!employeeService.isLibrarian(librarianId)) {
             logger.warn("This user tried to delete a book without the right permissions");
             throw new NotAuthorizedException("user has no permission to delete books");
         }
         bookRepository.setBookToDeleted(checkIfBookIsEmpty(bookRepository.getBookByID(id)));
-        return "This book with id " + id + " has been deleted.";
+        return getBookById(id);
     }
 
-    public String restoreBookById(String librarianId, String id) {
+    public Book restoreBookById(String librarianId, String id) {
         if (!employeeService.isLibrarian(librarianId)) {
             logger.warn("This user tried to restore a deleted book without the right permissions");
             throw new NotAuthorizedException("user has no permission to restore books");
         }
         bookRepository.restoreDeletedBook(checkIfBookIsEmpty(bookRepository.getDeletedBookByID(id)));
-        return "This book with id " + id + " has been restored.";
+        return getBookById(id);
     }
 
     private Collection<Book> checkIfBookListIsEmpty(String information, Collection<Book> books) {
         if (books.isEmpty()) {
-            logger.warn("No books were found with the provide query");
+            logger.warn("No books were found with the provided query");
             throw new NoBooksFoundException("No books found with " + information);
         }
         return books;
@@ -91,7 +91,7 @@ public class BookService {
 
     private Book checkIfBookIsEmpty(Optional<Book> book) {
         if (book.isEmpty()) {
-            logger.warn("No book was found with the provide query");
+            logger.warn("No book was found with the provided query");
             throw new BookNotFoundException("Book not found");
         }
         return book.get();
