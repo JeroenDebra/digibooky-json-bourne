@@ -29,8 +29,9 @@ public class BookService {
         return bookRepository.getAllBooks();
     }
 
-    public Book getBookByISBN(String isbn) {
-        return checkIfBookIsEmpty(bookRepository.getBookByISBN(isbn));
+    public Collection<Book> getBookByISBN(String isbn) {
+       return checkIfBookListIsEmpty("isbn: " + isbn, bookRepository.getBooksByISBN(isbn));
+
     }
 
     public Book getBookById(String id) {

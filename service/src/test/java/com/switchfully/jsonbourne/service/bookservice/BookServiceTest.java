@@ -4,6 +4,7 @@ import com.switchfully.jsonbourne.domain.models.book.Book;
 import com.switchfully.jsonbourne.domain.repository.BookRepository;
 import com.switchfully.jsonbourne.domain.repository.EmployeeRepository;
 import com.switchfully.jsonbourne.infrastructure.exceptions.BookNotFoundException;
+import com.switchfully.jsonbourne.infrastructure.exceptions.NoBooksFoundException;
 import com.switchfully.jsonbourne.service.BookService;
 import com.switchfully.jsonbourne.service.EmployeeService;
 import org.junit.jupiter.api.Test;
@@ -24,13 +25,12 @@ class BookServiceTest {
 
     @Test
     void getBookByISBNWillReturnCorrectBook() {
-        assertEquals("9789024564460",bookService.getBookByISBN("9789024564460").getIsbn());
+        assertEquals(1,bookService.getBookByISBN("9789024564460").size());
     }
 
     @Test
     void getBookByISBN_withFakeISBNWillReturnException() {
-        Exception exception = assertThrows(BookNotFoundException.class, () -> bookService.getBookByISBN("97"));
-        assertEquals("Book not found", exception.getMessage());
+        assertThrows(NoBooksFoundException.class, () -> bookService.getBookByISBN("FAKEISBNNUMBER"));
     }
 
     @Test

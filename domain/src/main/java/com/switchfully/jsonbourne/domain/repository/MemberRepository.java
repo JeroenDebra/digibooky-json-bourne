@@ -3,10 +3,7 @@ package com.switchfully.jsonbourne.domain.repository;
 import com.switchfully.jsonbourne.domain.models.member.Member;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Repository
 public class MemberRepository  {
@@ -23,5 +20,9 @@ public class MemberRepository  {
 
     public int getsize(){
         return members.size();
+    }
+
+    public Optional<Member> getMemberById(String memberId){
+       return members.stream().filter(member -> member.getUuid().toString().equals(memberId)).findFirst();
     }
 }

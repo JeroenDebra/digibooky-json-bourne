@@ -24,8 +24,9 @@ public class BookRepository {
         books.add(new Book("9789024564460","title",new Author("Firstname","Lastname"),"this is the story ....."));
     }
 
-    public Optional<Book> getBookByISBN(String isbn){
-        return books.stream().filter(book -> book.getIsbn().equals(isbn) && !book.isDeleted()).findFirst();
+    public Collection<Book> getBooksByISBN(String isbn){
+        return books.stream()
+                .filter(book -> book.getIsbn().contains(isbn) && !book.isDeleted()).collect(Collectors.toList());
     }
 
     public Optional<Book> getBookByISBNAndIsNotLoaned(String isbn){

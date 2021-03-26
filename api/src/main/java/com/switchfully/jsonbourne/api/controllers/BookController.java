@@ -1,9 +1,11 @@
 package com.switchfully.jsonbourne.api.controllers;
 
 import com.switchfully.jsonbourne.api.dto.book.BookDTO;
+import com.switchfully.jsonbourne.api.dto.book.DetailedBookDTO;
 import com.switchfully.jsonbourne.api.dto.book.UpDateBookDTO;
 import com.switchfully.jsonbourne.api.dto.book.CreateBookDTO;
 import com.switchfully.jsonbourne.api.mappers.BookMapper;
+import com.switchfully.jsonbourne.api.mappers.DetailedBookMapper;
 import com.switchfully.jsonbourne.service.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,10 +22,12 @@ public class BookController {
 
     private final BookService bookService;
     private final BookMapper bookMapper;
+    private final DetailedBookMapper detailedBookMapper;
 
-    public BookController(BookService bookService, BookMapper bookMapper) {
+    public BookController(BookService bookService, BookMapper bookMapper,DetailedBookMapper detailedBookMapper) {
         this.bookService = bookService;
         this.bookMapper = bookMapper;
+        this.detailedBookMapper = detailedBookMapper;
     }
 
     @GetMapping(produces = "application/json")
@@ -33,18 +37,28 @@ public class BookController {
         return bookMapper.listBookToListDTO(bookService.getAllBooks());
     }
 
+//    @GetMapping(path = "/{id}", produces = "application/json")
+//    @ResponseStatus(HttpStatus.OK)
+//    public BookDTO getBookById(@PathVariable String id) {
+//        logger.info("A user requested a specific book by its ID");
+//        return bookMapper.bookToDTO(bookService.getBookById(id));
+//    }
+
     @GetMapping(path = "/{id}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public BookDTO getBookById(@PathVariable String id) {
-        logger.info("A user requested a specific book by its ID");
-        return bookMapper.bookToDTO(bookService.getBookById(id));
+    public DetailedBookDTO getDetailedBookById(@PathVariable String id) {
+        logger.info("A user requested a specific detailed book by its ID");
+        var x = bookService.getBookById(id);
+        System.out.println(x);
+        System.out.println(x.isOnLoan());
+        return detailedBookMapper.BookToDetailedDTO(bookService.getBookById(id));
     }
 
     @GetMapping(produces = "application/json", params = {"isbn"})
     @ResponseStatus(HttpStatus.OK)
-    public BookDTO getBookByISBN(@RequestParam String isbn) {
+    public Collection<BookDTO> getBookByISBN(@RequestParam String isbn) {
         logger.info("A user requested a specific book by its ISBN");
-        return bookMapper.bookToDTO(bookService.getBookByISBN(isbn));
+        return bookMapper.listBookToListDTO(bookService.getBookByISBN(isbn));
     }
 
     @GetMapping(produces = "application/json", params = {"fullAuthorName"})
