@@ -34,7 +34,7 @@ public class BookController {
     @ResponseStatus(HttpStatus.OK)
     public Collection<BookDTO> getAllBooks() {
         logger.info("A user requested to get a list of all the books");
-        return bookMapper.listBookToListDTO(bookService.getAllBooks());
+        return bookMapper.listBookToListDTOWithoutSummary(bookService.getAllBooks());
     }
 
     @GetMapping(path = "/{id}", produces = "application/json")
