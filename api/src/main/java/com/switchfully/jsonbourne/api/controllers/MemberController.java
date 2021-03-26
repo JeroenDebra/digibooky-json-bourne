@@ -38,5 +38,4 @@ public class MemberController {
         logger.info("An Admin requests a list of all the members");
         return mapper.memberListToMemberDTOList(memberService.getAllMembers(adminId));
     }
-
 }
