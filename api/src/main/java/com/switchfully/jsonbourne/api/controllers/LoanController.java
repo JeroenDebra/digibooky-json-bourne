@@ -35,14 +35,14 @@ public class LoanController {
     @PostMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public BookLoanDTO lendBook(@RequestBody CreateBookLoanDTO bookLoanDTO){
-        logger.info("A user is requesting to add a book by ISBN " + bookLoanDTO.getIsbn() + " to his loans");
+        logger.info("A user with id " + bookLoanDTO.getMemberId() + " is requesting to add a book by ISBN " + bookLoanDTO.getIsbn() + " to his loans");
         return loanMapper.bookLoanToBookLoanDTO(loanService.addBookLoan(loanMapper.createBookLoanToBookLoan(bookLoanDTO)));
     }
 
     @PostMapping(path = "/{memberId}",produces = "application/json",consumes = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public Collection<BookLoanDTO> getLoansByUser(@RequestBody LoanBookLibarianDTO loanBookLibarianDTO, @PathVariable UUID memberId){
-        logger.info("A librarian requests a list of all the books user " + memberId.toString() + " has in loan");
+        logger.info("A user with id " + loanBookLibarianDTO.getLibarianId() + " requests a list of all the books user " + memberId + " has in loan");
         return loanMapper.listBookLoanToListBookLoanDTO(loanService.getLoansForUser(loanBookLibarianDTO.getLibarianId().toString(), memberId));
     }
 
@@ -59,7 +59,7 @@ public class LoanController {
     @PostMapping(path = "/overdue",consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public Collection<BookLoanDTO> getAllOverdueBookLoans (@RequestBody AuthorizationIdDTO authorizationIdDTO) {
-        logger.info("A librarian requests a list of all overdue books");
+        logger.info("A user with id " + authorizationIdDTO + " requests a list of all overdue books");
         return loanMapper.listBookLoanToListBookLoanDTO(loanService.getAllOverdueBookLoans(employeeMapper.mapToStringId(authorizationIdDTO)));
     }
 }

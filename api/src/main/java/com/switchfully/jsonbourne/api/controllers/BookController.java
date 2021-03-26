@@ -41,10 +41,7 @@ public class BookController {
     @ResponseStatus(HttpStatus.OK)
     public DetailedBookDTO getDetailedBookById(@PathVariable String id) {
         logger.info("A user requested a specific detailed book by its ID");
-
-        var Book = bookService.getBookById(id);
-       DetailedBookDTO detailedBookDTO = detailedBookMapper.BookToDetailedDTO(bookService.getBookById(id));
-        return detailedBookDTO;
+        return detailedBookMapper.BookToDetailedDTO(bookService.getBookById(id));
     }
 
     @GetMapping(produces = "application/json", params = {"isbn"})

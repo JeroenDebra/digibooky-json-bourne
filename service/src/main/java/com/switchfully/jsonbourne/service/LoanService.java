@@ -45,8 +45,8 @@ public class LoanService {
     public UUID getUUIDFromisbn(String isbn) {
         var bookToLoan = bookRepository.getBookByISBNAndIsNotLoaned(isbn);
         if (bookToLoan.isEmpty()) {
-            logger.warn("This user tried to loan a book that was not pressent.");
-            throw new NoBooksForLoan("There are no book for loan with this isbn.");
+            logger.warn("This user tried to loan a book that was not present.");
+            throw new NoBooksForLoan("There are no book for loan with ISBN " + isbn);
         }
         return bookToLoan.get().getId();
     }
@@ -54,7 +54,7 @@ public class LoanService {
     public Collection<BookLoan> getLoansForUser(String librarianId, UUID memberId) {
         if (!employeeService.isLibrarian(librarianId)) {
             logger.warn("This user tried to see the loans for a user without the right permissions");
-            throw new NotAuthorizedException("user has no permission to see the loan info");
+            throw new NotAuthorizedException("This user with id " + librarianId + " has no permission to see the loan info");
         }
         return loanRepository.getLoansForUser(memberId);
     }
@@ -62,7 +62,7 @@ public class LoanService {
     public Collection<BookLoan> getAllOverdueBookLoans(String librarianId) {
         if (!employeeService.isLibrarian(librarianId)) {
             logger.warn("This user tried to get a list of overdue books without the right permissions");
-            throw new NotAuthorizedException("user has no permission to restore books");
+            throw new NotAuthorizedException("This user with id " + librarianId + " has no permission to restore books");
         }
         return loanRepository.getAllOverdueBookLoans();
     }
@@ -70,7 +70,7 @@ public class LoanService {
     public boolean returnBook(String loanId) {
         Optional<BookLoan> bookLoan = loanRepository.getOpenBookLoanFromUser(loanId);
         if (bookLoan.isEmpty()) {
-            logger.warn("This user tried to return a book that was on loan");
+            logger.warn("This user with id tried to return a book that was on loan");
             throw new LoanNotFoundException("Your loan could not be found:" + loanId);
         }
         bookLoan.get().setReturned(true);
