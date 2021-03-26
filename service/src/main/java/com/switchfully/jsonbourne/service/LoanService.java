@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -27,12 +26,14 @@ public class LoanService {
     private final BookRepository bookRepository;
     private final EmployeeService employeeService;
     private final MemberRepository memberRepository;
+    private final BookService bookService;
 
-    public LoanService(LoanRepository loanRepository, BookRepository bookRepository, EmployeeService employeeService, MemberRepository memberRepository) {
+    public LoanService(LoanRepository loanRepository, BookRepository bookRepository, EmployeeService employeeService, MemberRepository memberRepository, BookService bookService) {
         this.loanRepository = loanRepository;
         this.bookRepository = bookRepository;
         this.employeeService = employeeService;
         this.memberRepository = memberRepository;
+        this.bookService = bookService;
     }
 
     public BookLoan addBookLoan(BookLoan bookLoan) {
@@ -68,12 +69,14 @@ public class LoanService {
     }
 
     public boolean returnBook(String loanId) {
-        Optional<BookLoan> bookLoan = loanRepository.getOpenBookLoanFromUser(loanId);
+        Optional<BookLoan> bookLoan = loanRepository.getBookLoanWithId(loanId);
+
         if (bookLoan.isEmpty()) {
             logger.warn("This user tried to return a book that was on loan");
             throw new LoanNotFoundException("Your loan could not be found:" + loanId);
         }
         bookLoan.get().setReturned(true);
+        bookService.getBookById(bookLoan.get().getBookId().toString()).returnBook();
         return isBookReturnedLate(bookLoan.get());
     }
 
@@ -83,5 +86,12 @@ public class LoanService {
 
     public Optional<Member> getMemberThatLoanedABook(String bookId) {
         return memberRepository.getMemberById(loanRepository.getBookLoans().stream().filter(bookLoan -> bookLoan.getBookId().toString().equals(bookId)).findFirst().get().getMemberId().toString());
+    }
+
+    public Collection<BookLoan> getLoansOfBook(String bookId, String librarianId) {
+        if (!employeeService.isLibrarian(librarianId)) {
+            throw new NotAuthorizedException("you must be a librarian to see loans of a book");
+        }
+        return loanRepository.getLoansOfBook(bookId);
     }
 }

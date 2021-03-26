@@ -1,5 +1,6 @@
 package com.switchfully.jsonbourne.api.controllers;
 
+import com.switchfully.jsonbourne.api.dto.book.BookDTO;
 import com.switchfully.jsonbourne.api.dto.bookloan.BookLoanDTO;
 import com.switchfully.jsonbourne.api.dto.bookloan.CreateBookLoanDTO;
 import com.switchfully.jsonbourne.api.dto.bookloan.LoanBookLibarianDTO;
@@ -12,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Collection;
 import java.util.UUID;
 
@@ -34,21 +34,21 @@ public class LoanController {
 
     @PostMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public BookLoanDTO lendBook(@RequestBody CreateBookLoanDTO bookLoanDTO){
+    public BookLoanDTO lendBook(@RequestBody CreateBookLoanDTO bookLoanDTO) {
         logger.info("A user is requesting to add a specific book to his loans");
         return loanMapper.bookLoanToBookLoanDTO(loanService.addBookLoan(loanMapper.createBookLoanToBookLoan(bookLoanDTO)));
     }
 
-    @PostMapping(path = "/{memberId}",produces = "application/json",consumes = "application/json")
+    @PostMapping(path = "/{memberId}", produces = "application/json", consumes = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public Collection<BookLoanDTO> getLoansByUser(@RequestBody LoanBookLibarianDTO loanBookLibarianDTO, @PathVariable UUID memberId){
+    public Collection<BookLoanDTO> getLoansByUser(@RequestBody LoanBookLibarianDTO loanBookLibarianDTO, @PathVariable UUID memberId) {
         logger.info("A librarian requests a list of all the books a member has in loan");
         return loanMapper.listBookLoanToListBookLoanDTO(loanService.getLoansForUser(loanBookLibarianDTO.getLibarianId().toString(), memberId));
     }
 
     @PutMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public String returnBook(@RequestBody ReturnBookLoanDTO returnBookLoanDTO){
+    public String returnBook(@RequestBody ReturnBookLoanDTO returnBookLoanDTO) {
         logger.info(returnBookLoanDTO.getLoanId() + "is being returned");
 
         if (loanMapper.returnBookUpdate(returnBookLoanDTO)) {
@@ -57,10 +57,19 @@ public class LoanController {
         return "book has been successfully returned";
     }
 
-    @PostMapping(path = "/overdue",consumes = "application/json", produces = "application/json")
+    @PostMapping(path = "/overdue", consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public Collection<BookLoanDTO> getAllOverdueBookLoans (@RequestBody AuthorizationIdDTO authorizationIdDTO) {
+    public Collection<BookLoanDTO> getAllOverdueBookLoans(@RequestBody AuthorizationIdDTO authorizationIdDTO) {
         logger.info("A librarian requests a list of all overdue books");
         return loanMapper.listBookLoanToListBookLoanDTO(loanService.getAllOverdueBookLoans(employeeMapper.mapToStringId(authorizationIdDTO)));
     }
+
+    @PostMapping(path = "/overview", consumes = "application/json",produces = "application/json", params = {"bookId"})
+    @ResponseStatus(HttpStatus.OK)
+    public Collection<BookLoanDTO> getLendingHistoryOfBook(@RequestParam String bookId, @RequestBody AuthorizationIdDTO authorizationIdDTO) {
+        return loanMapper.listBookLoanToListBookLoanDTO(loanService.getLoansOfBook(bookId, employeeMapper.mapToStringId(authorizationIdDTO)));
+    }
+
 }
+
+

@@ -28,8 +28,6 @@ public class DetailedBookMapper {
                 .setOnLoan(book.isOnLoan());
 
         if (book.isOnLoan()) {
-
-
             detailedBookDTO.setMemberFirstName(loanService.getMemberThatLoanedABook(book.getId().toString()).get().getPersonalInformation().getFirstName())
                     .setMemberLastName(loanService.getMemberThatLoanedABook(book.getId().toString()).get().getPersonalInformation().getLastName());
         } else {

@@ -36,9 +36,13 @@ public class LoanRepository {
         return bookLoans.stream().filter(bookLoan -> bookLoan.getReturnDate().isBefore(LocalDate.now())).collect(Collectors.toList());
     }
 
-    public Optional<BookLoan> getOpenBookLoanFromUser(String loanId){
+    public Optional<BookLoan> getBookLoanWithId(String loanId){
        return bookLoans.stream().filter(bookLoan -> !bookLoan.isReturned())
                 .filter(bookLoan -> bookLoan.getId().toString().equals(loanId))
                 .findFirst();
+    }
+
+    public Collection<BookLoan> getLoansOfBook(String bookId) {
+        return bookLoans.stream().filter(bookLoan -> bookLoan.getBookId().toString().equals(bookId)).collect(Collectors.toList());
     }
 }
