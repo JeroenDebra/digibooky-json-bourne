@@ -65,6 +65,7 @@ public class BookRepository {
         Book bookToUpdate = getBookByID(id).get();
         bookToUpdate.update(bookWithNewInformation);
         return bookToUpdate;
+//        return getBookByID(id).get().update(bookWithNewInformation);
     }
 
 }

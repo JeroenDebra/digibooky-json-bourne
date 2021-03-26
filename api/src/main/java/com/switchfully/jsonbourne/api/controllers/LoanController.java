@@ -35,12 +35,14 @@ public class LoanController {
     @PostMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public BookLoanDTO lendBook(@RequestBody CreateBookLoanDTO bookLoanDTO){
+        logger.info("A user is requesting to add a specific book to his loans");
         return loanMapper.bookLoanToBookLoanDTO(loanService.addBookLoan(loanMapper.createBookLoanToBookLoan(bookLoanDTO)));
     }
 
     @PostMapping(path = "/{memberId}",produces = "application/json",consumes = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public Collection<BookLoanDTO> getLoansByUser(@RequestBody LoanBookLibarianDTO loanBookLibarianDTO, @PathVariable UUID memberId){
+        logger.info("A librarian requests a list of all the books a member has in loan");
         return loanMapper.listBookLoanToListBookLoanDTO(loanService.getLoansForUser(loanBookLibarianDTO.getLibarianId().toString(), memberId));
     }
 
@@ -58,6 +60,7 @@ public class LoanController {
     @PostMapping(path = "/overdue",consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public Collection<BookLoanDTO> getAllOverdueBookLoans (@RequestBody AuthorizationIdDTO authorizationIdDTO) {
+        logger.info("A librarian requests a list of all overdue books");
         return loanMapper.listBookLoanToListBookLoanDTO(loanService.getAllOverdueBookLoans(employeeMapper.mapToStringId(authorizationIdDTO)));
     }
 }
