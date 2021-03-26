@@ -30,7 +30,7 @@ public class BookService {
     }
 
     public Collection<Book> getBookByISBN(String isbn) {
-       return checkIfBookListIsEmpty("isbn: " + isbn, bookRepository.getBooksByISBN(isbn));
+        return checkIfBookListIsEmpty("isbn: " + isbn, bookRepository.getBooksByISBN(isbn));
 
     }
 

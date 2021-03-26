@@ -14,7 +14,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-public class MemberService{
+public class MemberService {
 
     private static final Logger logger = LoggerFactory.getLogger(MemberService.class);
 
@@ -27,7 +27,7 @@ public class MemberService{
     }
 
     public Member addMember(Member newMember) {
-        if (!checkIfDuplicateExists(newMember)){
+        if (!checkIfDuplicateExists(newMember)) {
             logger.warn("The user tried to register a user that already exists");
             throw new DuplicateMemberException("This member already exists");
         }
@@ -36,9 +36,7 @@ public class MemberService{
     }
 
     private boolean checkIfDuplicateExists(Member newMember) {
-        return memberRepository.getAllMembers().stream()
-                .filter(member -> member.getPersonalInformation().getEmail().equalsIgnoreCase(newMember.getPersonalInformation().getEmail().toLowerCase()) || member.getPersonalInformation().getInss().equals(newMember.getPersonalInformation().getInss()))
-                .collect(Collectors.toList()).isEmpty();
+        return memberRepository.getAllMembers().stream().filter(member -> member.getPersonalInformation().getEmail().equalsIgnoreCase(newMember.getPersonalInformation().getEmail().toLowerCase()) || member.getPersonalInformation().getInss().equals(newMember.getPersonalInformation().getInss())).collect(Collectors.toList()).isEmpty();
     }
 
     public Collection<Member> getAllMembers(String adminId) {
@@ -48,14 +46,4 @@ public class MemberService{
         }
         return memberRepository.getAllMembers();
     }
-
-//    public Member getMemberById(String memberId){
-//        var member = memberRepository.getMemberById(memberId);
-//        if(member == null){
-//            //do logger later
-//            throw new MemberNotFoundException("No member found");
-//        }
-//        return member;
-//    }
-
-    }
+}
