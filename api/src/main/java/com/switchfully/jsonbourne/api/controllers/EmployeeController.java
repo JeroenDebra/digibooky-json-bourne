@@ -16,11 +16,9 @@ public class EmployeeController {
     private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
     private final EmployeeMapper employeeMapper;
-    private final EmployeeService employeeService;
 
-    public EmployeeController(EmployeeMapper employeeMapper, EmployeeService employeeService) {
+    public EmployeeController(EmployeeMapper employeeMapper) {
         this.employeeMapper = employeeMapper;
-        this.employeeService = employeeService;
     }
 
     @PostMapping(path = "",consumes = "application/json",produces = "application/json")

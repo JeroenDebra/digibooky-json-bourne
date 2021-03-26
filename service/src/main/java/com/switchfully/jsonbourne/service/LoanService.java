@@ -35,23 +35,23 @@ public class LoanService {
         this.memberRepository = memberRepository;
     }
 
-    public BookLoan addBookLoan(BookLoan bookLoan){
+    public BookLoan addBookLoan(BookLoan bookLoan) {
         loanRepository.LendABook(bookLoan);
         var book = bookRepository.getBookByID(bookLoan.getBookId().toString());
         book.get().setOnLoan();
         return bookLoan;
     }
 
-    public UUID getUUIDFromisbn(String isbn){
+    public UUID getUUIDFromisbn(String isbn) {
         var bookToLoan = bookRepository.getBookByISBNAndIsNotLoaned(isbn);
-       if(bookToLoan.isEmpty()){
-           logger.warn("This user tried to loan a book that was not pressent.");
-           throw new NoBooksForLoan("There are no book for loan with this isbn.");
-       }
-       return bookToLoan.get().getId();
+        if (bookToLoan.isEmpty()) {
+            logger.warn("This user tried to loan a book that was not pressent.");
+            throw new NoBooksForLoan("There are no book for loan with this isbn.");
+        }
+        return bookToLoan.get().getId();
     }
 
-    public Collection<BookLoan> getLoansForUser(String librarianId,UUID memberId){
+    public Collection<BookLoan> getLoansForUser(String librarianId, UUID memberId) {
         if (!employeeService.isLibrarian(librarianId)) {
             logger.warn("This user tried to see the loans for a user without the right permissions");
             throw new NotAuthorizedException("user has no permission to see the loan info");
@@ -67,9 +67,9 @@ public class LoanService {
         return loanRepository.getAllOverdueBookLoans();
     }
 
-    public boolean returnBook( String loanId) {
+    public boolean returnBook(String loanId) {
         Optional<BookLoan> bookLoan = loanRepository.getOpenBookLoanFromUser(loanId);
-        if (bookLoan.isEmpty()){
+        if (bookLoan.isEmpty()) {
             logger.warn("This user tried to return a book that was on loan");
             throw new LoanNotFoundException("Your loan could not be found:" + loanId);
         }
@@ -77,7 +77,7 @@ public class LoanService {
         return isBookReturnedLate(bookLoan.get());
     }
 
-    private boolean isBookReturnedLate(BookLoan bookLoan){
+    private boolean isBookReturnedLate(BookLoan bookLoan) {
         return bookLoan.getReturnDate().isBefore(LocalDate.now());
     }
 

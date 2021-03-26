@@ -34,7 +34,7 @@ public class BookController {
     @ResponseStatus(HttpStatus.OK)
     public Collection<BookDTO> getAllBooks() {
         logger.info("A user requested to get a list of all the books");
-        return bookMapper.listBookToListDTO(bookService.getAllBooks());
+        return bookMapper.listBookToListDTOWithoutSummary(bookService.getAllBooks());
     }
 
     @GetMapping(path = "/{id}", produces = "application/json")
@@ -77,16 +77,16 @@ public class BookController {
 
     @DeleteMapping(path = "{bookId}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public String deleteBook(@RequestParam String librarianId, @PathVariable String bookId) {
+    public BookDTO deleteBook(@RequestParam String librarianId, @PathVariable String bookId) {
         logger.info("A librarian tried to delete a specific book");
-        return bookService.deleteBookById(librarianId, bookId);
+        return bookMapper.bookToDTO(bookService.deleteBookById(librarianId, bookId));
     }
 
     @PostMapping(path = "/{bookId}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public String restoreBook(@RequestParam String librarianId, @PathVariable String bookId) {
+    public BookDTO restoreBook(@RequestParam String librarianId, @PathVariable String bookId) {
         logger.info("A librarian tried to restore a specific deleted book");
-        return bookService.restoreBookById(librarianId, bookId);
+        return bookMapper.bookToDTO(bookService.restoreBookById(librarianId, bookId));
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
