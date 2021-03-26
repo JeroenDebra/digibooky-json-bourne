@@ -5,6 +5,7 @@ import com.switchfully.jsonbourne.domain.models.member.Member;
 import com.switchfully.jsonbourne.domain.repository.BookRepository;
 import com.switchfully.jsonbourne.domain.repository.LoanRepository;
 import com.switchfully.jsonbourne.domain.repository.MemberRepository;
+import com.switchfully.jsonbourne.infrastructure.exceptions.MemberNotFoundException;
 import com.switchfully.jsonbourne.infrastructure.exceptions.NoBooksForLoan;
 import com.switchfully.jsonbourne.infrastructure.exceptions.NotAuthorizedException;
 import org.slf4j.Logger;
@@ -36,9 +37,12 @@ public class LoanService {
     }
 
     public BookLoan addBookLoan(BookLoan bookLoan) {
+        if(memberRepository.getMemberById(bookLoan.getMemberId().toString()).isEmpty()) {
+            logger.warn("A not know user tried to loan a book.");
+            throw new MemberNotFoundException("Member id is not found.");
+        }
         loanRepository.LendABook(bookLoan);
-        var book = bookRepository.getBookByID(bookLoan.getBookId().toString());
-        book.get().setOnLoan();
+        bookRepository.getBookByID(bookLoan.getBookId().toString()).get().setOnLoan();
         return bookLoan;
     }
 
