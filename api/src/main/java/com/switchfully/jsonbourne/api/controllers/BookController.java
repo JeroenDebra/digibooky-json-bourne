@@ -37,11 +37,11 @@ public class BookController {
         return bookMapper.listBookToListDTOWithoutSummary(bookService.getAllBooks());
     }
 
-    @GetMapping(path = "/{id}", produces = "application/json")
+    @GetMapping(path = "/{bookId}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public DetailedBookDTO getDetailedBookById(@PathVariable String id) {
+    public DetailedBookDTO getDetailedBookById(@PathVariable String bookId) {
         logger.info("A user requested a specific detailed book by its ID");
-        return detailedBookMapper.BookToDetailedDTO(bookService.getBookById(id));
+        return detailedBookMapper.BookToDetailedDTO(bookService.getBookById(bookId));
     }
 
     @GetMapping(produces = "application/json", params = {"isbn"})

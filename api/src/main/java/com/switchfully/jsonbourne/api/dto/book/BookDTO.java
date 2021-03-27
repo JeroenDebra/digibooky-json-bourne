@@ -7,7 +7,7 @@ import java.util.UUID;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BookDTO {
 
-    private UUID uuid;
+    private UUID id;
     private String isbn;
     private String title;
     private String authorFirstName;
@@ -17,8 +17,8 @@ public class BookDTO {
     public BookDTO() {
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public UUID getId() {
+        return id;
     }
 
     public String getIsbn() {
@@ -41,8 +41,8 @@ public class BookDTO {
         return summary;
     }
 
-    public BookDTO setUuid(UUID uuid) {
-        this.uuid = uuid;
+    public BookDTO setId(UUID id) {
+        this.id = id;
         return this;
     }
 

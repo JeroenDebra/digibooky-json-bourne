@@ -19,12 +19,10 @@
             <groupId>com.switchfully.jsonbourne</groupId>
             <artifactId>api</artifactId>
         </dependency>
-
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-boot-starter</artifactId>
         </dependency>
-
     </dependencies>
 
     <build>

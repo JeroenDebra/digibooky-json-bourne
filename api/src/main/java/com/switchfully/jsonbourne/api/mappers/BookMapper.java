@@ -23,7 +23,7 @@ public class BookMapper {
 
     public BookDTO bookToDTO(Book book){
         return new BookDTO()
-                .setUuid(book.getId())
+                .setId(book.getId())
                 .setIsbn(book.getIsbn())
                 .setTitle(book.getTitle())
                 .setAuthorFirstName(book.getAuthor().getFirstname())
@@ -37,7 +37,7 @@ public class BookMapper {
 
     private BookDTO bookToBookDTOWithoutSummary(Book book) {
         return new BookDTO()
-                .setUuid(book.getId())
+                .setId(book.getId())
                 .setIsbn(book.getIsbn())
                 .setTitle(book.getTitle())
                 .setAuthorFirstName(book.getAuthor().getFirstname())

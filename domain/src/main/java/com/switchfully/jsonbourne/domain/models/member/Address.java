@@ -1,5 +1,6 @@
 package com.switchfully.jsonbourne.domain.models.member;
 
+import com.switchfully.jsonbourne.infrastructure.exceptions.InvalidCityException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,13 +18,12 @@ public class Address {
         this.streetName = streetName;
         this.streetNumber = streetNumber;
         this.postalCode = postalCode;
-
     }
 
     private String cityValidator(String city) {
         if (city == null || city.isBlank()) {
             logger.warn("The user tried to register an invalid city");
-            throw new IllegalArgumentException("city not valid");
+            throw new InvalidCityException("City not valid");
         }
         return city;
     }

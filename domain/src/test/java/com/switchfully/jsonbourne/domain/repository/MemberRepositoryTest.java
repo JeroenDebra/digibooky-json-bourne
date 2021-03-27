@@ -1,14 +1,13 @@
-package com.switchfully.jsonbourne.domain.repository.member;
+package com.switchfully.jsonbourne.domain.repository;
 
 import com.switchfully.jsonbourne.domain.models.member.Address;
 import com.switchfully.jsonbourne.domain.models.member.Member;
 import com.switchfully.jsonbourne.domain.models.member.PersonalInformation;
-import com.switchfully.jsonbourne.domain.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LocalMemberRepositoryTest {
+class MemberRepositoryTest {
 
     private final MemberRepository memberRepository = new MemberRepository();
 

@@ -1,5 +1,6 @@
 package com.switchfully.jsonbourne.domain.models.member;
 
+import com.switchfully.jsonbourne.infrastructure.exceptions.InvalidEmailException;
 import com.switchfully.jsonbourne.infrastructure.utils.EmailUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +37,7 @@ public class Employee {
     private String validEmail(String email){
         if (!EmailUtils.isValidEmail(email)){
             logger.warn("The user tried to register an invalid e-mail");
-            throw new IllegalArgumentException("email is not valid");
+            throw new InvalidEmailException("E-mail is not valid");
         }
         return email;
     }
