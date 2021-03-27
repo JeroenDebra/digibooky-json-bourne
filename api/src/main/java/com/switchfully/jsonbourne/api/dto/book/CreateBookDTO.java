@@ -2,8 +2,6 @@ package com.switchfully.jsonbourne.api.dto.book;
 
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
-
 @Component
 public class CreateBookDTO {
     private String isbn;

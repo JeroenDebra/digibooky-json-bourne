@@ -14,7 +14,7 @@ public class Book {
     private static final Logger logger = LoggerFactory.getLogger(Book.class);
 
     private final UUID id;
-    private String isbn;
+    private final String isbn;
     private String title;
     private Author author;
     private String summary;
@@ -124,8 +124,6 @@ public class Book {
     }
 
     public void update(Book bookWithNewInformation) {
-        this.setTitle(bookWithNewInformation.getTitle());
-        this.setAuthor(bookWithNewInformation.getAuthor());
-        this.setSummary(bookWithNewInformation.getSummary());
+        this.setTitle(bookWithNewInformation.getTitle()).setAuthor(bookWithNewInformation.getAuthor()).setSummary(bookWithNewInformation.getSummary());
     }
 }

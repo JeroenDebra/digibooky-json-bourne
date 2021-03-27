@@ -20,9 +20,7 @@ public enum Role {
     @JsonCreator
     public static Role getRoleFromCode(String value) {
         for (Role role : Role.values()) {
-
             if (role.getCode().equals(value)) {
-
                 return role;
             }
         }

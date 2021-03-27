@@ -1,6 +1,5 @@
 package com.switchfully.jsonbourne.api.controllers;
 
-import com.switchfully.jsonbourne.api.dto.book.BookDTO;
 import com.switchfully.jsonbourne.api.dto.bookloan.BookLoanDTO;
 import com.switchfully.jsonbourne.api.dto.bookloan.CreateBookLoanDTO;
 import com.switchfully.jsonbourne.api.dto.bookloan.LoanBookLibarianDTO;

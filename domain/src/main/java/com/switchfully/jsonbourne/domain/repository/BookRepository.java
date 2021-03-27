@@ -67,5 +67,4 @@ public class BookRepository {
         return books.stream().filter(book -> book.getIsbn().equals(isbn) && !book.isDeleted() && !book.isOnLoan()).findFirst();
     }
 
-
 }

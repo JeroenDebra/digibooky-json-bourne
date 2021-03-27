@@ -1,7 +1,6 @@
 package com.switchfully.jsonbourne.domain.models.member;
 
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 public class Member {

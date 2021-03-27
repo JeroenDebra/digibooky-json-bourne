@@ -1,9 +1,9 @@
 package com.switchfully.jsonbourne.api.dto.bookloan;
 
-
 import java.util.UUID;
 
 public class LoanBookLibarianDTO {
+
     private UUID libarianId;
 
     public LoanBookLibarianDTO() {

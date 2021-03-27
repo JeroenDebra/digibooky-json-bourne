@@ -20,7 +20,7 @@ public class LoanMapper {
     }
 
     public BookLoan createBookLoanToBookLoan(CreateBookLoanDTO bookLoan) {
-        return new BookLoan(bookLoan.getMemberId(), loanService.getUUIDFromisbn(bookLoan.getIsbn()));
+        return new BookLoan(bookLoan.getMemberId(), loanService.getUUIDFromIsbn(bookLoan.getIsbn()));
     }
 
     public BookLoanDTO bookLoanToBookLoanDTO(BookLoan bookLoan) {

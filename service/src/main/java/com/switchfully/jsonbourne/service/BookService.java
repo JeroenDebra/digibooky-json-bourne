@@ -34,6 +34,10 @@ public class BookService {
 
     }
 
+    public Optional<Book> getBookByISBNAndIsNotLoaned(String isbn) {
+        return bookRepository.getBookByISBNAndIsNotLoaned(isbn);
+    }
+
     public Book getBookById(String id) {
         return checkIfBookIsEmpty(bookRepository.getBookByID(id));
     }

@@ -4,11 +4,8 @@ package com.switchfully.jsonbourne.infrastructure.utils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -16,7 +13,6 @@ import java.util.regex.Pattern;
 public class EmailUtils {
 
     private static final Pattern VALID_EMAIL_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-
 
     public static boolean isValidEmail(String email) {
         StringBuffer response = new StringBuffer();

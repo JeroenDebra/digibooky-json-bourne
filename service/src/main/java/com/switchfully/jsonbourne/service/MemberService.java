@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,6 +32,10 @@ public class MemberService {
         }
         memberRepository.addMember(newMember);
         return newMember;
+    }
+
+    public Optional<Member> getMemberById(String memberId){
+        return memberRepository.getMemberById(memberId);
     }
 
     private boolean checkIfDuplicateExists(Member newMember) {
