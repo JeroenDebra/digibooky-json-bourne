@@ -1,5 +1,6 @@
 package com.switchfully.jsonbourne.service.bookservice;
 
+import com.switchfully.jsonbourne.domain.models.book.Author;
 import com.switchfully.jsonbourne.domain.models.book.Book;
 import com.switchfully.jsonbourne.domain.repository.BookRepository;
 import com.switchfully.jsonbourne.domain.repository.EmployeeRepository;
@@ -7,6 +8,7 @@ import com.switchfully.jsonbourne.infrastructure.exceptions.BookNotFoundExceptio
 import com.switchfully.jsonbourne.infrastructure.exceptions.NoBooksFoundException;
 import com.switchfully.jsonbourne.service.BookService;
 import com.switchfully.jsonbourne.service.EmployeeService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.stream.Collectors;
@@ -16,7 +18,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class BookServiceTest {
 
-    private final BookService bookService =  new BookService(new BookRepository(),new EmployeeService(new EmployeeRepository()));
+    private final BookRepository bookRepository = new BookRepository();
+    private final BookService bookService =  new BookService(bookRepository,new EmployeeService(new EmployeeRepository()));
+
+
+    @BeforeEach
+        void init () {
+        Book book = new Book("9789024564460", "title",new Author("firstname","lastname"),"This is a summary...");
+        bookRepository.addBook(book);
+        }
+
 
     @Test
     void getAllBooksGivesACollectionOfBooks() {
@@ -46,6 +57,6 @@ class BookServiceTest {
 
     @Test
     void getBooksByAuthorName() {
-        assertThat(bookService.getBookByAuthor("first").stream().map(book -> book.getAuthor().getFullname()).collect(Collectors.toList())).contains("Firstname Lastname");
+        assertThat(bookService.getBookByAuthor("first").stream().map(book -> book.getAuthor().getFullname()).collect(Collectors.toList())).contains("firstname lastname");
     }
 }
