@@ -49,18 +49,16 @@ public class BookRepository {
         return books.stream().filter(book -> book.getId().toString().equals(id) && book.isDeleted()).findFirst();
     }
 
-    public void setBookToDeleted(Book book) {
-        book.setIsDeleted();
+    public Book setBookToDeleted(Book book) {
+        return book.setIsDeleted();
     }
 
-    public void restoreDeletedBook(Book book) {
-        book.setUndeleted();
+    public Book restoreDeletedBook(Book book) {
+        return book.setUndeleted();
     }
 
     public Book updateBook(String id, Book bookWithNewInformation) {
-        Book bookToUpdate = getBookByID(id).get();
-        bookToUpdate.update(bookWithNewInformation);
-        return bookToUpdate;
+        return getBookByID(id).get().update(bookWithNewInformation);
     }
 
     public Optional<Book> getBookByISBNAndIsNotLoaned(String isbn) {

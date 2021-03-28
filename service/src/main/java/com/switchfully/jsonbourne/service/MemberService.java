@@ -30,8 +30,7 @@ public class MemberService {
             logger.warn("The user tried to register a user that already exists");
             throw new DuplicateMemberException("This member already exists");
         }
-        memberRepository.addMember(newMember);
-        return newMember;
+        return memberRepository.addMember(newMember);
     }
 
     public Optional<Member> getMemberById(String memberId){

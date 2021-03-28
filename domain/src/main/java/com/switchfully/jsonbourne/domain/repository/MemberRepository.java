@@ -10,8 +10,9 @@ public class MemberRepository  {
 
     private final Set<Member> members = new HashSet<>();
 
-    public void addMember(Member member) {
+    public Member addMember(Member member) {
         members.add(member);
+        return member;
     }
 
     public Collection<Member> getAllMembers() {

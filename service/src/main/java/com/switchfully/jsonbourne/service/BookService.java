@@ -31,7 +31,6 @@ public class BookService {
 
     public Collection<Book> getBookByISBN(String isbn) {
         return checkIfBookListIsEmpty("isbn: " + isbn, bookRepository.getBooksByISBN(isbn));
-
     }
 
     public Optional<Book> getBookByISBNAndIsNotLoaned(String isbn) {
@@ -72,8 +71,7 @@ public class BookService {
             logger.warn("This user tried to delete a book without the right permissions");
             throw new NotAuthorizedException("user has no permission to delete books");
         }
-        bookRepository.setBookToDeleted(checkIfBookIsEmpty(bookRepository.getBookByID(id)));
-        return getBookById(id);
+        return bookRepository.setBookToDeleted(checkIfBookIsEmpty(bookRepository.getBookByID(id)));
     }
 
     public Book restoreBookById(String librarianId, String id) {
@@ -81,8 +79,7 @@ public class BookService {
             logger.warn("This user tried to restore a deleted book without the right permissions");
             throw new NotAuthorizedException("user has no permission to restore books");
         }
-        bookRepository.restoreDeletedBook(checkIfBookIsEmpty(bookRepository.getDeletedBookByID(id)));
-        return getBookById(id);
+        return bookRepository.restoreDeletedBook(checkIfBookIsEmpty(bookRepository.getDeletedBookByID(id)));
     }
 
     private Collection<Book> checkIfBookListIsEmpty(String information, Collection<Book> books) {

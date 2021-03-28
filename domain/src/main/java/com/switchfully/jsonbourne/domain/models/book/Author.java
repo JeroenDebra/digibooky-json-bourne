@@ -1,5 +1,6 @@
 package com.switchfully.jsonbourne.domain.models.book;
 
+import com.switchfully.jsonbourne.infrastructure.exceptions.InvalidLastNameException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +21,7 @@ public class Author {
     private String lastNameValidator(String lastname) {
         if (lastname == null || lastname.isBlank()) {
             logger.warn("The user tried to register an invalid last name");
-            throw new IllegalArgumentException("lastname is not valid");
+            throw new InvalidLastNameException("Last name is not valid");
         }
         return lastname;
     }

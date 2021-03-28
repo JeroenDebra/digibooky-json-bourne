@@ -30,7 +30,8 @@ public class EmployeeRepository {
         return employees.stream().filter(employee -> employee.getRole() == Role.LIBRARIAN).filter(employee -> employee.getId().toString().equals(uuid)).count() > 0;
     }
 
-    public boolean addEmployee(Employee employee) {
-        return employees.add(employee);
+    public Employee addEmployee(Employee employee) {
+        employees.add(employee);
+        return  employee;
     }
 }

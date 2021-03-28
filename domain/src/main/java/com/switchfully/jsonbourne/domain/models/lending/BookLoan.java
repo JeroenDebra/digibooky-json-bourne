@@ -1,5 +1,7 @@
 package com.switchfully.jsonbourne.domain.models.lending;
 
+import com.switchfully.jsonbourne.infrastructure.exceptions.InvalidIdException;
+
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -20,7 +22,7 @@ public class BookLoan {
 
     private UUID idValidator(UUID id,String name) {
         if (id == null) {
-            throw new IllegalArgumentException( name + " is not valid");
+            throw new InvalidIdException( name + " is not valid");
         }
         return id;
     }

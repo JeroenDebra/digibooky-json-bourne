@@ -27,8 +27,7 @@ public class EmployeeService {
             logger.warn("This user tried to register a new employee without the right permissions");
             throw new NotAuthorizedException("this user may not add another employee");
         }
-        employeeRepository.addEmployee(employee);
-        return employee;
+        return employeeRepository.addEmployee(employee);
     }
 
     public boolean isLibrarian(String uuid) {

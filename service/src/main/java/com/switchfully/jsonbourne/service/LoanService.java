@@ -1,5 +1,6 @@
 package com.switchfully.jsonbourne.service;
 
+import com.switchfully.jsonbourne.domain.models.book.Book;
 import com.switchfully.jsonbourne.domain.models.lending.BookLoan;
 import com.switchfully.jsonbourne.domain.models.member.Member;
 import com.switchfully.jsonbourne.domain.repository.LoanRepository;
@@ -75,9 +76,17 @@ public class LoanService {
             throw new LoanNotFoundException("Your loan could not be found:" + loanId);
         }
         bookLoan.get().setReturned(true);
-        bookService.getBookById(bookLoan.get().getBookId().toString()).returnBook();
-        memberService.getMemberById(bookLoan.get().getMemberId().toString()).get().setTotalAmountOfFines(CalculateFine(bookLoan));
+        getBookByLoanId(bookLoan).returnBook();
+        getMemberByLoanId(bookLoan).setTotalAmountOfFines(CalculateFine(bookLoan));
         return CalculateFine(bookLoan);
+    }
+
+    private Member getMemberByLoanId(Optional<BookLoan> bookLoan) {
+        return memberService.getMemberById(bookLoan.get().getMemberId().toString()).get();
+    }
+
+    private Book getBookByLoanId(Optional<BookLoan> bookLoan) {
+        return bookService.getBookById(bookLoan.get().getBookId().toString());
     }
 
     private double CalculateFine(Optional<BookLoan> bookLoan) {

@@ -86,16 +86,18 @@ public class Book {
 
     public boolean isOnLoan(){return isOnLoan;}
 
-    public void setIsDeleted() {
+    public Book setIsDeleted() {
         if (!isDeleted) {
             this.isDeleted = true;
         }
+        return this;
     }
 
-    public void setUndeleted() {
+    public Book setUndeleted() {
         if (isDeleted) {
             this.isDeleted = false;
         }
+        return this;
     }
 
     public void setOnLoan(){
@@ -123,7 +125,7 @@ public class Book {
         return Objects.hash(id);
     }
 
-    public void update(Book bookWithNewInformation) {
-        this.setTitle(bookWithNewInformation.getTitle()).setAuthor(bookWithNewInformation.getAuthor()).setSummary(bookWithNewInformation.getSummary());
+    public Book update(Book bookWithNewInformation) {
+        return this.setTitle(bookWithNewInformation.getTitle()).setAuthor(bookWithNewInformation.getAuthor()).setSummary(bookWithNewInformation.getSummary());
     }
 }
