@@ -1,4 +1,4 @@
-package com.switchfully.jsonbourne.api.dto.member;
+package com.switchfully.jsonbourne.api.dto.employee;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

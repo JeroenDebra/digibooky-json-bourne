@@ -1,9 +1,9 @@
 package com.switchfully.jsonbourne.api.mappers;
 
-import com.switchfully.jsonbourne.api.dto.member.AuthorizationIdDTO;
-import com.switchfully.jsonbourne.api.dto.member.CreateEmployeeDTO;
-import com.switchfully.jsonbourne.api.dto.member.EmployeeDTO;
-import com.switchfully.jsonbourne.domain.models.member.Employee;
+import com.switchfully.jsonbourne.api.dto.employee.AuthorizationIdDTO;
+import com.switchfully.jsonbourne.api.dto.employee.CreateEmployeeDTO;
+import com.switchfully.jsonbourne.api.dto.employee.EmployeeDTO;
+import com.switchfully.jsonbourne.domain.models.employee.Employee;
 import com.switchfully.jsonbourne.service.EmployeeService;
 import org.springframework.stereotype.Component;
 

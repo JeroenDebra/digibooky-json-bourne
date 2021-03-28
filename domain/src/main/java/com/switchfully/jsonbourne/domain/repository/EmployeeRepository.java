@@ -1,7 +1,7 @@
 package com.switchfully.jsonbourne.domain.repository;
 
-import com.switchfully.jsonbourne.domain.models.member.Employee;
-import com.switchfully.jsonbourne.domain.models.member.Role;
+import com.switchfully.jsonbourne.domain.models.employee.Employee;
+import com.switchfully.jsonbourne.domain.models.employee.Role;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;

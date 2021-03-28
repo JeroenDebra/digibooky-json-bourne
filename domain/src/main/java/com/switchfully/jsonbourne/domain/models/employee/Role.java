@@ -1,4 +1,4 @@
-package com.switchfully.jsonbourne.domain.models.member;
+package com.switchfully.jsonbourne.domain.models.employee;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 

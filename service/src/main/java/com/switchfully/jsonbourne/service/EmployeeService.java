@@ -1,6 +1,6 @@
 package com.switchfully.jsonbourne.service;
 
-import com.switchfully.jsonbourne.domain.models.member.Employee;
+import com.switchfully.jsonbourne.domain.models.employee.Employee;
 import com.switchfully.jsonbourne.domain.repository.EmployeeRepository;
 import com.switchfully.jsonbourne.infrastructure.exceptions.NotAuthorizedException;
 import org.slf4j.Logger;

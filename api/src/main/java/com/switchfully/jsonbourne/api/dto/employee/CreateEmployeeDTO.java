@@ -1,6 +1,6 @@
-package com.switchfully.jsonbourne.api.dto.member;
+package com.switchfully.jsonbourne.api.dto.employee;
 
-import com.switchfully.jsonbourne.domain.models.member.Role;
+import com.switchfully.jsonbourne.domain.models.employee.Role;
 
 public class CreateEmployeeDTO {
 

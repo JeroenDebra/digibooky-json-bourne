@@ -1,4 +1,4 @@
-package com.switchfully.jsonbourne.domain.models.member;
+package com.switchfully.jsonbourne.domain.models.employee;
 
 import com.switchfully.jsonbourne.infrastructure.exceptions.InvalidEmailException;
 import com.switchfully.jsonbourne.infrastructure.utils.EmailUtils;

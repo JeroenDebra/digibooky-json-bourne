@@ -4,7 +4,7 @@ import com.switchfully.jsonbourne.api.dto.bookloan.BookLoanDTO;
 import com.switchfully.jsonbourne.api.dto.bookloan.CreateBookLoanDTO;
 import com.switchfully.jsonbourne.api.dto.bookloan.LoanBookLibarianDTO;
 import com.switchfully.jsonbourne.api.dto.bookloan.ReturnBookLoanDTO;
-import com.switchfully.jsonbourne.api.dto.member.AuthorizationIdDTO;
+import com.switchfully.jsonbourne.api.dto.employee.AuthorizationIdDTO;
 import com.switchfully.jsonbourne.api.mappers.EmployeeMapper;
 import com.switchfully.jsonbourne.api.mappers.LoanMapper;
 import com.switchfully.jsonbourne.service.LoanService;
