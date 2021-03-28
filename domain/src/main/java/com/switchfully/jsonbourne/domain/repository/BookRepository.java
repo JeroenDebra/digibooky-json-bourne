@@ -17,7 +17,6 @@ public class BookRepository {
     }
 
     private void fillInList() {
-        books.add(new Book("9789024564460", "title", new Author("Firstname", "Lastname"), "this is the story ....."));
     }
 
     public Collection<Book> getAllBooks() {

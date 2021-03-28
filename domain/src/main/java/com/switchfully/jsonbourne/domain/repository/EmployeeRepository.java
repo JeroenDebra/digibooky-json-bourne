@@ -19,7 +19,6 @@ public class EmployeeRepository {
 
     private void init(){
         employees.add(new Employee(UUID.fromString("d774eceb-03c5-4f63-9e92-aa1025b2257f"),"","","admin@digibooky.be", Role.ADMIN));
-        employees.add(new Employee(UUID.fromString("ca212169-3f51-4eda-a351-b57abc517eda"),"lib","lib","lib@digibooky.be", Role.LIBRARIAN));
     }
 
     public boolean isAdmin(String uuid) {
