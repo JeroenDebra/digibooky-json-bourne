@@ -10,8 +10,8 @@ public class Author {
 
     private static final Logger logger = LoggerFactory.getLogger(Author.class);
 
-    private String firstname;
-    private String lastname;
+    private final String firstname;
+    private final String lastname;
 
     public Author(String firstname, String lastname) {
         this.firstname = firstname;
@@ -32,14 +32,6 @@ public class Author {
 
     public String getLastname() {
         return lastname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
     }
 
     public String getFullname() {
