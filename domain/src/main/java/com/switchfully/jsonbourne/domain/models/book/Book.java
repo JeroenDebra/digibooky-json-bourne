@@ -112,6 +112,10 @@ public class Book {
         }
     }
 
+    public Book update(Book bookWithNewInformation) {
+        return this.setTitle(bookWithNewInformation.getTitle()).setAuthor(bookWithNewInformation.getAuthor()).setSummary(bookWithNewInformation.getSummary());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -125,7 +129,4 @@ public class Book {
         return Objects.hash(id);
     }
 
-    public Book update(Book bookWithNewInformation) {
-        return this.setTitle(bookWithNewInformation.getTitle()).setAuthor(bookWithNewInformation.getAuthor()).setSummary(bookWithNewInformation.getSummary());
-    }
 }
