@@ -16,7 +16,7 @@ jobs:
       with:
         java-version: '15'
     - run: mvn clean test-compile
-    - run: cd domain && mvn test
+    - run: mvn test
       
     - uses: barecheck/code-coverage-action@v0.1-beta.1
       with:
