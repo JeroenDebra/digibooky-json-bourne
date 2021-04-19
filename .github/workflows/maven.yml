@@ -17,8 +17,8 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
-    - name: Build with Maven
-      run: cd domain && mvn test
+    - run: mvn clean test-compile
+    - run: cd domain && mvn test
       
     - uses: barecheck/code-coverage-action@v0.1-beta.1
       with:
